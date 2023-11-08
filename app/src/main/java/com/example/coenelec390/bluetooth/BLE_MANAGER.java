@@ -228,6 +228,15 @@ public class BLE_MANAGER {
                 nextCommand();
             }else {Utils.print("Failed to receive data");}
 
+            // Create an Intent
+            Intent intent = new Intent();
+            // Set the action for the Intent
+            intent.setAction("com.example.coenelec390.bluetooth.NEW_CHARACTERISTIC");
+            // Put the received data as an extra
+            intent.putExtra("data", stringValue.toString().trim());
+            // Send the broadcast
+            context.sendBroadcast(intent);
+
         }
 
         @Override
