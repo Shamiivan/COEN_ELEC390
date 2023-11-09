@@ -13,16 +13,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.coenelec390.databinding.FragmentItemBinding;
 
-public class ItemFragment extends Fragment {//TODO: To remove
+public class ItemFragment extends Fragment {
 
     private FragmentItemBinding binding;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ItemViewModel itemViewModel =
-                new ViewModelProvider(this).get(ItemViewModel.class);
-
         binding = FragmentItemBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 

@@ -12,8 +12,8 @@ import com.example.coenelec390.MainActivity;
 import com.example.coenelec390.R;
 import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+//import com.google.android.gms.tasks.OnCompleteListener;
+//import com.google.android.gms.tasks.Task;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,9 +63,9 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
         View rootview = inflater.inflate(R.layout.activity_add_item, container, false);
 
         editText1 = rootview.findViewById(R.id.etId1);
-        //editText2 = findViewById(R.id.etImageURL1);
-        //editText3 = findViewById(R.id.etStock1);
-        //editText4 = findViewById(R.id.etDescription1);
+        editText2 = rootview.findViewById(R.id.etImageURL1);
+        editText3 = rootview.findViewById(R.id.etStock1);
+        editText4 = rootview.findViewById(R.id.etDescription1);
         //editText5 = findViewById(R.id.editTextText5);
         //editText6 = findViewById(R.id.editTextText6);
         //editText7 = findViewById(R.id.editTextText7);
@@ -75,9 +75,9 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
             @Override
             public void onClick(View view) {
                 Name1 = editText1.getText().toString();
-                //Name2 = editText2.getText().toString();
-                //Name3 = editText3.getText().toString();
-                //Name4 = editText4.getText().toString();
+                Name2 = editText2.getText().toString();
+                Name3 = editText3.getText().toString();
+                Name4 = editText4.getText().toString();
                 //Name5 = editText2.getText().toString();
                 //Name6 = editText3.getText().toString();
                 //Name7 = editText3.getText().toString();
@@ -88,9 +88,9 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                     Map<String, String> characteristics5 = new HashMap<>();
                     characteristics5.put("capacitance", "100uF");
                     Component capacitor1 = new Component(characteristics5, Name1, 100);
-                    //dbManager.addComponent(Name2, Name3, Name4, capacitor1);
+                    dbManager.addComponent(Name2, Name3, Name4, capacitor1);
                     //DatabaseManager.BooleanDataCallback
-                    dbManager.findNFC(Name1)
+                    /*dbManager.findNFC(Name1)
                             .addOnCompleteListener(new OnCompleteListener<Boolean>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Boolean> task) {
@@ -108,7 +108,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                                         Toast.makeText(getActivity(), "Error occurred.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-                            });
+                            });*/
 
                     Toast.makeText(getActivity(), "DB WORKED", Toast.LENGTH_SHORT).show();
                     //characteristics1.put(Name1, Name2);
