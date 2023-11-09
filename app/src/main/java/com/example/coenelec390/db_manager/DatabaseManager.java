@@ -6,6 +6,10 @@ import androidx.annotation.NonNull;
 
 import com.example.coenelec390.MainActivity;
 import com.example.coenelec390.ui.item.AddItemActivity;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -68,35 +72,18 @@ public class DatabaseManager {
     }
 
 
-    public void findNFC(String tag, BooleanDataCallback callback) {
-        DatabaseReference ref = mDatabase.child("NFC TAG IDs");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+    public Task<Boolean> findNFC(String tag) {
+        DatabaseReference ref = mDatabase.child("NFC TAG IDs").child(tag);
+        return ref.get().continueWith(new Continuation<DataSnapshot, Boolean>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //List<String> taglist = new ArrayList<>();
-                /*for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
-                    if (tag==categorySnapshot.getKey()){
-                        //NFC FOUND
-
-                        break;
-                    }
-                    //taglist.add(categorySnapshot.getKey());
-                }*/
-                boolean exists = snapshot.exists();
-
-
-                callback.onDataReceived(exists);
-                if (!exists){
-                    //LAUNCH ADD ITEM FRAGMENT
-                    addItemFragment(tag);
+            public Boolean then(@NonNull Task<DataSnapshot> task) throws Exception {
+                if (task.isSuccessful()) {
+                    DataSnapshot dataSnapshot = task.getResult();
+                    return dataSnapshot.exists();
+                } else {
+                    // Handle any potential errors here
+                    return false; // Return false in case of error
                 }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
