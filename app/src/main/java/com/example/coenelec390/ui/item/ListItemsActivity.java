@@ -13,7 +13,7 @@ public class ListItemsActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_items);
+        setContentView(R.layout.fragment_item);
 
 //        API api = RetrofitClient.getInstance().getAPI();
 //        Call<List<Item>> call = api.getProducts();

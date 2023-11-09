@@ -1,14 +1,53 @@
 package com.example.coenelec390.db_manager;
 
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+
+import com.example.coenelec390.MainActivity;
+import com.example.coenelec390.ui.item.AddItemActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+import com.google.firebase.database.ValueEventListener;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+//assign2 libraries
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.example.coenelec390.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+
 
 public class DatabaseManager {
 
     private DatabaseReference mDatabase;
+    static int counter = 1;
+
 
     // Constructor
     public DatabaseManager() {
@@ -24,7 +63,65 @@ public class DatabaseManager {
      */
     public void addComponent(String type, String category, String model, Component component) {
         mDatabase.child("components").child(type).child(category).child(model).setValue(component);
+        //mDatabase.child("NFC TAG IDs").child(Integer.toString(counter)).setValue(9892);
+        //counter++;
     }
+
+
+    public void findNFC(String tag, BooleanDataCallback callback) {
+        DatabaseReference ref = mDatabase.child("NFC TAG IDs");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //List<String> taglist = new ArrayList<>();
+                /*for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
+                    if (tag==categorySnapshot.getKey()){
+                        //NFC FOUND
+
+                        break;
+                    }
+                    //taglist.add(categorySnapshot.getKey());
+                }*/
+                boolean exists = snapshot.exists();
+
+
+                callback.onDataReceived(exists);
+                if (!exists){
+                    //LAUNCH ADD ITEM FRAGMENT
+                    addItemFragment(tag);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    private void addItemFragment(String tag) {
+        AddItemActivity addItemFragment = new AddItemActivity();
+        Bundle args = new Bundle();
+        args.putString("nfctag", tag);
+        addItemFragment.setArguments(args);
+        addItemFragment.show(addItemFragment.getFragmentManager(), "my");
+
+
+    }
+
+    public interface BooleanDataCallback {
+        void onDataReceived(boolean result);
+    }
+
+
+
+
+
+
+
     public void deleteComponent(String type, String category, String model) {
         mDatabase.child("components").child(type).child(category).child(model).removeValue();
         //if you want to remove a model from the database
@@ -38,9 +135,9 @@ public class DatabaseManager {
         void onError(String error);
     }
 
-
+//NEW FUNCTIONS
     //this isnt 100% stable fetchCategories
-    /*public void fetchCategories(String type, DataCallback callback) {
+    public void fetchCategories(String type, DataCallback callback) {
         DatabaseReference ref = mDatabase.child("components").child(type);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -79,5 +176,5 @@ public class DatabaseManager {
     public void fetchModelDetails(String type, String category, String model, ValueEventListener listener) {
         DatabaseReference ref = mDatabase.child("components").child(type).child(category).child(model);
         ref.addListenerForSingleValueEvent(listener);
-    }*/
+    }
 }
