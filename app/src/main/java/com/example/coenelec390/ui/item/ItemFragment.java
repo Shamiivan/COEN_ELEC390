@@ -31,6 +31,15 @@ public class ItemFragment extends Fragment {
                 a.show(getActivity().getSupportFragmentManager(), "MyFragment");
             }
         });
+
+        Button view = binding.listItem;
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListItemsActivity v = new ListItemsActivity();
+                v.show(getActivity().getSupportFragmentManager(), "MyFragment");
+            }
+        });
         return root;
     }
 
