@@ -64,6 +64,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.6.0")
     implementation("androidx.compose.material3:material3:1.1.2")
     implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("com.firebaseui:firebase-ui-database:8.0.2")
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
 
 
@@ -74,16 +75,11 @@ dependencies {
     //Dependencies for Card View
     implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
-    //May need to remove this once database is set
-    implementation("com.squareup.retrofit2:retrofit:2.4.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.4.0")
 
     //Allows to display image of product based off of URL
-    implementation("com.github.bumptech.glide:glide:4.11.0")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
 
     // Fix Duplicate class
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))

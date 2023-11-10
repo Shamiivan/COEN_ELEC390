@@ -8,7 +8,7 @@
     tools:context=".ui.item.AddItemActivity">
 
     <TextView
-        android:id="@+id/tvSubtitle"
+        android:id="@+id/Addtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD COMPONENT"
@@ -22,32 +22,30 @@
         app:layout_constraintVertical_bias="0.065" />
 
     <EditText
-        android:id="@+id/etId1"
+        android:id="@+id/etID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:hint="Model/Serial ID"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
-        app:layout_constraintVertical_bias="0.038" />
-
-    <EditText
-        android:id="@+id/etImageURL1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Image URL"
+        android:hint="Model/ID"
         app:layout_constraintBottom_toBottomOf="@+id/btnAddProduct"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etId1"
+        app:layout_constraintTop_toBottomOf="@+id/Addtitle"
+        app:layout_constraintVertical_bias="0.096" />
+
+    <EditText
+        android:id="@+id/etLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etID"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/etStock1"
+        android:id="@+id/etStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Stock"
@@ -56,18 +54,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etImageURL1"
+        app:layout_constraintTop_toBottomOf="@+id/etLocation"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/etDescription1"
+        android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Description"
         app:layout_constraintBottom_toBottomOf="@+id/btnAddProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etStock1"
+        app:layout_constraintTop_toBottomOf="@+id/etStock"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button

@@ -2,13 +2,17 @@ package com.example.coenelec390.ui.item;
 
 public class Item {
     private String id;
-    private String imageURL;
+    private String location;
     private String description;
     private int stock;
 
-    public Item(String id, String imageURL, String description, int stock){
+    public Item(){
+
+    }
+
+    public Item(String id, String location, String description, int stock){
         this.id = id;
-        this.imageURL = imageURL;
+        this.location = location;
         this.description = description;
         this.stock = stock;
     }
@@ -17,8 +21,8 @@ public class Item {
         return id;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getLocation() {
+        return location;
     }
 
     public String getDescription() {

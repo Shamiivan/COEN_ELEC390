@@ -47,10 +47,10 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
          super.onCreateView(inflater, container, savedInstanceState);
         View rootview = inflater.inflate(R.layout.add_item, container, false);
 
-        editText1 = rootview.findViewById(R.id.etId1);
-        editText2 = rootview.findViewById(R.id.etImageURL1);
-        editText3 = rootview.findViewById(R.id.etStock1);
-        editText4 = rootview.findViewById(R.id.etDescription1);
+        editText1 = rootview.findViewById(R.id.etLocation);
+        editText2 = rootview.findViewById(R.id.etID);
+        editText3 = rootview.findViewById(R.id.etStock);
+        editText4 = rootview.findViewById(R.id.etDescription);
         //editText5 = findViewById(R.id.editTextText5);
         //editText6 = findViewById(R.id.editTextText6);
         //editText7 = findViewById(R.id.editTextText7);
@@ -116,10 +116,10 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
-        //editText1 = findViewById(R.id.etId1);
-        //editText2 = findViewById(R.id.etImageURL1);
-        //editText3 = findViewById(R.id.etStock1);
-        //editText4 = findViewById(R.id.etDescription1);
+        //editText1 = findViewById(R.id.etLocation);
+        //editText2 = findViewById(R.id.etID);
+        //editText3 = findViewById(R.id.etStock);
+        //editText4 = findViewById(R.id.etDescription);
         //editText5 = findViewById(R.id.editTextText5);
         //editText6 = findViewById(R.id.editTextText6);
         //editText7 = findViewById(R.id.editTextText7);

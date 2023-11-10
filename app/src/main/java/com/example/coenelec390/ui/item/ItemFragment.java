@@ -28,7 +28,7 @@ public class ItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AddItemActivity a = new AddItemActivity();
-                a.show(getActivity().getSupportFragmentManager(), "MyFragment");
+                a.show(getActivity().getSupportFragmentManager(), "Add Fragment");
             }
         });
 
@@ -37,7 +37,7 @@ public class ItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ListItemsActivity v = new ListItemsActivity();
-                v.show(getActivity().getSupportFragmentManager(), "MyFragment");
+                v.show(getActivity().getSupportFragmentManager(), "View Fragment");
             }
         });
         return root;
