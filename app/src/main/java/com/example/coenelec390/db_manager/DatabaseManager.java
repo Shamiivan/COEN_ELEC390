@@ -71,6 +71,13 @@ public class DatabaseManager {
         //counter++;
     }
 
+    public void addComponent(Component component){
+        String mainCategory = component.getMainCategory();
+        String subCategory = component.getSubCategory();
+        //this is used as the key
+        String key = component.getPartNumber();
+        mDatabase.child(mainCategory).child(subCategory).child(key).setValue(component);
+    }
 
     public Task<Boolean> findNFC(String tag) {
         DatabaseReference ref = mDatabase.child("NFC TAG IDs").child(tag);
