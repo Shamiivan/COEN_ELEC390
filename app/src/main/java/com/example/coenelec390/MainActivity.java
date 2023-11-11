@@ -9,8 +9,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.example.coenelec390.databinding.MainBinding;
+
+import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,11 +24,7 @@ public class MainActivity extends AppCompatActivity {
         binding = MainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
-
-
-
+        FirebaseApp.initializeApp(this);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

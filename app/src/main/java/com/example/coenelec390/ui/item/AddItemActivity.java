@@ -55,7 +55,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
         //editText6 = findViewById(R.id.editTextText6);
         //editText7 = findViewById(R.id.editTextText7);
         save = rootview.findViewById(R.id.btnAddProduct);
-        Map<String, String> characteristics1 = new HashMap<>();
+        Map<String, Object> characteristics1 = new HashMap<>();
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +70,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                     Toast.makeText(getActivity(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                 else{
                     DatabaseManager dbManager = new DatabaseManager();
-                    Map<String, String> characteristics5 = new HashMap<>();
+                    Map<String, Object> characteristics5 = new HashMap<>();
                     characteristics5.put("capacitance", "100uF");
                     Component capacitor1 = new Component(characteristics5, Name1, 100);
                     dbManager.addComponent(Name2, Name3, Name4, capacitor1);
@@ -139,7 +139,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                     Toast.makeText(AddItemActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 else{
                     DatabaseManager dbManager = new DatabaseManager();
-                    Map<String, String> characteristics5 = new HashMap<>();
+                    Map<String, Object> characteristics5 = new HashMap<>();
                     characteristics5.put("capacitance", "100uF");
                     Component capacitor1 = new Component(characteristics5, Name1, 100);
                     dbManager.addComponent(Name2, Name3, Name4, capacitor1);
