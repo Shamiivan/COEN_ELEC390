@@ -1,6 +1,7 @@
 package com.example.coenelec390.ui.notifications;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.coenelec390.R;
 import com.example.coenelec390.bluetooth.BLE_MANAGER;
 import com.example.coenelec390.databinding.FragmentNotificationsBinding;
+import com.example.coenelec390.db_manager.PopulateDatabase;
 
 public class NotificationsFragment extends Fragment {
 
@@ -69,6 +71,16 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 bleManager.connectPeripheral();
+            }
+        });
+
+        Button db = root.findViewById(R.id.updateDB);
+        db.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String filename ="dataset.csv";
+               PopulateDatabase pd = new PopulateDatabase(getContext());
+                pd.readCSVAndPrint(filename);
             }
         });
         return root;

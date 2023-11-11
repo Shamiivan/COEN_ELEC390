@@ -96,7 +96,6 @@ public class DatabaseManager {
         addItemFragment.setArguments(args);
         addItemFragment.show(addItemFragment.getFragmentManager(), "my");
 
-
     }
 
     public interface BooleanDataCallback {
@@ -164,4 +163,5 @@ public class DatabaseManager {
         DatabaseReference ref = mDatabase.child("components").child(type).child(category).child(model);
         ref.addListenerForSingleValueEvent(listener);
     }
+
 }

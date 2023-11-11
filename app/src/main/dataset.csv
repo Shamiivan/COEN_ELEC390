@@ -1,0 +1,10 @@
+Main Category,Subcategory,Part Number,Value,Quantity,Price,Grade,Tolerance,Rating,Package
+Passive,Resistors,CRCW06031K00FKTA,1k ohms,1000,$0.15,AEC-Q200,1%,0.1 W,0603
+Passive,Resistors,CRCW060349R9FKTA,49.9 ohms,100,$0.15,AEC-Q200,1%,0.1 W,0603
+Passive,Resistors,ERA-6AED333V,33k ohms,50,$0.42,AEC-Q200,0.50%,0.125 W,0805
+Passive,Capacitors,06035C104K4Z4A,0.1 uF,2000,$0.12,AEC-Q200,10%,50 V,0603
+Passive,Capacitors,C0603X220J5GACAUTO,22 pF,100,$0.33,AEC-Q200,5%,50 V,0603
+Passive,Inductors,IHLP4040EDER220M5A,22 uH,20,$0.39,AEC-Q200,20%,3.8 A,4040
+Passive,Inductors,SRP5015TA-2R2M,2.2 uH,50,$1.03,AEC-Q200,20%,4 A,N/S
+Passive,Ferrite Beads,ACML-0805-102-T,1k ohms,100,$0.09,ROHS II,25%,0.3 A,0805
+Passive,Ferrite Beads,"MH2029-101Y",100 ohms,500,$0.03,ROHS,25%,2 A,0805
