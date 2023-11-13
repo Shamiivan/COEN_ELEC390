@@ -35,8 +35,10 @@ import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.coenelec390.Utils;
+import com.example.coenelec390.ui.item.AddItemActivity;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -62,14 +64,17 @@ public class BLE_MANAGER {
 
     private Queue<Runnable> commandQueue = new LinkedList<>();
     private boolean commandQueueBusy = false;
+    private FragmentManager fragmentManager ;
 
 
-    public BLE_MANAGER(Activity _activity) {
+
+    public BLE_MANAGER(Activity _activity , FragmentManager _fragmentManager) {
         context = _activity.getApplicationContext();
         activity = _activity;
         BluetoothManager bluetoothManager = (BluetoothManager) _activity.getSystemService(Context.BLUETOOTH_SERVICE);
         btAdapter = bluetoothManager.getAdapter();
         btScanner = btAdapter.getBluetoothLeScanner();
+        this.fragmentManager = _fragmentManager;
 
 
         btState = new BLE_STATE(context);
@@ -228,14 +233,26 @@ public class BLE_MANAGER {
                 nextCommand();
             }else {Utils.print("Failed to receive data");}
 
+            //AddItemActivity a = new AddItemActivity() ;
             // Create an Intent
-            Intent intent = new Intent();
+            //IntentService myIntentService = new IntentService(fragmentManager);
+            Intent intent = new Intent(context, AddItemActivity.class);
             // Set the action for the Intent
             intent.setAction("com.example.coenelec390.bluetooth.NEW_CHARACTERISTIC");
             // Put the received data as an extra
             intent.putExtra("data", stringValue.toString().trim());
             // Send the broadcast
-            context.sendBroadcast(intent);
+            //myIntentService.enqueueWork(context, intent);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //context.startActivity(intent);
+            if (fragmentManager != null) {
+                AddItemActivity fragment = AddItemActivity.newInstance(stringValue.toString().trim());
+                fragment.show(fragmentManager, "dialogFragment");
+            }
+            Utils.print("finished ble_manager lines");
+
+
+            //context.sendBroadcast(intent);
 
         }
 

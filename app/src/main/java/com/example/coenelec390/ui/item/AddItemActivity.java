@@ -2,17 +2,16 @@ package com.example.coenelec390.ui.item;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.example.coenelec390.MainActivity;
+
 import com.example.coenelec390.R;
+import com.example.coenelec390.bluetooth.FragmentOpenListener;
+import com.example.coenelec390.bluetooth.IntentService;
 import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,23 +19,11 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.HashMap;
 import java.util.Map;
-import android.content.Intent;
-import android.os.Bundle;
+
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 
 public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
@@ -49,11 +36,16 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
     private Button save ;
     //private Component comp;
     static String stringNFC;
-
+    //IntentService IntentServiceContext = new IntentService();
+    public int x;
+    public AddItemActivity thiss(){
+        return this;
+    }
 
     public AddItemActivity(){
 
     }
+
 
     public static AddItemActivity newInstance(String tag) {
         AddItemActivity fragment = new AddItemActivity();
@@ -73,6 +65,15 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
         return builder.create();
     }*/
 
+//    @Override
+//    public void onOpenFragment(AddItemActivity fragment) {
+//        getChildFragmentManager().beginTransaction()
+//                .replace(R.id.container, fragment)
+//                .addToBackStack(null)
+//                .commit();
+//    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,9 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
         View rootview = inflater.inflate(R.layout.activity_add_item, container, false);
+
+
+
 
         editText1 = rootview.findViewById(R.id.etId1);
         editText2 = rootview.findViewById(R.id.etImageURL1);
@@ -156,6 +160,12 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
 
         return rootview;
     }
+
+//    @Override
+//    public void onOpenFragment() {
+//        ((IntentService) getActivity()).setActivityListener(AddItemActivity.this);
+//
+//    }
 
     /*@Override
     public void onCreate(Bundle savedInstanceState) {

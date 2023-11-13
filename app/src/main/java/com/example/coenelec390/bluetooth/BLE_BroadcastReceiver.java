@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.coenelec390.Utils;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.ui.item.AddItemActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,6 +18,7 @@ public class BLE_BroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("com.example.coenelec390.bluetooth.NEW_CHARACTERISTIC")) {
             String data = intent.getStringExtra("data");
+            Utils.print("I think its broadcasting to ble rec");
 
             // TODO : CALL addItem DialogFragment
             DatabaseManager dbManager = new DatabaseManager();
