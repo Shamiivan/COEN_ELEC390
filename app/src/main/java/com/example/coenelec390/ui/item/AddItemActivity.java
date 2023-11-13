@@ -3,6 +3,9 @@ package com.example.coenelec390.ui.item;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,11 +48,31 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
     DatabaseManager dbManager_for_add_items;
     private Button save ;
     //private Component comp;
+    static String stringNFC;
 
 
     public AddItemActivity(){
 
     }
+
+    public static AddItemActivity newInstance(String tag) {
+        AddItemActivity fragment = new AddItemActivity();
+        Bundle args = new Bundle();
+        args.putString("TAG", tag);
+        fragment.setArguments(args);
+        stringNFC = tag;
+        return fragment;
+    }
+    /*@Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        String message = getArguments().getString("TAG");
+        // Create your dialog with the message
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(message);
+        // Set other dialog properties
+        return builder.create();
+    }*/
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +86,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
         View rootview = inflater.inflate(R.layout.activity_add_item, container, false);
 
         editText1 = rootview.findViewById(R.id.etId1);
-        //editText2 = findViewById(R.id.etImageURL1);
+        editText2 = rootview.findViewById(R.id.etImageURL1);
         //editText3 = findViewById(R.id.etStock1);
         //editText4 = findViewById(R.id.etDescription1);
         //editText5 = findViewById(R.id.editTextText5);
@@ -109,8 +132,15 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                                     }
                                 }
                             });
+                   /*boolean x = dbManager.isTagNew(Name1);
+                    if(x)
+                        Toast.makeText(getActivity(), "new tag", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getActivity(), "old tag old", Toast.LENGTH_SHORT).show();*/
 
-                    Toast.makeText(getActivity(), "DB WORKED", Toast.LENGTH_SHORT).show();
+
+                    editText2.setText(stringNFC);
+                    Toast.makeText(getActivity(), "nfcid= "+ stringNFC, Toast.LENGTH_SHORT).show();
                     //characteristics1.put(Name1, Name2);
                     // Toast.makeText(AddItemsActivity.this, "char gd", Toast.LENGTH_SHORT).show();
                     //int x = 10;

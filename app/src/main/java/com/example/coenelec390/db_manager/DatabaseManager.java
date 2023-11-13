@@ -1,5 +1,7 @@
 package com.example.coenelec390.db_manager;
 
+import static android.app.PendingIntent.getActivity;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,8 @@ import java.util.Map;
 //assign2 libraries
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.AsyncListUtil;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -88,6 +92,56 @@ public class DatabaseManager {
         });
 
     }
+    //modified nfctag search
+
+    //DatabaseManager dbManager = new DatabaseManager();
+
+   /* public boolean isTagNew(String tagid) {
+         boolean[] result = {true};
+        findNFC(tagid)
+                .addOnCompleteListener(new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Boolean> task) {
+                        if (task.isSuccessful()) {
+                            boolean typeExists = task.getResult();
+                            if (typeExists) {
+                                // Type exists in the database, show a message
+                               // Toast.makeText(getActivity(AddItemActivi), "Type exists!", Toast.LENGTH_SHORT).show();
+                                 result[0] =false;
+
+                            } else {
+                                // Type doesn't exist in the database, show a message
+                                //Toast.makeText(getActivity(), "Type doesn't exist.", Toast.LENGTH_SHORT).show();
+                                result[0] =false;
+                            }
+                        } else {
+                            result[0] =false;
+                            // Handle any potential errors here
+                            //Toast.makeText(getActivity(), "Error occurred.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        return result[0];
+    }*/
+
+    /*public void isTypeNew(String nfc, final AsyncListUtil.DataCallback<Boolean> callback) {
+        findNFC(nfc)
+                .addOnCompleteListener(new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Boolean> task) {
+                        if (task.isSuccessful()) {
+                            boolean typeExists = task.getResult();
+                            callback.onDataReceived(!typeExists); // Notify the caller with the result
+                        } else {
+                            // Handle any potential errors here
+                            callback.onDataReceived(false); // Notify the caller with an error result
+                        }
+                    }
+                });
+    }*/
+
+
+
 
     private void addItemFragment(String tag) {
         AddItemActivity addItemFragment = new AddItemActivity();
