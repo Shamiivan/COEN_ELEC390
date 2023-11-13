@@ -87,8 +87,8 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
 
         editText1 = rootview.findViewById(R.id.etId1);
         editText2 = rootview.findViewById(R.id.etImageURL1);
-        //editText3 = findViewById(R.id.etStock1);
-        //editText4 = findViewById(R.id.etDescription1);
+        editText3 = rootview.findViewById(R.id.etStock1);
+        editText4 = rootview.findViewById(R.id.etDescription1);
         //editText5 = findViewById(R.id.editTextText5);
         //editText6 = findViewById(R.id.editTextText6);
         //editText7 = findViewById(R.id.editTextText7);

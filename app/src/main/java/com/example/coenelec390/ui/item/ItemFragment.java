@@ -16,16 +16,13 @@ import com.example.coenelec390.db_manager.DatabaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-public class ItemFragment extends Fragment {//TODO: To remove
+public class ItemFragment extends Fragment {
 
     private FragmentItemBinding binding;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ItemViewModel itemViewModel =
-                new ViewModelProvider(this).get(ItemViewModel.class);
-
         binding = FragmentItemBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
