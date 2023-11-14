@@ -136,24 +136,32 @@ public class DatabaseManager {
        });
     }
 
-    public interface BooleanDataCallback {
+    /*
+    * Subcategories
+    * */
+    public interface OnSubCategoriesLoadedListener {
+        void onSubCategoriesLoaded(List<String> subCategories);
+        void onSubCategoriesError(String errorMessage);
     }
 
-////    String selectedCategory = getIntent().getStringExtra("selected_category");
-//
-//mDatabase.child("components").child(selectedCategory).addValueEventListener(new ValueEventListener() {
-//        @Override
-//        public void onDataChange(DataSnapshot dataSnapshot) {
-//            for (DataSnapshot subCategorySnapshot: dataSnapshot.getChildren()) {
-//                String subCategory = subCategorySnapshot.getKey();
-//                // Add the subcategory to your list and update your RecyclerView
-//            }
-//        }
-//
-//        @Override
-//        public void onCancelled(DatabaseError databaseError) {
-//            // Handle possible errors.
-//        }
-//    });
-//
+    public void fetchSubCategories(String mainCategory, OnSubCategoriesLoadedListener listener) {
+        DatabaseReference reference = mDatabase.child("components").child(mainCategory);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> subCategories = new ArrayList<>();
+                for (DataSnapshot subCategorySnap : snapshot.getChildren()) {
+                    String subCategory = subCategorySnap.getKey();
+                    subCategories.add(subCategory);
+                }
+                listener.onSubCategoriesLoaded(subCategories);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onSubCategoriesError(error.getMessage());
+            }
+        });
+    }
+
 }

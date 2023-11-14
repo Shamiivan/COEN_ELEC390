@@ -95,7 +95,28 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
     @Override
     public void onItemClick(String category) {
         Toast.makeText(getContext(), "Clicked category: " + category, Toast.LENGTH_SHORT).show();
-        Utils.print("GOT SO FAR MFF");
+
 
     }
+    private void fetchSubCategories(String category) {
+        // Fetch the subcategories for the selected category from Firebase
+        databaseManager.fetchSubCategories(category, new DatabaseManager.OnSubCategoriesLoadedListener() {
+            @Override
+            public void onSubCategoriesLoaded(List<String> subCategories) {
+                // Replace the current fragment with the SubCategoryFragment
+                SubCategoryFragment subCategoryFragment = SubCategoryFragment.newInstance(subCategories);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.subCategoryFragment, subCategoryFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+            @Override
+            public void onSubCategoriesError(String errorMessage) {
+                // Handle possible errors.
+                Toast.makeText(getContext(), "Error fetching subcategories: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

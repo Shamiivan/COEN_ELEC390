@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
+import com.example.coenelec390.Utils;
 
 import java.util.List;
 
@@ -57,7 +58,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     listener.onItemClick(category);
+                    Utils.print(category);
                 }
+
             });
         }
     }
