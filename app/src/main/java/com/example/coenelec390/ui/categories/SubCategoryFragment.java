@@ -1,32 +1,43 @@
 package com.example.coenelec390.ui.categories;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
+import com.example.coenelec390.Utils;
+import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.db_manager.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubCategoryFragment extends Fragment {
+public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.OnItemClickListener {
     private RecyclerView recyclerView;
     private SubCategoryAdapter subCategoryAdapter;
     private List<String> subCategories;
+    private String categoryName;
+    private CategoryAdapter.OnItemClickListener listener;
+    private DatabaseManager databaseManager;
 
     public SubCategoryFragment() {
         // Required empty public constructor
     }
 
-    public static SubCategoryFragment newInstance(List<String> subCategories) {
+    public static SubCategoryFragment newInstance(List<String> subCategories, String categoryName) {
         SubCategoryFragment fragment = new SubCategoryFragment();
         Bundle args = new Bundle();
         args.putStringArrayList("subCategories", new ArrayList<>(subCategories));
+        args.putString("categoryName", categoryName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,7 +47,10 @@ public class SubCategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             subCategories = getArguments().getStringArrayList("subCategories");
+            categoryName = getArguments().getString("categoryName");
         }
+        // Initialize the databaseManager object
+        databaseManager = new DatabaseManager();
     }
 
 
@@ -47,7 +61,7 @@ public class SubCategoryFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        subCategoryAdapter = new SubCategoryAdapter(subCategories, getContext());
+        subCategoryAdapter = new SubCategoryAdapter(subCategories, getContext(), this);
         recyclerView.setAdapter(subCategoryAdapter);
 
         return view;
@@ -64,4 +78,29 @@ public class SubCategoryFragment extends Fragment {
         subCategoryAdapter = null;
     }
 
+    @Override
+    public void onItemClick(String subCategory) {
+        Toast.makeText(getContext(), "Clicked category: " + subCategory, Toast.LENGTH_SHORT).show();
+        Utils.print(subCategory + " " + categoryName);
+        fetchComponents(categoryName, subCategory);
+
+    }
+
+    public void fetchComponents(String mainCategory, String subCategory){
+        databaseManager.fetchComponents(mainCategory, subCategory, new DatabaseManager.OnComponentLoadedListener() {
+            @Override
+            public void onComponentLoaded(List<Component> components) {
+                for (Component component: components
+                     ) {
+                        component.display();
+                    }
+            }
+
+            @Override
+            public void onComponentError(String errorMessage) {
+                Toast.makeText(getContext(), "Error fetching subcategories: " + errorMessage, Toast.LENGTH_SHORT).show();
+                Utils.print(errorMessage);
+            }
+        });
+    }
 }

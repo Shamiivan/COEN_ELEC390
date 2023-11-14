@@ -106,11 +106,7 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
         databaseManager.fetchSubCategories(category, new DatabaseManager.OnSubCategoriesLoadedListener() {
             @Override
             public void onSubCategoriesLoaded(List<String> subCategories) {
-                // Replace the current fragment with the SubCategoryFragment
-                for (String sub :subCategories) {
-                    Utils.print(sub);
-                }
-                SubCategoryFragment subCategoryFragment = SubCategoryFragment.newInstance(subCategories);
+                SubCategoryFragment subCategoryFragment = SubCategoryFragment.newInstance(subCategories, category);
                 // Replace the fragment using a transaction
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.nav_host_fragment_activity_main, subCategoryFragment);

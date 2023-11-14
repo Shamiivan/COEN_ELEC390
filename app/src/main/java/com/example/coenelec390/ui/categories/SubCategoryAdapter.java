@@ -10,13 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
+import com.example.coenelec390.Utils;
+import com.example.coenelec390.db_manager.Component;
 
 import java.util.List;
 
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.ViewHolder> {
+    private String MainCategory;
+    private SubCategoryAdapter.OnItemClickListener listener;
     private List<String> subCategories;
     private Context context;
 
+    public SubCategoryAdapter(List<String> subCategories, Context context, OnItemClickListener listener) {
+        this.subCategories = subCategories;
+        this.listener = listener;
+    }
     public SubCategoryAdapter(List<String> subCategories, Context context) {
         this.subCategories = subCategories;
         this.context = context;
@@ -33,6 +41,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String subCategory = subCategories.get(position);
         holder.subCategoryTextView.setText(subCategory);
+        holder.bind(subCategory, listener);
     }
 
     @Override
@@ -47,6 +56,19 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
             super(itemView);
             subCategoryTextView = itemView.findViewById(R.id.textView);
         }
+        public void bind(String subCategory, SubCategoryAdapter.OnItemClickListener listener) {
+            subCategoryTextView.setText(subCategory);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(subCategory);
+                }
+
+            });
+        }
+    }
+    public interface OnItemClickListener {
+        void onItemClick(String componentName);
     }
 
     public void clearData() {
@@ -54,3 +76,5 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         notifyDataSetChanged();
     }
 }
+
+
