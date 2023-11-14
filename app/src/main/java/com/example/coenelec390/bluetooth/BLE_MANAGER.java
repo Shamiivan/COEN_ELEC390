@@ -34,6 +34,7 @@ import android.provider.Settings;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import com.example.coenelec390.Utils;
@@ -79,6 +80,7 @@ public class BLE_MANAGER {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void connectPeripheral() {
         if (!peripheralAvailable) {
             Utils.print("Peripheral not available");

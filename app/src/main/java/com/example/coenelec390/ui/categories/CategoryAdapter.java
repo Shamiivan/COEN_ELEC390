@@ -68,4 +68,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public interface OnItemClickListener {
         void onItemClick(String category);
     }
+
+    // Add the following method
+    public void clearData() {
+        mainCategories.clear();
+        notifyDataSetChanged();
+    }
 }

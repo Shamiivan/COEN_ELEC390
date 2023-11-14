@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -95,20 +96,26 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
     @Override
     public void onItemClick(String category) {
         Toast.makeText(getContext(), "Clicked category: " + category, Toast.LENGTH_SHORT).show();
+        categoryAdapter.clearData();
         fetchSubCategories(category);
 
     }
+
     private void fetchSubCategories(String category) {
         // Fetch the subcategories for the selected category from Firebase
         databaseManager.fetchSubCategories(category, new DatabaseManager.OnSubCategoriesLoadedListener() {
             @Override
             public void onSubCategoriesLoaded(List<String> subCategories) {
                 // Replace the current fragment with the SubCategoryFragment
+                for (String sub :subCategories) {
+                    Utils.print(sub);
+                }
                 SubCategoryFragment subCategoryFragment = SubCategoryFragment.newInstance(subCategories);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.subCategoryFragment, subCategoryFragment)
-                        .addToBackStack(null)
-                        .commit();
+                // Replace the fragment using a transaction
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.nav_host_fragment_activity_main, subCategoryFragment);
+                transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
+                transaction.commit();
             }
 
             @Override
@@ -118,5 +125,12 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
             }
         });
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        categoryAdapter.clearData(); // Clear the data when the view is destroyed
+    }
+
 
 }

@@ -27,7 +27,11 @@
         android:id="@+id/navigation_categories"
         android:name="com.example.coenelec390.ui.categories.CategoryFragment"
         android:label="@string/menu_categories"
-        tools:layout="@layout/fragment_category_list" />
+        tools:layout="@layout/fragment_category_list" >
+        <action
+            android:id="@+id/action_navigation_categories_to_subCategoryFragment"
+            app:destination="@id/subCategoryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/subCategoryFragment"

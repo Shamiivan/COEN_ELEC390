@@ -164,4 +164,33 @@ public class DatabaseManager {
         });
     }
 
+    /*
+    * Component listing
+    *
+    * */
+
+    public interface OnComponentLoadedListener{
+        void onComponentLoaded(List<Component> components);
+        void onComponentError(String errorMessage);
+    }
+
+    public void fetchComponents(String mainCategory,String subCategory, OnComponentLoadedListener listener) {
+        DatabaseReference reference = mDatabase.child("components").child(mainCategory).child(subCategory);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Component> components = new ArrayList<>();
+                for (DataSnapshot subCategorySnap : snapshot.getChildren()) {
+                    Component subCategory = subCategorySnap.getValue(Component.class);
+                    components.add(subCategory);
+                }
+                listener.onComponentLoaded(components);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onComponentError(error.getMessage());
+            }
+        });
+    }
 }

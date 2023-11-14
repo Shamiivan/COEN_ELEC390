@@ -45,7 +45,12 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            subCategoryTextView = itemView.findViewById(R.id.subCategoryTextView);
+            subCategoryTextView = itemView.findViewById(R.id.textView);
         }
+    }
+
+    public void clearData() {
+        subCategories.clear();
+        notifyDataSetChanged();
     }
 }

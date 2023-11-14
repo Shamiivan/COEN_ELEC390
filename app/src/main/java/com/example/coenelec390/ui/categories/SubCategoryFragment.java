@@ -45,11 +45,23 @@ public class SubCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subcategory_list, container, false);
 
-        recyclerView = view.findViewById(R.id.recycleView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         subCategoryAdapter = new SubCategoryAdapter(subCategories, getContext());
         recyclerView.setAdapter(subCategoryAdapter);
 
         return view;
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Clear the data in the adapter
+        if (subCategoryAdapter != null) {
+            subCategoryAdapter.clearData();
+        }
+        // Set the RecyclerView and Adapter to null to release resources
+        recyclerView = null;
+        subCategoryAdapter = null;
+    }
+
 }
