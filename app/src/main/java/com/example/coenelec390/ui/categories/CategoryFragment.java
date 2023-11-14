@@ -95,7 +95,7 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
     @Override
     public void onItemClick(String category) {
         Toast.makeText(getContext(), "Clicked category: " + category, Toast.LENGTH_SHORT).show();
-
+        fetchSubCategories(category);
 
     }
     private void fetchSubCategories(String category) {
