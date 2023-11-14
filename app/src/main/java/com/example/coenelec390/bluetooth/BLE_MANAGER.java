@@ -64,7 +64,7 @@ public class BLE_MANAGER {
 
     private Queue<Runnable> commandQueue = new LinkedList<>();
     private boolean commandQueueBusy = false;
-    private FragmentManager fragmentManager ;
+    static private FragmentManager fragmentManager ;
 
 
 
@@ -75,12 +75,14 @@ public class BLE_MANAGER {
         btAdapter = bluetoothManager.getAdapter();
         btScanner = btAdapter.getBluetoothLeScanner();
         this.fragmentManager = _fragmentManager;
+        //final FragmentManager fg = _fragmentManager;
 
 
         btState = new BLE_STATE(context);
         bleHandler = new Handler(Looper.getMainLooper());
 
     }
+
 
 
     public void connectPeripheral() {
@@ -247,7 +249,11 @@ public class BLE_MANAGER {
             //context.startActivity(intent);
             if (fragmentManager != null) {
                 AddItemActivity fragment = AddItemActivity.newInstance(stringValue.toString().trim());
+               // if (fragment!=null)
+                 //   fragment.updateContent();
+
                 fragment.show(fragmentManager, "dialogFragment");
+
             }
             Utils.print("finished ble_manager lines");
 

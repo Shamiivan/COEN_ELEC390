@@ -7,6 +7,30 @@
     android:padding="20dp"
     tools:context=".ui.item.AddItemActivity">
 
+    <EditText
+        android:id="@+id/etDescription2"
+        android:layout_width="371dp"
+        android:layout_height="78dp"
+        android:hint="Description"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAddProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etStock1"
+        app:layout_constraintVertical_bias="0.502" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quantity"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAddProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etStock1"
+        app:layout_constraintVertical_bias="0.212" />
+
     <TextView
         android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
@@ -26,19 +50,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:hint="Model/Serial ID"
+        android:hint="Type"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/etId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:editable="false"
+        android:hint="NFC-TAG ID(please scan new tag)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061" />
 
     <EditText
         android:id="@+id/etImageURL1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Image URL"
+        android:hint="Category"
         app:layout_constraintBottom_toBottomOf="@+id/btnAddProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
@@ -50,8 +87,7 @@
         android:id="@+id/etStock1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Stock"
-        android:inputType="numberDecimal"
+        android:hint="Model Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
@@ -63,7 +99,7 @@
         android:id="@+id/etDescription1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"
+        android:hint="Location"
         app:layout_constraintBottom_toBottomOf="@+id/btnAddProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

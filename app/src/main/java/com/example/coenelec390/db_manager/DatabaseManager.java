@@ -68,11 +68,18 @@ public class DatabaseManager {
      * @param category The category of the component (resistors, transistors, etc.).
      * @param model The model of the component.
      * @param component The component data.
+     *
      */
-    public void addComponent(String type, String category, String model, Component component) {
+    public void addComponent(String tag, String type, String category, String model, Component component) {
+        addComponentTag(tag);
         mDatabase.child("components").child(type).child(category).child(model).setValue(component);
-        //mDatabase.child("NFC TAG IDs").child(Integer.toString(counter)).setValue(9892);
-        //counter++;
+        //mDatabase.child("NFC TAG IDs").child(type).setValue(type)/*.setValue(3453)*/;
+        counter++;
+    }
+    public void addComponentTag(String type) {
+        //mDatabase.child("components").child(type).child(category).child(model).setValue(component);
+        mDatabase.child("NFC TAG IDs").child(type).setValue(type)/*.setValue(3453)*/;
+        counter++;
     }
 
 
