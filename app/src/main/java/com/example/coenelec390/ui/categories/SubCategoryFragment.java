@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
+import com.example.coenelec390.ui.item.ComponentDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,16 +86,25 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
         Utils.print(subCategory + " " + categoryName);
         fetchComponents(categoryName, subCategory);
 
+
+
     }
 
     public void fetchComponents(String mainCategory, String subCategory){
         databaseManager.fetchComponents(mainCategory, subCategory, new DatabaseManager.OnComponentLoadedListener() {
             @Override
             public void onComponentLoaded(List<Component> components) {
-                for (Component component: components
-                     ) {
+                for (Component component: components) {
+                    component.setMainCategory(mainCategory);
+                    component.setSubCategory(subCategory);
                         component.display();
-                    }
+                }
+                // Start the ComponentDetailFragment
+                ComponentDetailFragment componentDetailFragment = ComponentDetailFragment.newInstance(components);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.nav_host_fragment_activity_main, componentDetailFragment);
+                transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
+                transaction.commit();
             }
 
             @Override

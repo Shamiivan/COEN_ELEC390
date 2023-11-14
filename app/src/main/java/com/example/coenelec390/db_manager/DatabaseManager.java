@@ -181,8 +181,8 @@ public class DatabaseManager {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Component> components = new ArrayList<>();
                 for (DataSnapshot subCategorySnap : snapshot.getChildren()) {
-                    Component subCategory = subCategorySnap.getValue(Component.class);
-                    components.add(subCategory);
+                    Component component = subCategorySnap.getValue(Component.class);
+                    components.add(component);
                 }
                 listener.onComponentLoaded(components);
             }

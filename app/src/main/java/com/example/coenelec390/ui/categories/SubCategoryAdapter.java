@@ -21,6 +21,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     private List<String> subCategories;
     private Context context;
 
+    private List<Component> components;
     public SubCategoryAdapter(List<String> subCategories, Context context, OnItemClickListener listener) {
         this.subCategories = subCategories;
         this.listener = listener;

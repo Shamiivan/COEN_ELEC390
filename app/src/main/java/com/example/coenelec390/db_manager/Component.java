@@ -45,6 +45,8 @@ public class Component {
         this.totalPrice = quantity * unitPrice;
         this.tag = tag;
     }
+
+
     public Map<String, Object> getCharacteristics() {
         return characteristics;
     }
@@ -80,6 +82,15 @@ public class Component {
     public String getTag() {
         return tag;
     }
+
+    public void setMainCategory(String mainCategory) {
+        MainCategory = mainCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        SubCategory = subCategory;
+    }
+
     public void display(){
         StringBuilder builder = new StringBuilder();
         builder.append("Tag: ").append(tag).append("\n");
@@ -93,5 +104,19 @@ public class Component {
         builder.append("Characteristics: ").append(characteristics).append("\n");
 
         Utils.print(builder.toString());
+    }
+    public String getComponent(){
+            StringBuilder builder = new StringBuilder();
+            builder.append("Tag: ").append(tag).append("\n");
+            builder.append("Location: ").append(location).append("\n");
+            builder.append("Main Category: ").append(MainCategory).append("\n");
+            builder.append("Sub Category: ").append(SubCategory).append("\n");
+            builder.append("Part Number: ").append(PartNumber).append("\n");
+            builder.append("Unit Price: ").append(unitPrice).append("\n");
+            builder.append("Quantity: ").append(quantity).append("\n");
+            builder.append("Total Price: ").append(totalPrice).append("\n");
+            builder.append("Characteristics: ").append(characteristics).append("\n");
+
+            return builder.toString();
     }
 }
