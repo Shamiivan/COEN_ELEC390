@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.coenelec390.R;
+import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.db_manager.DatabaseManager;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,13 +26,23 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListItemsActivity extends androidx.fragment.app.DialogFragment {
     private RecyclerView recyclerView;
-    private DatabaseReference componentsRef, idRef;
+    private DatabaseReference categoryRef, subCategoryRef;
+    private DatabaseManager databaseManager;
+    private String selectedCategory;
 
+    private ArrayAdapter<String> adapter;
     public ListItemsActivity(){
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        databaseManager = new DatabaseManager();
     }
 
     @Override
@@ -41,64 +53,28 @@ public class ListItemsActivity extends androidx.fragment.app.DialogFragment {
         recyclerView = rootview.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        componentsRef = FirebaseDatabase.getInstance().getReference().child("components");
-        idRef = FirebaseDatabase.getInstance().getReference().child("type");
+
+        adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1);
+//        recyclerView.setAdapter(adapter);
 
         return rootview;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Item>().setQuery(componentsRef, Item.class).build();
-
-        FirebaseRecyclerAdapter<Item, ItemsViewHolder> adapter = new FirebaseRecyclerAdapter<Item, ItemsViewHolder>(options) {
+    public void fetchMainCategories(DatabaseManager.OnMainCategoriesLoadedListener listener){
+        databaseManager.fetchMainCategories(new DatabaseManager.OnMainCategoriesLoadedListener() {
             @Override
-            protected void onBindViewHolder(@NonNull ItemsViewHolder holder, int position, @NonNull Item model) {
-                String componentIDs = getRef(position).getKey();
-
-                idRef.child(componentIDs).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String idview = snapshot.child("type").getValue().toString();
-                        String locationview = snapshot.child("location").getValue().toString();
-                        String stockview = snapshot.child("quantity").getValue().toString();
-
-                        holder.id.setText(idview);
-                        holder.location.setText(locationview);
-                        holder.stock.setText(stockview);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+            public void onMainCategoriesLoaded(List<String> mainCategories) {
+                adapter.clear();
+                adapter.addAll(mainCategories);
+                listener.onMainCategoriesLoaded(mainCategories);
             }
 
-            @NonNull
             @Override
-            public ItemsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview, parent, false);
-                ItemsViewHolder viewHolder = new ItemsViewHolder(view);
+            public void onMainCategoriesError(String errorMessage) {
+                listener.onMainCategoriesError(errorMessage);
 
-                return viewHolder;
             }
-        };
-
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
+        });
     }
 
-    public static class ItemsViewHolder extends RecyclerView.ViewHolder{
-        TextView id, location, stock;
-        public ItemsViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            id = itemView.findViewById(R.id.tvID);
-            location = itemView.findViewById(R.id.tvLocation);
-            stock = itemView.findViewById(R.id.tvStock);
-        }
-    }
 }

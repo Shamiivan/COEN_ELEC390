@@ -78,30 +78,6 @@ public class NotificationsFragment extends Fragment {
         });
 
         Button db = root.findViewById(R.id.updateDB);
-        db.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatabaseManager databaseManager = new DatabaseManager();
-                databaseManager.findAll(new DatabaseManager.DataCallback() {
-
-                        public void onDataReceived(List<Component> data) {
-                            // Handle the received data
-                            for (Component component : data) {
-                                // Do something with each component
-                                component.display();
-                            }
-                    }
-
-
-                    @Override
-                    public void onError(String error) {
-                        // Handle the error
-                        System.out.println("Error: " + error);
-                    }
-                });
-
-            }
-        });
         return root;
     }
 

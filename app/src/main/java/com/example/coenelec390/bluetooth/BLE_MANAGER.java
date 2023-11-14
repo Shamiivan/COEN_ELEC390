@@ -78,6 +78,7 @@ public class BLE_MANAGER {
     }
 
 
+
     public void connectPeripheral() {
         if (!peripheralAvailable) {
             Utils.print("Peripheral not available");

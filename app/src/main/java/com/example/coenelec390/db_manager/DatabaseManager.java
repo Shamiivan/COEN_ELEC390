@@ -33,18 +33,13 @@ public class DatabaseManager {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    /**
+    /*
      * Adds a component to the database.
-     * @param type The type of component (active/passive).
-     * @param category The category of the component (resistors, transistors, etc.).
+     * @param  mainCategory of component (active/passive).
+     * @param Subcategory  name the component (resistors, transistors, etc.).
      * @param model The model of the component.
      * @param component The component data.
      */
-    public void addComponent(String type, String category, String model, Component component) {
-        mDatabase.child("components").child(type).child(category).child(model).setValue(component);
-        //mDatabase.child("NFC TAG IDs").child(Integer.toString(counter)).setValue(9892);
-        //counter++;
-    }
 
     public void addComponent(Component component) {
         // TODO : HAVE TO CHECK FOR TAG if it exist ovewrite it
@@ -70,6 +65,8 @@ public class DatabaseManager {
         }
     }
 
+
+    //TODO ADD CATEGORY Method
     public Task<Boolean> findNFC(String tag) {
         DatabaseReference ref = mDatabase.child("NFC TAG IDs").child(tag);
         return ref.get().continueWith(new Continuation<DataSnapshot, Boolean>() {
@@ -96,15 +93,6 @@ public class DatabaseManager {
 
     }
 
-    public interface BooleanDataCallback {
-        void onDataReceived(boolean result);
-    }
-
-
-
-
-
-
 
     public void deleteComponent(String type, String category, String model) {
         mDatabase.child("components").child(type).child(category).child(model).removeValue();
@@ -114,100 +102,58 @@ public class DatabaseManager {
         mDatabase.child("components").child(type).child(category).child(model).updateChildren(updates);
         //the user only inputs Map<String, Object> updates, the rest stays the same
     }
-    public interface DataCallback {
-        void onDataReceived(List<Component> data);
-        void onError(String error);
 
-        void onDataReceived(List<String> mainCategories);
+
+
+
+    /*
+    *
+    *
+    *  */
+
+    public interface OnMainCategoriesLoadedListener {
+        void onMainCategoriesLoaded(List<String> mainCategories);
+        void onMainCategoriesError(String errorMessage);
     }
 
-//NEW FUNCTIONS
-    //this isnt 100% stable fetchCategories
-//    public void fetchCategories(String type, DataCallback callback) {
-//        DatabaseReference ref = mDatabase.child("components").child(type);
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                List<String> categories = new ArrayList<>();
-//                for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
-//                    categories.add(categorySnapshot.getKey());
-//                }
-//                callback.onDataReceived(categories);
-//            }
+    public void fetchMainCategories(OnMainCategoriesLoadedListener listener){
+       DatabaseReference reference = mDatabase.child("components");
+       reference.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               List<String> mainCategories = new ArrayList<>();
+               for (DataSnapshot mainCategorySnap : snapshot.getChildren()) {
+                   String category = mainCategorySnap.getKey();
+                   mainCategories.add(category);
+               }
+               listener.onMainCategoriesLoaded(mainCategories);
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+               listener.onMainCategoriesError(error.getMessage());
+           }
+       });
+    }
+
+    public interface BooleanDataCallback {
+    }
+
+////    String selectedCategory = getIntent().getStringExtra("selected_category");
 //
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                callback.onError(databaseError.getMessage());
+//mDatabase.child("components").child(selectedCategory).addValueEventListener(new ValueEventListener() {
+//        @Override
+//        public void onDataChange(DataSnapshot dataSnapshot) {
+//            for (DataSnapshot subCategorySnapshot: dataSnapshot.getChildren()) {
+//                String subCategory = subCategorySnapshot.getKey();
+//                // Add the subcategory to your list and update your RecyclerView
 //            }
-//        });
-//    }
-
-
-    public void findAll(DataCallback callback) {
-        DatabaseReference ref = mDatabase.child("components");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Component> components = new ArrayList<>();
-                for (DataSnapshot mainCategory : dataSnapshot.getChildren()) {
-                    for (DataSnapshot categorySnapshot : mainCategory.getChildren()) {
-                        for (DataSnapshot subCategory : categorySnapshot.getChildren()) {
-                            Component component = subCategory.getValue(Component.class);
-                            components.add(component);
-                        }
-                    }
-                }
-                callback.onDataReceived(components);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                callback.onError(databaseError.getMessage());
-            }
-        });
-    }
-
-    public void findMainCategories(DataCallback callback) {
-        DatabaseReference ref = mDatabase.child("components");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<String> mainCategories = new ArrayList<>();
-                for (DataSnapshot mainCategory : dataSnapshot.getChildren()) {
-                    String mainCategoryName = mainCategory.getKey();
-                    mainCategories.add(mainCategoryName);
-                }
-                callback.onDataReceived(mainCategories);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                callback.onError(databaseError.getMessage());
-            }
-        });
-    }
-
-    //    public void fetchModels(String type, String category, DataCallback callback) {
-//        DatabaseReference ref = mDatabase.child("components").child(type).child(category);
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                List<String> models = new ArrayList<>();
-//                for (DataSnapshot modelSnapshot : dataSnapshot.getChildren()) {
-//                    models.add(modelSnapshot.getKey());
-//                }
-//                callback.onDataReceived(models);
-//            }
+//        }
 //
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                callback.onError(databaseError.getMessage());
-//            }
-//        });
-//    }
-    public void fetchModelDetails(String type, String category, String model, ValueEventListener listener) {
-        DatabaseReference ref = mDatabase.child("components").child(type).child(category).child(model);
-        ref.addListenerForSingleValueEvent(listener);
-    }
-
+//        @Override
+//        public void onCancelled(DatabaseError databaseError) {
+//            // Handle possible errors.
+//        }
+//    });
+//
 }

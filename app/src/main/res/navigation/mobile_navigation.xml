@@ -22,4 +22,11 @@
         android:name="com.example.coenelec390.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_categories"
+        android:name="com.example.coenelec390.ui.categories.CategoryFragment"
+        android:label="@string/menu_categories"
+        tools:layout="@layout/fragment_category_list" />
+
 </navigation>

@@ -72,8 +72,6 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                     DatabaseManager dbManager = new DatabaseManager();
                     Map<String, Object> characteristics5 = new HashMap<>();
                     characteristics5.put("capacitance", "100uF");
-                    Component capacitor1 = new Component(characteristics5, Name1, 100);
-                    dbManager.addComponent(Name2, Name3, Name4, capacitor1);
                     //DatabaseManager.BooleanDataCallback
                     /*dbManager.findNFC(Name1)
                             .addOnCompleteListener(new OnCompleteListener<Boolean>() {
