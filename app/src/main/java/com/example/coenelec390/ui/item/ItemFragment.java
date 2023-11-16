@@ -23,6 +23,31 @@ public class ItemFragment extends Fragment {
         binding = FragmentItemBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        Button update = binding.updateItem;
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        Button viewCat = binding.viewCat;
+        viewCat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        Button viewList = binding.viewList;
+        viewList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListItemsActivity v = new ListItemsActivity();
+                v.show(getActivity().getSupportFragmentManager(), "View Fragment");
+            }
+        });
+
         Button add = binding.additem;
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,14 +57,7 @@ public class ItemFragment extends Fragment {
             }
         });
 
-        Button view = binding.listItem;
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListItemsActivity v = new ListItemsActivity();
-                v.show(getActivity().getSupportFragmentManager(), "View Fragment");
-            }
-        });
+
         return root;
     }
 
