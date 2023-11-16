@@ -4,7 +4,7 @@ import com.example.coenelec390.Utils;
 import java.util.Map;
 
 public class Component {
-    private Map<String, Object> characteristics;
+    private Map<String, Object> characteristics;//sdehjiodp3o
 
     private String tag;
     private String location;
