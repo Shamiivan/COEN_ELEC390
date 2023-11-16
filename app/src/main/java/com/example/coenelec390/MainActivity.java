@@ -2,6 +2,7 @@ package com.example.coenelec390;
 
 import android.os.Bundle;
 
+import com.example.coenelec390.ui.item.ComponentDetailFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import com.example.coenelec390.databinding.MainBinding;
 
 import com.google.firebase.FirebaseApp;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ComponentDetailFragment.OnBackPressedListener{
 
     private MainBinding binding;
 
@@ -37,4 +38,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    @Override
+    public void onBackPressed() {
+        ComponentDetailFragment fragment = (ComponentDetailFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+        if (fragment != null && fragment.isVisible()) {
+            fragment.handleBackPress();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

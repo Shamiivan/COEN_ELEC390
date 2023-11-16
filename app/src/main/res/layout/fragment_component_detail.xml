@@ -1,84 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.item.ComponentAdapter">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewTag"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tag:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewLocation"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTag" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewMainCategory"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Main Category:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation" />
 
-    <!-- Add more TextViews as needed -->
+    <!-- Add more MaterialTextViews as needed -->
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewSubCategory"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sub Category:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewMainCategory" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewPartNumber"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Part Number:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSubCategory" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewUnitPrice"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Unit Price:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPartNumber" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewQuantity"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Quantity:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUnitPrice" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewTotalPrice"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Price:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewQuantity" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewCharacteristics"
+        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Characteristics:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTotalPrice" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

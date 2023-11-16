@@ -1,17 +1,22 @@
 package com.example.coenelec390.ui.item;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.coenelec390.Utils;
 import com.example.coenelec390.databinding.ComponentListBinding;
 import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.ui.categories.SubCategoryAdapter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +24,8 @@ import java.util.List;
 public class ComponentDetailFragment extends Fragment {
     private ComponentListBinding binding;
     private List<Component> components;
+    private SubCategoryAdapter adapter;
+    private RecyclerView recyclerView;
 
     public static ComponentDetailFragment newInstance(List<Component> components) {
         ComponentDetailFragment fragment = new ComponentDetailFragment();
@@ -43,7 +50,7 @@ public class ComponentDetailFragment extends Fragment {
         View root = binding.getRoot();
 
         // Set up the RecyclerView
-        RecyclerView recyclerView = binding.recyclerView;
+        recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new ComponentAdapter(components)); // You need to create this adapter
 
@@ -51,8 +58,41 @@ public class ComponentDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void onPause() {
+        super.onPause();
+        Utils.print("Onpause called ");
+        if (recyclerView.getAdapter() != null) {
+            recyclerView.setAdapter(null);
+        }
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("FragmentLifecycle", "onStop called");
+    }
+
+
+    public interface OnBackPressedListener {
+        void onBackPressed();
+    }
+
+    private OnBackPressedListener mListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnBackPressedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnBackPressedListener");
+        }
+    }
+
+    public void handleBackPress() {
+        if (mListener != null) {
+            mListener.onBackPressed();
+        }
+    }
+
+
 }
