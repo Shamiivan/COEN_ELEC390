@@ -5,12 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.example.coenelec390.databinding.FragmentItemBinding;
 
 public class ItemFragment extends Fragment {
@@ -23,19 +20,11 @@ public class ItemFragment extends Fragment {
         binding = FragmentItemBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Button update = binding.updateItem;
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         Button viewCat = binding.viewCat;
         viewCat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //TODO
             }
         });
 
@@ -43,8 +32,8 @@ public class ItemFragment extends Fragment {
         viewList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListItemsActivity v = new ListItemsActivity();
-                v.show(getActivity().getSupportFragmentManager(), "View Fragment");
+                ListItems v = new ListItems();
+                v.show(getActivity().getSupportFragmentManager(), "View List Fragment");
             }
         });
 
@@ -52,7 +41,7 @@ public class ItemFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddItemActivity a = new AddItemActivity();
+                AddItem a = new AddItem();
                 a.show(getActivity().getSupportFragmentManager(), "Add Fragment");
             }
         });

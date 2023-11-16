@@ -21,7 +21,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 
-public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
+public class AddItem extends androidx.fragment.app.DialogFragment {
 
 
     private EditText editText1, editText2 , editText3 , editText4 , editText5 , editText6 , editText7 ;
@@ -32,7 +32,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
     //private Component comp;
 
 
-    public AddItemActivity(){
+    public AddItem(){
 
     }
     @Override
@@ -102,7 +102,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                     //Component comp = new Component( characteristics1 , Name3 , x);
                     //Toast.makeText(AddItemsActivity.this, "comp gd", Toast.LENGTH_SHORT).show();
                     //dbManager_for_add_items.addComponent(Name3, Name4, Name5,comp );
-                    //Toast.makeText(AddItemActivity.this, "db gd", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(AddItem.this, "db gd", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -136,21 +136,21 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                 //Name6 = editText3.getText().toString();
                 //Name7 = editText3.getText().toString();
                 if (Name1.equals("") || Name2.equals("") || Name3.equals("") || Name4.equals("") /*|| Name5.equals("") || Name6.equals("") || Name7.equals("")* /)
-                    Toast.makeText(AddItemActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddItem.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 else{
                     DatabaseManager dbManager = new DatabaseManager();
                     Map<String, String> characteristics5 = new HashMap<>();
                     characteristics5.put("capacitance", "100uF");
                     Component capacitor1 = new Component(characteristics5, Name1, 100);
                     dbManager.addComponent(Name2, Name3, Name4, capacitor1);
-                    Toast.makeText(AddItemActivity.this, "DB WORKED", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddItem.this, "DB WORKED", Toast.LENGTH_SHORT).show();
                     //characteristics1.put(Name1, Name2);
                     // Toast.makeText(AddItemsActivity.this, "char gd", Toast.LENGTH_SHORT).show();
                     //int x = 10;
                     //Component comp = new Component( characteristics1 , Name3 , x);
                     //Toast.makeText(AddItemsActivity.this, "comp gd", Toast.LENGTH_SHORT).show();
                     //dbManager_for_add_items.addComponent(Name3, Name4, Name5,comp );
-                    //Toast.makeText(AddItemActivity.this, "db gd", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(AddItem.this, "db gd", Toast.LENGTH_SHORT).show();
                 }
             }
         });* /
