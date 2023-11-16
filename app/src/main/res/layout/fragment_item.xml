@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.item.ItemFragment">
 
-
-
-    <Button
-        android:id="@+id/btnOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Turn off bluetooth"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.483" />
-
-
     <Button
         android:id="@+id/additem"
         android:layout_width="wrap_content"
