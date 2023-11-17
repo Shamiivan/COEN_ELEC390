@@ -18,15 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.coenelec390.databinding.AddItemBinding;
-
-
 public class AddItem extends androidx.fragment.app.DialogFragment {
     private Spinner cat;
     private Spinner subCat;
     ArrayAdapter<CharSequence> adapter;
-    private Button save;
-    private AddItemBinding binding;
 
     public AddItem(){
 
@@ -63,13 +58,14 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
                 layout.addView(desc);
             }
         });
-        /*save = binding.btnAddProduct;
+
+        Button save = rootview.findViewById(R.id.btnAddProduct);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Component Added!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Component added!", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
         return rootview;
     }
