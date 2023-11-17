@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class AddItem extends androidx.fragment.app.DialogFragment {
+    int yMvmnt = 1600;
+    int btnClickCount = 0;
     private Spinner cat;
     private Spinner subCat;
     ArrayAdapter<CharSequence> adapter;
@@ -53,9 +55,21 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
         addTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnClickCount = btnClickCount + 1;
+                addTxt.animate().y(yMvmnt);
                 LinearLayout layout = rootview.findViewById(R.id.extraDesc);
                 EditText desc = new EditText(getContext());
                 layout.addView(desc);
+
+                if (btnClickCount == 2){
+                    addTxt.animate().y(yMvmnt + 150);
+                } else if (btnClickCount == 3) {
+                    addTxt.animate().y(yMvmnt + 300);
+                } else if (btnClickCount == 4) {
+                    addTxt.setOnClickListener(null);
+                    addTxt.setVisibility(View.GONE);
+                }
+
             }
         });
 
