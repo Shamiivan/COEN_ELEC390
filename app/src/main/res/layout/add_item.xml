@@ -43,27 +43,51 @@
         android:id="@+id/btnAddDesc"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="296dp"
-        android:background="?attr/actionMenuTextColor"
+        android:background="#00FFFFFF"
         android:text="+ADD TEXT FIELD"
         android:textColor="#FF0000"
         android:textSize="16sp"
+        android:textStyle="normal|bold"
         app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDescription"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.07" />
+
+    <TextView
+        android:id="@+id/etSubCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        android:hint="Subcategory"
+        android:textSize="21sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/etDescription"
+        app:layout_constraintTop_toBottomOf="@+id/etCat" />
+
+    <TextView
+        android:id="@+id/etCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="Category"
+        android:textSize="21sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/etSubCat"
+        app:layout_constraintTop_toBottomOf="@+id/etStock" />
 
     <TextView
         android:id="@+id/etDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="32dp"
         android:hint="Description"
         android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/etSubCat"
-        app:layout_constraintTop_toBottomOf="@+id/etSubCat" />
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@+id/etSubCat"
+        tools:layout_editor_absoluteX="12dp" />
 
     <Button
         android:id="@+id/btnAddProduct"
@@ -80,45 +104,20 @@
 
     <Spinner
         android:id="@+id/category"
-        android:layout_width="278dp"
+        android:layout_width="260dp"
         android:layout_height="28dp"
         app:layout_constraintBottom_toBottomOf="@+id/etCat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etCat"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/etCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:hint="Category"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/category"
-        app:layout_constraintHorizontal_bias="0.208"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etStock" />
-
     <Spinner
         android:id="@+id/subcategory"
-        android:layout_width="240dp"
+        android:layout_width="220dp"
         android:layout_height="28dp"
         app:layout_constraintBottom_toBottomOf="@+id/etSubCat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etSubCat"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/etSubCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Subcategory"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/etCat"
-        app:layout_constraintTop_toBottomOf="@+id/etCat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

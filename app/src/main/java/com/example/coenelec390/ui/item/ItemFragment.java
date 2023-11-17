@@ -20,6 +20,15 @@ public class ItemFragment extends Fragment {
         binding = FragmentItemBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        Button add = binding.additem;
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddItem a = new AddItem();
+                a.show(getActivity().getSupportFragmentManager(), "Add Fragment");
+            }
+        });
+
         Button viewCat = binding.viewCat;
         viewCat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,16 +45,6 @@ public class ItemFragment extends Fragment {
                 v.show(getActivity().getSupportFragmentManager(), "View List Fragment");
             }
         });
-
-        Button add = binding.additem;
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddItem a = new AddItem();
-                a.show(getActivity().getSupportFragmentManager(), "Add Fragment");
-            }
-        });
-
 
         return root;
     }

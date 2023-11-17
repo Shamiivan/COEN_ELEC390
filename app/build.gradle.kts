@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.coenelec390"
-        minSdk = 22
+        minSdk = 28
         targetSdk = 31
         versionCode = 1
         versionName = "1.0"
