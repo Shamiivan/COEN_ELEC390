@@ -15,23 +15,8 @@ public class Component {
     private int quantity;
     private double totalPrice;
 
-    public Component(Map<String, Object> characteristics, String location, int quantity) {
-        this.characteristics = characteristics;
-        this.location = location;
-        this.quantity = quantity;
-    }
     public Component() {
         // Default constructor required for Firebase
-    }
-    public Component(String mainCategory, String subCategory, String partNumber, double unitPrice, int quantity,String location, Map<String, Object> characteristics) {
-        this.characteristics = characteristics;
-        this.location = location;
-        this.MainCategory = mainCategory;
-        this.SubCategory = subCategory;
-        this.PartNumber = partNumber;
-        this.unitPrice = unitPrice;
-        this.quantity = quantity;
-        this.totalPrice = quantity * unitPrice;
     }
 
     public Component(String tag, String mainCategory, String subCategory, String partNumber, double unitPrice, int quantity,String location, Map<String, Object> characteristics) {
