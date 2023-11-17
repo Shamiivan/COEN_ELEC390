@@ -1,5 +1,6 @@
 package com.example.coenelec390.ui.notifications;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +75,9 @@ public class NotificationsFragment extends Fragment {
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bleManager.connectPeripheral();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    bleManager.connectPeripheral();
+                }
             }
         });
 
