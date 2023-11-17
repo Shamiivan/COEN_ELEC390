@@ -5,15 +5,11 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.coenelec390.MainActivity;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.ui.item.AddItemActivity;
-import com.example.coenelec390.ui.item.ItemFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 

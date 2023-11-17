@@ -18,9 +18,7 @@ import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import com.example.coenelec390.ui.item.ItemFragment;
 
 public class NotificationsFragment extends Fragment {
 
