@@ -51,11 +51,18 @@
 
 
         <receiver android:name=".bluetooth.BLE_BroadcastReceiver"
-            android:exported="true">
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.example.coenelec390.bluetooth.NEW_CHARACTERISTIC" />
             </intent-filter>
         </receiver>
+        <service
+            android:name=".bluetooth.IntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+
+
     </application>
 
 </manifest>

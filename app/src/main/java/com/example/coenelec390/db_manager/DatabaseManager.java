@@ -1,5 +1,7 @@
 package com.example.coenelec390.db_manager;
 
+import static android.app.PendingIntent.getActivity;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,32 @@ import java.util.List;
 import java.util.Map;
 
 //assign2 libraries
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.AsyncListUtil;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.example.coenelec390.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
 
 
 public class DatabaseManager {
@@ -65,6 +93,11 @@ public class DatabaseManager {
         }
     }
 
+    public void addComponentTag(String type) {
+        //mDatabase.child("components").child(type).child(category).child(model).setValue(component);
+        mDatabase.child("NFC TAG IDs").child(type).setValue(type)/*.setValue(3453)*/;
+        counter++;
+    }
 
     //TODO ADD CATEGORY Method
     public Task<Boolean> findNFC(String tag) {
