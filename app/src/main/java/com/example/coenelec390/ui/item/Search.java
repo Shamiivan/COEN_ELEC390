@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
+import android.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.coenelec390.R;
@@ -31,13 +31,13 @@ public class Search extends Fragment {
         searchView = root.findViewById(R.id.searchBar);
         listView = root.findViewById(R.id.searchlist);
 
-        arrayList = new ArrayList<>();
-        arrayList.add("Item 1");
-        arrayList.add("Item 2");
-        arrayList.add("Item 3");
-        arrayList.add("Item 4");
-        arrayList.add("Item 5");
-        arrayList.add("Item 6");
+        arrayList = new ArrayList<>();//Dummy array
+        arrayList.add("CRCW06031K00FKTA");
+        arrayList.add("CRCW060349R9FKTA");
+        arrayList.add("ERA-6AED333V");
+        arrayList.add("06035C104K4Z4A");
+        arrayList.add("C0603X220J5GACAUTO");
+        arrayList.add("IHLP4040EDER220M5A");
 
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);

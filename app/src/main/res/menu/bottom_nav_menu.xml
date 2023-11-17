@@ -21,4 +21,9 @@
         android:icon="?android:attr/actionModeWebSearchDrawable"
         android:title="Search" />
 
+    <item
+        android:id="@+id/navigation_details"
+        android:icon="@drawable/car_ui_icon_overflow_menu"
+        android:title="Detail" />
+
 </menu>

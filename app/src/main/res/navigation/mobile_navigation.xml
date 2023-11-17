@@ -27,4 +27,8 @@
         android:name="com.example.coenelec390.ui.item.Search"
         android:label="Search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+    <fragment
+        android:id="@+id/navigation_details"
+        android:name="com.example.coenelec390.ui.item.ItemDetails"
+        android:label="ItemDetails" />
 </navigation>
