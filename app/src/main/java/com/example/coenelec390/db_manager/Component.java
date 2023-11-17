@@ -29,6 +29,7 @@ public class Component {
         this.quantity = quantity;
         this.totalPrice = quantity * unitPrice;
         this.tag = tag;
+        //TO DO make sure all of these are lower case.
     }
 
 

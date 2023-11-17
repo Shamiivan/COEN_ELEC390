@@ -85,7 +85,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
-        View rootview = inflater.inflate(R.layout.activity_add_item, container, false);
+        View rootview = inflater.inflate(R.layout.add_item, container, false);
 
 
 
@@ -121,7 +121,24 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                     DatabaseManager dbManager = new DatabaseManager();
                     Map<String, String> characteristics5 = new HashMap<>();
                     characteristics5.put("description", Name6);
-                    Component capacitor1 = new Component(characteristics5, Name4, Integer.parseInt(Name5), stringNFC);
+                    double price = 10;
+                    //Component capacitor1 = new Component(stringNFC,Name1, Name2 , Name3,price,Integer.parseInt(Name5), ,characteristics5,  );
+// Passive Components
+
+                    Map<String, Object> characteristics2 = new HashMap<>();
+                    characteristics2.put("Grade", "AEC-Q200");
+                    characteristics2.put("Tolerance", "1%");
+                    characteristics2.put("Rating", "0.1 W");
+                    characteristics2.put("Package", "0603");
+                    Component component2 = new Component(stringNFC,"Passive", "Resistors", "CRCW060349R9FKTA", 100, 11, "49.9 ohms", characteristics2);
+                    Map<String, Object> characteristics3 = new HashMap<>();
+                    characteristics3.put("Grade", "AEC-Q200");
+                    characteristics3.put("Tolerance", "0.50%");
+                    characteristics3.put("Rating", "0.125 W");
+                    characteristics3.put("Package", "0805");
+                    Component component3 = new Component(stringNFC, "Passive", "Resistors", "ERA-6AED333V", 50, 11, "33k ohms", characteristics3);
+
+
                     //dbManager.addComponent(Name2, Name3, Name4, capacitor1);
                     //DatabaseManager.BooleanDataCallback
                     dbManager.findNFC(stringNFC)
@@ -137,7 +154,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                                             //editText7.setText(stringNFC);
                                             // Type doesn't exist in the database, show a message
                                             Toast.makeText(getActivity(), "Type doesn't exist.", Toast.LENGTH_SHORT).show();
-                                            dbManager.addComponent(stringNFC, Name1, Name2, Name3 , capacitor1);
+                                            dbManager.addComponent(component3);
                                             Utils.print("db should be updated");
                                             Toast.makeText(getActivity(), "SUCCESSFULLY ADDED.", Toast.LENGTH_SHORT).show();
 
