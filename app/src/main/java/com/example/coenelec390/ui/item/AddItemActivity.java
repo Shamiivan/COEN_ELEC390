@@ -85,7 +85,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
-        View rootview = inflater.inflate(R.layout.activity_add_item, container, false);
+        View rootview = inflater.inflate(R.layout.add_item, container, false);
 
 
 
@@ -118,12 +118,17 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                 if (Name1.equals("") || Name2.equals("") || Name3.equals("") || Name4.equals("") || Name5.equals("") || Name6.equals("") || stringNFC.equals("") /*|| Name7.equals("")*/)
                     Toast.makeText(getActivity(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                 else{
+
+                    // insert a new component in  the database
                     DatabaseManager dbManager = new DatabaseManager();
-                    Map<String, String> characteristics5 = new HashMap<>();
-                    characteristics5.put("description", Name6);
-                    Component capacitor1 = new Component(characteristics5, Name4, Integer.parseInt(Name5), stringNFC);
-                    //dbManager.addComponent(Name2, Name3, Name4, capacitor1);
-                    //DatabaseManager.BooleanDataCallback
+
+                    Map<String, Object> characteristics12 = new HashMap<>();
+                    characteristics12.put("Type", "Arm Cortex M7");
+                    characteristics12.put("Family", "RT");
+                    characteristics12.put("Package", "LQFP144");
+                    characteristics12.put("Voltage", "3-3.6 V");
+
+                    Component component = new Component(stringNFC,"Active", "MCUs", "SAMV71Q21RT", 5, 65, "Arm Cortex M7", characteristics12);
                     dbManager.findNFC(stringNFC)
                             .addOnCompleteListener(new OnCompleteListener<Boolean>() {
                                 @Override
@@ -137,7 +142,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                                             //editText7.setText(stringNFC);
                                             // Type doesn't exist in the database, show a message
                                             Toast.makeText(getActivity(), "Type doesn't exist.", Toast.LENGTH_SHORT).show();
-                                            dbManager.addComponent(stringNFC, Name1, Name2, Name3 , capacitor1);
+                                            dbManager.addComponent(component);
                                             Utils.print("db should be updated");
                                             Toast.makeText(getActivity(), "SUCCESSFULLY ADDED.", Toast.LENGTH_SHORT).show();
 
