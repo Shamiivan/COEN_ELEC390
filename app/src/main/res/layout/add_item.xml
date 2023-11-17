@@ -7,15 +7,71 @@
     android:padding="20dp"
     tools:context=".ui.item.AddItem">
 
+    <TextView
+        android:id="@+id/tvTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="4dp"
+        android:hint="Total$"
+        android:textSize="21sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUnitPrice"
+        app:layout_constraintStart_toEndOf="@+id/tvUnitPrice"
+        app:layout_constraintTop_toTopOf="@+id/tvUnitPrice"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/etUnitPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Unit Price"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddDesc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvUnitPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="$/unit"
+        android:textSize="21sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/etUnitPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/etUnitPrice"
+        app:layout_constraintTop_toTopOf="@+id/etUnitPrice"
+        app:layout_constraintVertical_bias="0.352" />
+
+    <TextView
+        android:id="@+id/tvNFCtag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="NFC Tag"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
     <EditText
         android:id="@+id/etID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:hint="Model/ID"
+        android:layout_marginTop="10dp"
+        android:hint="Part Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNFCtag" />
 
     <EditText
         android:id="@+id/etLocation"
@@ -50,13 +106,13 @@
         android:textStyle="normal|bold"
         app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDescription"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        app:layout_constraintVertical_bias="0.283" />
 
     <TextView
-        android:id="@+id/etSubCat"
+        android:id="@+id/tvSubCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -64,29 +120,29 @@
         android:hint="Subcategory"
         android:textSize="21sp"
         android:textStyle="normal"
-        app:layout_constraintStart_toStartOf="@+id/etDescription"
-        app:layout_constraintTop_toBottomOf="@+id/etCat" />
+        app:layout_constraintStart_toStartOf="@+id/tvDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvCat" />
 
     <TextView
-        android:id="@+id/etCat"
+        android:id="@+id/tvCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:hint="Category"
         android:textSize="21sp"
         android:textStyle="normal"
-        app:layout_constraintStart_toStartOf="@+id/etSubCat"
+        app:layout_constraintStart_toStartOf="@+id/tvSubCat"
         app:layout_constraintTop_toBottomOf="@+id/etStock" />
 
     <TextView
-        android:id="@+id/etDescription"
+        android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:hint="Description"
         android:textSize="21sp"
         android:textStyle="normal"
-        app:layout_constraintTop_toBottomOf="@+id/etSubCat"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubCat"
         tools:layout_editor_absoluteX="12dp" />
 
     <Button
@@ -104,20 +160,20 @@
 
     <Spinner
         android:id="@+id/category"
-        android:layout_width="260dp"
+        android:layout_width="wrap_content"
         android:layout_height="28dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etCat"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etCat"
+        app:layout_constraintTop_toTopOf="@+id/tvCat"
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/subcategory"
-        android:layout_width="220dp"
+        android:layout_width="wrap_content"
         android:layout_height="28dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etSubCat"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSubCat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etSubCat"
+        app:layout_constraintTop_toTopOf="@+id/tvSubCat"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
