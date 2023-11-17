@@ -13,6 +13,8 @@ import androidx.fragment.app.DialogFragment;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -52,6 +54,15 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         subCat.setAdapter(adapter);
 
+        Button addTxt = rootview.findViewById(R.id.btnAddDesc);
+        addTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout layout = rootview.findViewById(R.id.extraDesc);
+                EditText desc = new EditText(getContext());
+                layout.addView(desc);
+            }
+        });
         /*save = binding.btnAddProduct;
         save.setOnClickListener(new View.OnClickListener() {
             @Override
