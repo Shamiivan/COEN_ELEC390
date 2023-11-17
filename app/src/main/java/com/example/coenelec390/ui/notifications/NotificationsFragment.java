@@ -9,11 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.bluetooth.BLE_MANAGER;
 import com.example.coenelec390.databinding.FragmentNotificationsBinding;
+import com.example.coenelec390.ui.item.ItemFragment;
 
 public class NotificationsFragment extends Fragment {
 
@@ -28,7 +30,8 @@ public class NotificationsFragment extends Fragment {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        bleManager = new BLE_MANAGER(getActivity());
+        FragmentManager fragmentManager = getChildFragmentManager(); // Use your actual way to obtain the FragmentManager
+        bleManager = new BLE_MANAGER(getActivity() , fragmentManager);
 
         Button btnOn = root.findViewById(R.id.btnOn);
         btnOn.setOnClickListener(new View.OnClickListener() {
