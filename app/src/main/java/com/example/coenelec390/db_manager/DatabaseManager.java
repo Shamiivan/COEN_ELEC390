@@ -188,7 +188,7 @@ public class DatabaseManager {
         void onSpecificComponentError(String errorMessage);
     }
 
-    public void fetchSpecificComponent(String tag, OnSpecificComponentLoadedListener listener) {
+    public void fetchComponent(String tag, OnSpecificComponentLoadedListener listener) {
         DatabaseReference reference = mDatabase.child("tags").child(tag);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
