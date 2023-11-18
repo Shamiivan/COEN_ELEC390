@@ -76,6 +76,10 @@ public class Component {
         SubCategory = subCategory;
     }
 
+    public void setPartNumber(String partNumber) {
+        PartNumber = partNumber;
+    }
+
     public void display(){
         StringBuilder builder = new StringBuilder();
         builder.append("Tag: ").append(tag).append("\n");
