@@ -90,6 +90,9 @@ public class Component {
     public void setSubCategory(String subCategory) {
         SubCategory = subCategory;
     }
+    public void setPartNumber(String Partnumber) {
+        PartNumber = Partnumber;
+    }
 
     public void display(){
         StringBuilder builder = new StringBuilder();

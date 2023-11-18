@@ -193,4 +193,61 @@ public class DatabaseManager {
             }
         });
     }
+    public interface ComponentSearchCallback {
+        abstract void onComponentsFound(List<Component> components);
+
+        void onError(String error);
+    }
+
+
+    public void DatabaseSearch(String searchQuery, ComponentSearchCallback callback) {
+        mDatabase.child("components").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //fetch all components
+                List<Component> CopiedComponents = new ArrayList<>();
+                for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot subCategorySnapshot : categorySnapshot.getChildren()) {
+                        for (DataSnapshot componentSnapshot : subCategorySnapshot.getChildren()) {
+                            Component component = componentSnapshot.getValue(Component.class);
+                            if (component != null && component.getCharacteristics() != null) {
+                                for (Object value : component.getCharacteristics().values()) {
+                                    String mainCategoryKey = categorySnapshot.getKey();
+                                    String subCategoryKey = subCategorySnapshot.getKey();
+                                    String partNumberKey = componentSnapshot.getKey();
+                                    component.setMainCategory(mainCategoryKey);
+                                    component.setSubCategory(subCategoryKey);
+                                    component.setPartNumber(partNumberKey);
+                                    CopiedComponents.add(component);
+                                }
+                            }
+                        }
+                    }
+                }
+                //filter all components
+                List<Component> searchResults = new ArrayList<>();
+                for (Component component : CopiedComponents) {
+                    if (component.getCharacteristics().containsKey(searchQuery)) {
+                        searchResults.add(component);
+                    } else if (component.getLocation().equals(searchQuery)) {
+                        searchResults.add(component);
+                    } else if (component.getPartNumber().equals(searchQuery)) {
+                        searchResults.add(component);
+                    } else if (component.getMainCategory().equals(searchQuery)) {
+                        searchResults.add(component);
+                    } else if (component.getSubCategory().equals(searchQuery)) {
+                        searchResults.add(component);
+                    }
+                }
+                //return the found component
+                callback.onComponentsFound(searchResults);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callback.onError(databaseError.getMessage());
+            }
+        });
+    }
 }
