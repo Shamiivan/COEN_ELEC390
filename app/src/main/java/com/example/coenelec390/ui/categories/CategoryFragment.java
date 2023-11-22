@@ -74,7 +74,8 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
         categoryAdapter = new CategoryAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(categoryAdapter);
 
-        // Fetch the main categories from Firebase
+        //
+        //Fetch the main categories from Firebase
         databaseManager.fetchMainCategories(new DatabaseManager.OnMainCategoriesLoadedListener() {
             @Override
             public void onMainCategoriesLoaded(List<String> mainCategories) {
@@ -95,7 +96,7 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
 
     @Override
     public void onItemClick(String category) {
-        Toast.makeText(getContext(), "Clicked category: " + category, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Clicked categoryMAIN: " + category, Toast.LENGTH_SHORT).show();
         categoryAdapter.clearData();
         fetchSubCategories(category);
 

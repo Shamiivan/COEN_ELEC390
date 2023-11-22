@@ -17,18 +17,14 @@ import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import androidx.fragment.app.DialogFragment;
-
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 
 public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
-
 
     private EditText editText1, editText2 , editText3 , editText4 , editText5 , editText6 , editText7 ;
     String Name1 , Name2 , Name3 , Name4 , Name5 , Name6 , Name7 ;
@@ -150,6 +146,7 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                                         if (typeExists) {
                                             // Type exists in the database, show a message
                                             Toast.makeText(getActivity(), "Type exists!", Toast.LENGTH_SHORT).show();
+
                                         } else {
                                             //editText7.setText(stringNFC);
                                             // Type doesn't exist in the database, show a message
@@ -158,7 +155,8 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                                             Utils.print("db should be updated");
                                             Toast.makeText(getActivity(), "SUCCESSFULLY ADDED.", Toast.LENGTH_SHORT).show();
 
-                                        }
+
+                                            }
                                     } else {
                                         // Handle any potential errors here
                                         Toast.makeText(getActivity(), "Error occurred.", Toast.LENGTH_SHORT).show();

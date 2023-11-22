@@ -31,15 +31,26 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.provider.Settings;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
+import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.ui.item.AddItemActivity;
+import com.example.coenelec390.ui.item.ComponentDetailFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -66,10 +77,11 @@ public class BLE_MANAGER {
     private Queue<Runnable> commandQueue = new LinkedList<>();
     private boolean commandQueueBusy = false;
     static private FragmentManager fragmentManager ;
+    int containerID;
+    private FragmentOpener fragOpener;
 
 
-
-    public BLE_MANAGER(Activity _activity , FragmentManager _fragmentManager) {
+    public BLE_MANAGER(Activity _activity , FragmentManager _fragmentManager , int _containerID) {
         context = _activity.getApplicationContext();
         activity = _activity;
         BluetoothManager bluetoothManager = (BluetoothManager) _activity.getSystemService(Context.BLUETOOTH_SERVICE);
@@ -77,12 +89,32 @@ public class BLE_MANAGER {
         btScanner = btAdapter.getBluetoothLeScanner();
         this.fragmentManager = _fragmentManager;
         //final FragmentManager fg = _fragmentManager;
+        this.containerID = _containerID;
 
 
         btState = new BLE_STATE(context);
         bleHandler = new Handler(Looper.getMainLooper());
 
     }
+    public void setFragmentOpener(FragmentOpener fragmentOpener) {
+        this.fragOpener = fragmentOpener;
+    }
+  /*  public BLE_MANAGER(OnFragmentInteractionListener listener){
+        this.listener = listener;
+    }
+    public void handleScanningResult(List<Component> existComponent) {
+        if (listener != null) {
+            listener.onFragmentOpen(existComponent);
+        }
+    }*/
+  public interface FragmentOpener {
+      void openFragment(Fragment fragment);
+  }
+
+
+    /*public interface OnFragmentInteractionListener {
+        void onFragmentOpen(List<Component> existComponent);
+    }*/
 
 
 
@@ -248,18 +280,100 @@ public class BLE_MANAGER {
             //myIntentService.enqueueWork(context, intent);
             //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             //context.startActivity(intent);
-            if (fragmentManager != null) {
-                AddItemActivity fragment = AddItemActivity.newInstance(stringValue.toString().trim());
-               // if (fragment!=null)
-                 //   fragment.updateContent();
+            DatabaseManager db = new DatabaseManager();
+            db.findNFC(stringValue.toString().trim())
+                    .addOnCompleteListener(new OnCompleteListener<Boolean>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Boolean> task) {
+                            if (task.isSuccessful()) {
+                                boolean typeExists = task.getResult();
+                                if (typeExists) {
+                                    Utils.print("Type exist!");
+                                    String path ;
+                                    db.getNFCvalue(stringValue.toString().trim(), new DatabaseManager.OnComponentStringLoadedListener() {
+                                        @Override
+                                        public void onComponentStringLoaded(String componentString) {
+                                            Utils.print("NFC value: " + componentString);
+                                            String parts[] = componentString.split(",");
+                                            //Utils.print(parts[1]+ parts[2]+ parts[3]);
+                                            db.fetchcomp(parts[1], parts[2], parts[3], new DatabaseManager.OnComponentListener() {
+                                                @Override
+                                                public void onComponentLoaded(Component component) {
+                                                    Component c3 = component;
+                                                    Utils.print("BASHAR"+component.getComponent());
+                                                    Utils.print("2BASHAR2"+component.getLocation());
 
-                fragment.show(fragmentManager, "dialogFragment");
+                                                    if (fragmentManager != null) {
+                                                        List<Component> existComponent = new ArrayList<>();
+                                                        existComponent.add(component);
+                                                        //ComponentDetailFragment fragment = ComponentDetailFragment.newInstance(existComponent);
+                                                        //FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                                        //transaction.replace(, fragment);
+                                                        //FrameLayout container = new FrameLayout(context);
+                                                        //Intent int2 = new Intent();
+                                                        //fragment.startActivity(int2);
+                                                        //transaction.replace(R.id.navigation_notifications, fragment );
+                                                        //transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
+                                                        //transaction.commit();
+                                                        Fragment frag = ComponentDetailFragment.newInstance(existComponent);
+                                                        fragOpener.openFragment(frag);
 
-            }
+                                                        Utils.print("fragmentManager != null COMPLETED"+ component.getPartNumber());
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onComponentError(String errorMessage) {
+
+                                                }
+                                            });
+
+                                        }
+                                        @Override
+                                        public void onComponentError(String errorMessage) {
+                                        }
+                                    });
+
+                                    /*db.fetchcomp(parts[1], parts[2], parts[3], new DatabaseManager.OnComponentListener() {
+                                        @Override
+                                        public void onComponentLoaded(Component comp) {
+                                            List<Component> existComponent = new ArrayList<>();
+                                            existComponent.set(0 , comp);
+                                            ComponentDetailFragment fragment = ComponentDetailFragment.newInstance(existComponent);
+                                            FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                            transaction.replace(R.id.nav_host_fragment_activity_main, fragment);
+                                            \ ansaction.addToBackStack(null); // Oional: Add to back stack for fragment navigation
+                                            transaction.commit();
+                                        }
+                                        @Override
+                                        public void onComponentError(String errorMessage) {
+                                        }
+                                    });*/
+                                    /*if (fragmentManager != null) ?nbvcx   `1
+                                        List<Component> existComponent = new ArrayList<>(1);
+                                        existComponent.add( new Component());
+                                        //existComponent.add()
+                                        ComponentDetailFragment fragment = ComponentDetailFragment.newInstance(existComponent);
+                                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                        transaction.replace(R.id.nav_host_fragment_activity_main, fragment);
+                                        transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
+                                        transaction.commit();
+                                    }*/
+
+                                } else {
+                                    Utils.print("Type DOESN'T exist!");
+                                    if (fragmentManager != null) {
+                                        AddItemActivity fragment = AddItemActivity.newInstance(stringValue.toString().trim());
+                                        fragment.show(fragmentManager, "dialogFragment");
+                                    }
+                                }
+                            } else {
+
+                                Utils.print("ERROR happened");
+                            }
+                        }
+                    });
             Utils.print("finished ble_manager lines");
-
-
-            //context.sendBroadcast(intent);
 
         }
 

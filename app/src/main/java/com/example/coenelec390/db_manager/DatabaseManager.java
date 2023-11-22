@@ -76,6 +76,8 @@ public class DatabaseManager {
             String mainCategory = component.getMainCategory();
             String subCategory = component.getSubCategory();
             String key = component.getPartNumber();
+            String tag = component.getTag();
+            String path = component.getComponentCommaSeparated();
 
             DatabaseReference componentRef = mDatabase.child("components").child(mainCategory).child(subCategory).child(key);
             componentRef.setValue(component)
@@ -88,15 +90,46 @@ public class DatabaseManager {
                             }
                         }
                     });
+            addComponentTag(tag, path );
         } catch (Exception e) {
             Utils.print("Exception: " + e.getMessage());
         }
     }
 
-    public void addComponentTag(String type) {
+    public void addComponentTag(String id , String path) {
         //mDatabase.child("components").child(type).child(category).child(model).setValue(component);
-        mDatabase.child("NFC TAG IDs").child(type).setValue(type)/*.setValue(3453)*/;
+        mDatabase.child("NFC TAG IDs").child(id).setValue(path)/*.setValue(3453)*/;
+        //mDatabase.child("NFC TAG IDs").child(type).get()/*.setValue(3453)*/;
+
         counter++;
+    }
+    public interface OnComponentStringLoadedListener {
+        void onComponentStringLoaded(String componentString);
+        void onComponentError(String errorMessage);
+    }
+    public void getNFCvalue(String id ,OnComponentStringLoadedListener listener){
+         String returnString ;
+        mDatabase.child("NFC TAG IDs").child(id);
+        DatabaseReference reference = mDatabase.child("NFC TAG IDs").child(id);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 String componentString = snapshot.getValue(String.class);
+                //returnString = snapshot.getValue(String.class);
+                if (componentString != null) {
+                    listener.onComponentStringLoaded(componentString);
+                    //returnString[0] = componentString;
+                } else {
+                    listener.onComponentError("Component not found");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onComponentError(error.getMessage());
+            }
+        });
+
     }
 
     //TODO ADD CATEGORY Method
@@ -196,6 +229,31 @@ public class DatabaseManager {
             }
         });
     }
+
+    public interface OnComponentListener {
+        void onComponentLoaded(Component component);
+        void onComponentError(String errorMessage);
+    }
+
+    public void fetchcomp(String mainCategory,String SubCat, String partName, OnComponentListener listener) {
+        DatabaseReference reference = mDatabase.child("components").child(mainCategory).child(SubCat).child(partName);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //List<String> subCategories = new ArrayList<>();
+                Component component = snapshot.getValue(Component.class);
+
+                listener.onComponentLoaded(component);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onComponentError(error.getMessage());
+            }
+        });
+    }
+
+
 
     /*
     * Component listing

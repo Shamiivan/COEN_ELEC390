@@ -82,7 +82,7 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
 
     @Override
     public void onItemClick(String subCategory) {
-        Toast.makeText(getContext(), "Clicked category: " + subCategory, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Clicked categorySUB: " + subCategory, Toast.LENGTH_SHORT).show();
         Utils.print(subCategory + " " + categoryName);
         fetchComponents(categoryName, subCategory);
 
@@ -97,7 +97,7 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
                 for (Component component: components) {
                     component.setMainCategory(mainCategory);
                     component.setSubCategory(subCategory);
-                        component.display();
+                    component.display();
                 }
                 // Start the ComponentDetailFragment
                 ComponentDetailFragment componentDetailFragment = ComponentDetailFragment.newInstance(components);

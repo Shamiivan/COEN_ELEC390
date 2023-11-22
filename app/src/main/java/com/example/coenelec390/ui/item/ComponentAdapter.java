@@ -15,9 +15,15 @@ import java.util.List;
 
 public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.ComponentViewHolder> {
     private List<Component> components;
+    private OnItemClickListener listener;
 
-    public ComponentAdapter(List<Component> components) {
+
+    public interface OnItemClickListener {
+        void onItemClick(Component component);
+    }
+    public ComponentAdapter(List<Component> components, OnItemClickListener listener) {
         this.components = components;
+        this.listener = listener;
     }
 
     @NonNull
@@ -28,10 +34,22 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.Comp
         return new ComponentViewHolder(binding);
     }
 
+
+
+
+
     @Override
     public void onBindViewHolder(@NonNull ComponentViewHolder holder, int position) {
         Component component = components.get(position);
         holder.bind(component);
+
+        holder.binding.editbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener!=null)
+                    listener.onItemClick(component);
+            }
+        });
     }
 
     @Override

@@ -21,10 +21,16 @@ import com.example.coenelec390.db_manager.DatabaseManager;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NotificationsFragment extends Fragment {
+public class NotificationsFragment extends Fragment implements BLE_MANAGER.FragmentOpener {
 
     private FragmentNotificationsBinding binding;
-    private BLE_MANAGER bleManager;
+    public BLE_MANAGER bleManager;
+    @Override
+    public void openFragment(Fragment fragment) {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, fragment)
+                .commit();
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +41,8 @@ public class NotificationsFragment extends Fragment {
         View root = binding.getRoot();
 
         FragmentManager fragmentManager = getChildFragmentManager(); // Use your actual way to obtain the FragmentManager
-        bleManager = new BLE_MANAGER(getActivity() , fragmentManager);
+        bleManager = new BLE_MANAGER(getActivity() , fragmentManager, R.id.nav_host_fragment_activity_main);
+        bleManager.setFragmentOpener(this);
 
         Button btnOn = root.findViewById(R.id.btnOn);
         btnOn.setOnClickListener(new View.OnClickListener() {

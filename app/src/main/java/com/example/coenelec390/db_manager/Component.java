@@ -1,5 +1,7 @@
 package com.example.coenelec390.db_manager;
 import com.example.coenelec390.Utils;
+import com.example.coenelec390.ui.item.AddItemActivity;
+import com.example.coenelec390.ui.item.ComponentDetailFragment;
 
 import java.util.Map;
 
@@ -89,6 +91,9 @@ public class Component {
         builder.append("Total Price: ").append(totalPrice).append("\n");
         builder.append("Characteristics: ").append(characteristics).append("\n");
 
+        AddItemActivity ad;
+        ComponentDetailFragment df;
+
         Utils.print(builder.toString());
     }
     public String getComponent(){
@@ -104,5 +109,11 @@ public class Component {
             builder.append("Characteristics: ").append(characteristics).append("\n");
 
             return builder.toString();
+    }
+    public String getComponentCommaSeparated(){
+        String FullName = "components,"+ getMainCategory() +","+getSubCategory()+","+getPartNumber();
+        return FullName;
+
+
     }
 }
