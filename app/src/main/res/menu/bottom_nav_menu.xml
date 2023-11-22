@@ -5,20 +5,17 @@
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard" />
-
     <item
-        android:id="@+id/navigation_items"
+        android:id="@+id/navigation_categories"
         android:icon="@drawable/ic_items_black_24dp"
-        android:title="@string/title_items" />
-
+        android:title="@string/menu_categories" />
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search_black_24"
+        android:title="@string/menu_search" />
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_notifications" />
 
-
-    <item
-        android:id="@+id/navigation_categories"
-        android:icon="@drawable/ic_items_black_24dp"
-        android:title="@string/menu_categories" />
 </menu>

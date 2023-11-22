@@ -22,6 +22,11 @@
         android:name="com.example.coenelec390.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.coenelec390.ui.search.SearchFragment"
+        android:label="@string/menu_search"
+        tools:layout="@layout/fragment_search_view" />
 
     <fragment
         android:id="@+id/navigation_categories"
@@ -36,5 +41,9 @@
     <fragment
         android:id="@+id/subCategoryFragment"
         android:name="com.example.coenelec390.ui.categories.SubCategoryFragment"
-        android:label="@string/subcategories" />
+        android:label="@string/subcategories" >
+        <action
+            android:id="@+id/action_subCategoryFragment_to_navigation_items"
+            app:destination="@id/navigation_items" />
+    </fragment>
 </navigation>

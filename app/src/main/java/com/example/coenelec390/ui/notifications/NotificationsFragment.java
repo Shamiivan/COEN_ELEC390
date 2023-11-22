@@ -1,5 +1,6 @@
 package com.example.coenelec390.ui.notifications;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,15 @@ public class NotificationsFragment extends Fragment {
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!bleManager.hasBluetooth())  bleManager.enableBluetooth();
+                Map<String, Object> characteristics2 = new HashMap<>();
+                characteristics2.put("Grade", "AEC-Q200");
+                characteristics2.put("Tolerance", "1%");
+                characteristics2.put("Rating", "0.1 W");
+                characteristics2.put("Package", "0603");
+
+                Component component2 = new Component("048D720A215981", "Active", "Resistors", "CRCW060349R9FKTA", 100, 11, "49.9 ohms", characteristics2);
+                DatabaseManager manager = new DatabaseManager();
+                manager.addComponent(component2);
             }
         });
 
@@ -73,7 +82,9 @@ public class NotificationsFragment extends Fragment {
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bleManager.connectPeripheral();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    bleManager.connectPeripheral();
+                }
             }
         });
 

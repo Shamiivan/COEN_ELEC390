@@ -6,4 +6,6 @@
     <string name="title_activity_item">ItemActivity</string>
     <string name="menu_categories">Categories</string>
     <string name="subcategories">subcategories</string>
+    <string name="menu_search">Search</string>
+
 </resources>

@@ -39,6 +39,9 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.Comp
         return components.size();
     }
 
+    public void setComponents(List<Component> components) {
+    }
+
     public class ComponentViewHolder extends RecyclerView.ViewHolder {
         private FragmentComponentDetailBinding binding;
 
