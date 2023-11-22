@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.coenelec390.R;
+import com.example.coenelec390.Utils;
 import com.example.coenelec390.bluetooth.BLE_MANAGER;
 import com.example.coenelec390.databinding.FragmentNotificationsBinding;
 import com.example.coenelec390.db_manager.Component;
@@ -56,8 +57,22 @@ public class NotificationsFragment extends Fragment implements BLE_MANAGER.Fragm
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (bleManager.hasBluetooth())  bleManager.disableBluetooth();
+                String tag = "00100000100";
+                DatabaseManager manager = new DatabaseManager();
+                manager.fetchComponent(tag,new  DatabaseManager.OnSpecificComponentLoadedListener(){
+
+                    @Override
+                    public void onSpecificComponent(Component component) {
+                        component.display();
+                    }
+
+                    @Override
+                    public void onSpecificComponentError(String errorMessage) {
+                        Utils.print(errorMessage);
+                    }
+                });
             }
+
         });
         Button btnScan = root.findViewById(R.id.scan);
         btnScan.setOnClickListener(new View.OnClickListener() {

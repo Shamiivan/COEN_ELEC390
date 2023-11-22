@@ -114,6 +114,8 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                 if (Name1.equals("") || Name2.equals("") || Name3.equals("") || Name4.equals("") || Name5.equals("") || Name6.equals("") || stringNFC.equals("") /*|| Name7.equals("")*/)
                     Toast.makeText(getActivity(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                 else{
+
+                    // insert a new component in  the database
                     DatabaseManager dbManager = new DatabaseManager();
                     Map<String, String> characteristics5 = new HashMap<>();
                     characteristics5.put("description", Name6);

@@ -22,32 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 //assign2 libraries
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.AsyncListUtil;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.example.coenelec390.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 
 
 public class DatabaseManager {
@@ -70,8 +44,6 @@ public class DatabaseManager {
      */
 
     public void addComponent(Component component) {
-        // TODO : HAVE TO CHECK FOR TAG if it exist ovewrite it
-        //TODO : HAVE TO MAKE AN RFID IF NOT AVAILABLE
         try {
             String mainCategory = component.getMainCategory();
             String subCategory = component.getSubCategory();
@@ -132,7 +104,7 @@ public class DatabaseManager {
 
     }
 
-    //TODO ADD CATEGORY Method
+    //search database and check if nfc exits
     public Task<Boolean> findNFC(String tag) {
         DatabaseReference ref = mDatabase.child("NFC TAG IDs").child(tag);
         return ref.get().continueWith(new Continuation<DataSnapshot, Boolean>() {
@@ -173,9 +145,9 @@ public class DatabaseManager {
 
 
     /*
-    *
-    *
-    *  */
+     *
+     *
+     *  */
 
     public interface OnMainCategoriesLoadedListener {
         void onMainCategoriesLoaded(List<String> mainCategories);
@@ -256,9 +228,9 @@ public class DatabaseManager {
 
 
     /*
-    * Component listing
-    *
-    * */
+     * Component listing
+     *
+     * */
 
     public interface OnComponentLoadedListener{
         void onComponentLoaded(List<Component> components);
@@ -281,6 +253,103 @@ public class DatabaseManager {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 listener.onComponentError(error.getMessage());
+            }
+        });
+    }
+    public interface OnSpecificComponentLoadedListener {
+        void onSpecificComponent(Component component);
+
+        void onSpecificComponentError(String errorMessage);
+    }
+
+    public void fetchComponent(String tag, OnSpecificComponentLoadedListener listener) {
+        DatabaseReference reference = mDatabase.child("tags").child(tag);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String path = snapshot.getValue(String.class);
+
+                if (path != null) {
+                    DatabaseReference componentRef = FirebaseDatabase.getInstance().getReference().child(path);
+                    componentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Component component = snapshot.getValue(Component.class);
+                            listener.onSpecificComponent(component);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            listener.onSpecificComponentError(error.getMessage());
+                        }
+                    });
+                } else {
+                    // Handle the case where the path is null
+                    listener.onSpecificComponentError("Path is null");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onSpecificComponentError(error.getMessage());
+            }
+        });
+    }
+
+    public interface ComponentSearchCallback {
+        abstract void onComponentsFound(List<Component> components);
+
+        void onError(String error);
+    }
+
+
+    public void DatabaseSearch(String searchQuery, ComponentSearchCallback callback) {
+        mDatabase.child("components").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //fetch all components
+                List<Component> CopiedComponents = new ArrayList<>();
+                for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot subCategorySnapshot : categorySnapshot.getChildren()) {
+                        for (DataSnapshot componentSnapshot : subCategorySnapshot.getChildren()) {
+                            Component component = componentSnapshot.getValue(Component.class);
+                            if (component != null && component.getCharacteristics() != null) {
+                                for (Object value : component.getCharacteristics().values()) {
+                                    String mainCategoryKey = categorySnapshot.getKey();
+                                    String subCategoryKey = subCategorySnapshot.getKey();
+                                    String partNumberKey = componentSnapshot.getKey();
+                                    component.setMainCategory(mainCategoryKey);
+                                    component.setSubCategory(subCategoryKey);
+                                    component.setPartNumber(partNumberKey);
+                                    CopiedComponents.add(component);
+                                }
+                            }
+                        }
+                    }
+                }
+                //filter all components
+                List<Component> searchResults = new ArrayList<>();
+                for (Component component : CopiedComponents) {
+                    if (component.getCharacteristics().containsKey(searchQuery)) {
+                        searchResults.add(component);
+                    } else if (component.getLocation().equals(searchQuery)) {
+                        searchResults.add(component);
+                    } else if (component.getPartNumber().equals(searchQuery)) {
+                        searchResults.add(component);
+                    } else if (component.getMainCategory().equals(searchQuery)) {
+                        searchResults.add(component);
+                    } else if (component.getSubCategory().equals(searchQuery)) {
+                        searchResults.add(component);
+                    }
+                }
+                //return the found component
+                callback.onComponentsFound(searchResults);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callback.onError(databaseError.getMessage());
             }
         });
     }
