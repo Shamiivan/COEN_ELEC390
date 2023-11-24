@@ -26,6 +26,8 @@ public class ItemFragment extends Fragment {
             public void onClick(View view) {
                 AddItem a = new AddItem();
                 a.show(getActivity().getSupportFragmentManager(), "Add Fragment");
+                //AddItem m =  AddItem.newInstance("S");
+
             }
         });
 

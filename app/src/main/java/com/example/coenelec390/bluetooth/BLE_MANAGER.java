@@ -6,7 +6,6 @@ import static android.bluetooth.BluetoothDevice.TRANSPORT_LE;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -19,42 +18,32 @@ import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Looper;
 import android.provider.Settings;
-import android.widget.FrameLayout;
-import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
-import com.example.coenelec390.ui.item.AddItemActivity;
+import com.example.coenelec390.ui.item.AddItem;
 import com.example.coenelec390.ui.item.ComponentDetailFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -271,7 +260,7 @@ public class BLE_MANAGER {
 
             // Create an Intent
             //IntentService myIntentService = new IntentService(fragmentManager);
-            Intent intent = new Intent(context, AddItemActivity.class);
+            Intent intent = new Intent(context, AddItem.class);
             // Set the action for the Intent
             intent.setAction("com.example.coenelec390.bluetooth.NEW_CHARACTERISTIC");
             // Put the received data as an extra
@@ -363,7 +352,7 @@ public class BLE_MANAGER {
                                 } else {
                                     Utils.print("Type DOESN'T exist!");
                                     if (fragmentManager != null) {
-                                        AddItemActivity fragment = AddItemActivity.newInstance(stringValue.toString().trim());
+                                        AddItem fragment = AddItem.newInstance(stringValue.toString().trim());
                                         fragment.show(fragmentManager, "dialogFragment");
                                     }
                                 }

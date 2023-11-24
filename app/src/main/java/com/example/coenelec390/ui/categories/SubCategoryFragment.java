@@ -1,14 +1,11 @@
 package com.example.coenelec390.ui.categories;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,7 +58,7 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subcategory_list, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         subCategoryAdapter = new SubCategoryAdapter(subCategories, getContext(), this);
         recyclerView.setAdapter(subCategoryAdapter);

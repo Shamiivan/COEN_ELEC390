@@ -1,27 +1,26 @@
 package com.example.coenelec390.ui.item;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.example.coenelec390.MainActivity;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.bluetooth.FragmentOpenListener;
-import com.example.coenelec390.bluetooth.IntentService;
 import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
 import java.util.HashMap;
 import java.util.Map;
-import androidx.fragment.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 
 
 public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
@@ -87,13 +86,13 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
 
 
 
-        editText1 = rootview.findViewById(R.id.etId1);
+       /* editText1 = rootview.findViewById(R.id.etId1);
         editText2 = rootview.findViewById(R.id.etImageURL1);
         editText3 = rootview.findViewById(R.id.etStock1);
         editText4 = rootview.findViewById(R.id.etDescription1);
         editText5 = rootview.findViewById(R.id.etDescription);
         editText6 = rootview.findViewById(R.id.etDescription2);
-        editText7 = rootview.findViewById(R.id.etId);
+        editText7 = rootview.findViewById(R.id.etId);*/
         if (stringNFC!=null)
             editText7.setText(stringNFC);
 

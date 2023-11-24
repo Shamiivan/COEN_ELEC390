@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.bluetooth.BLE_MANAGER;
 import com.example.coenelec390.databinding.ComponentListBinding;
 import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.ui.categories.SubCategoryAdapter;
@@ -56,7 +54,7 @@ public class ComponentDetailFragment extends Fragment implements ComponentAdapte
         View root = binding.getRoot();
 
         // Set up the RecyclerView
-        recyclerView = binding.recyclerView;
+        recyclerView = binding.list;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new ComponentAdapter(components, this)); // You need to create this adapter
         editButton = root.findViewById(R.id.editbutton);

@@ -1,22 +1,23 @@
 package com.example.coenelec390.ui.item;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.coenelec390.R;
+import com.example.coenelec390.db_manager.Component;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.ValueEventListener;
 
 public class ListItems extends androidx.fragment.app.DialogFragment {
@@ -30,7 +31,7 @@ public class ListItems extends androidx.fragment.app.DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootview = inflater.inflate(R.layout.list_items, container, false);
+        View rootview = inflater.inflate(R.layout.component_list, container, false);
 
         recyclerView = rootview.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -45,11 +46,11 @@ public class ListItems extends androidx.fragment.app.DialogFragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Item>().setQuery(componentsRef, Item.class).build();
-
-        FirebaseRecyclerAdapter<Item, ItemsViewHolder> adapter = new FirebaseRecyclerAdapter<Item, ItemsViewHolder>(options) {
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Component>().setQuery(componentsRef, com.example.coenelec390.db_manager.Component.class).build();
+        FirebaseRecyclerAdapter o ;
+        FirebaseRecyclerAdapter<Component, ItemsViewHolder> adapter = new FirebaseRecyclerAdapter<Component, ItemsViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull ItemsViewHolder holder, int position, @NonNull Item model) {
+            protected void onBindViewHolder(@NonNull ItemsViewHolder holder, int position, @NonNull Component model) {
                 String componentIDs = getRef(position).getKey();
 
                 idRef.child(componentIDs).addValueEventListener(new ValueEventListener() {
