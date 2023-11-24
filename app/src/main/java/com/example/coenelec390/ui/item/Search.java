@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,23 @@ public class Search extends Fragment {
                 return false;
             }
         });
+
+        Button viewCat = binding.viewCat;
+        viewCat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO
+            }
+        });
+
+        Button viewList = binding.viewList;
+        viewList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO
+            }
+        });
+
         return root;
     }
 

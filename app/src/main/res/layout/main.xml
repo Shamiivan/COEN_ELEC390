@@ -16,7 +16,7 @@
         android:layout_marginBottom="15dp"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="#6200ED"
-        app:fabSize="normal"
+        app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent" />
 

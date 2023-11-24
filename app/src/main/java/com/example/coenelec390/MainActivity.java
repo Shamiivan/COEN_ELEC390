@@ -1,7 +1,10 @@
 package com.example.coenelec390;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.coenelec390.ui.item.AddItem;
+import com.example.coenelec390.ui.item.AddItemActivity;
 import com.example.coenelec390.ui.item.ComponentDetailFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -13,11 +16,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.coenelec390.databinding.MainBinding;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity implements ComponentDetailFragment.OnBackPressedListener{
 
     private MainBinding binding;
+    FloatingActionButton addFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,16 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        addFab = findViewById(R.id.add_fab);
+        addFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddItem addItem = new AddItem();
+                addItem.show(getSupportFragmentManager(), "Add Fragment");
+            }
+        });
+
     }
 
     @Override
