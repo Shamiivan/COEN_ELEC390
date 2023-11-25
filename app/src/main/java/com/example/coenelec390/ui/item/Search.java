@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.databinding.PageSearchBinding;
+import com.example.coenelec390.db_manager.Component;
 
 import java.util.ArrayList;
 
@@ -21,8 +22,8 @@ public class Search extends Fragment {
     SearchView searchView;
     ListView listView;
 
-    ArrayList<String> arrayList;
-    ArrayAdapter<String> adapter;
+    ArrayList<Component> arrayList;
+    ArrayAdapter<Component> adapter;
     private PageSearchBinding binding;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,12 +34,16 @@ public class Search extends Fragment {
         listView = root.findViewById(R.id.searchlist);
 
         arrayList = new ArrayList<>();//Dummy array
-        arrayList.add("CRCW06031K00FKTA");
+        Component com1 = new Component("tag1", "Active", "MOSFET", "Part Number1", 0.5, 5, "Location1", null);
+        Component com2 = new Component("tag2", "Passive", "Resistor", "Part Number2", 0.1, 10, "Location2", null);
+        arrayList.add(com1);
+        arrayList.add(com2);
+        /*arrayList.add("CRCW06031K00FKTA");
         arrayList.add("CRCW060349R9FKTA");
         arrayList.add("ERA-6AED333V");
         arrayList.add("06035C104K4Z4A");
         arrayList.add("C0603X220J5GACAUTO");
-        arrayList.add("IHLP4040EDER220M5A");
+        arrayList.add("IHLP4040EDER220M5A");*/
 
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);
@@ -56,11 +61,33 @@ public class Search extends Fragment {
             }
         });
 
-        Button viewCat = binding.viewCat;
-        viewCat.setOnClickListener(new View.OnClickListener() {
+        Button viewActive = binding.viewActive;
+        viewActive.setOnClickListener(new View.OnClickListener() {
+            ArrayList<Component> actives = new ArrayList<>();
             @Override
             public void onClick(View view) {
-                //TODO
+                for (Component com : arrayList) {
+                    if (com.getMainCategory() == "Active") {
+                        actives.add(com);
+                    }
+                }
+                adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, actives);
+                listView.setAdapter(adapter);
+            }
+        });
+
+        Button viewPassive = binding.viewPassive;
+        viewPassive.setOnClickListener(new View.OnClickListener() {
+            ArrayList<Component> passives = new ArrayList<>();
+            @Override
+            public void onClick(View view) {
+                for (Component com : arrayList) {
+                    if (com.getMainCategory() == "Passive") {
+                        passives.add(com);
+                    }
+                }
+                adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, passives);
+                listView.setAdapter(adapter);
             }
         });
 
@@ -68,7 +95,8 @@ public class Search extends Fragment {
         viewList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
+                listView.setAdapter(adapter);
             }
         });
 
