@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.example.coenelec390.model.Category;
 import com.example.coenelec390.model.Component;
 import com.example.coenelec390.ui.item.AddItem;
 import com.example.coenelec390.Utils;
@@ -153,28 +154,33 @@ public class DatabaseManager {
      *  */
 
     public interface OnMainCategoriesLoadedListener {
-        void onMainCategoriesLoaded(List<String> mainCategories);
+        void onMainCategoriesLoaded(List<Category> mainCategories);
         void onMainCategoriesError(String errorMessage);
     }
 
-    public void fetchMainCategories(OnMainCategoriesLoadedListener listener){
-       DatabaseReference reference = mDatabase.child("components");
-       reference.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot snapshot) {
-               List<String> mainCategories = new ArrayList<>();
-               for (DataSnapshot mainCategorySnap : snapshot.getChildren()) {
-                   String category = mainCategorySnap.getKey();
-                   mainCategories.add(category);
-               }
-               listener.onMainCategoriesLoaded(mainCategories);
-           }
+    public void fetchMainCategories(OnMainCategoriesLoadedListener listener) {
+        DatabaseReference reference = mDatabase.child("components");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Category> mainCategories = new ArrayList<>();
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
-               listener.onMainCategoriesError(error.getMessage());
-           }
-       });
+                for (DataSnapshot mainCategorySnap : snapshot.getChildren()) {
+                    String mainCategoryName = mainCategorySnap.getKey();
+                    long childCount = mainCategorySnap.getChildrenCount(); // Get the number of child elements
+
+                    Category mainCategory = new Category(mainCategoryName, childCount);
+                    mainCategories.add(mainCategory);
+                }
+
+                listener.onMainCategoriesLoaded(mainCategories);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onMainCategoriesError(error.getMessage());
+            }
+        });
     }
 
     /*

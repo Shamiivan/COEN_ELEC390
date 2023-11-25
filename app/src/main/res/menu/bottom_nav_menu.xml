@@ -20,5 +20,8 @@
         android:id="@+id/navigation_search"
         android:icon="?android:attr/actionModeWebSearchDrawable"
         android:title="Search" />
-
+    <item
+        android:id="@+id/navigation_categories"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Categories" />
 </menu>

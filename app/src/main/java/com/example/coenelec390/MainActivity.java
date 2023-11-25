@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
 
         FirebaseApp.initializeApp(this);
 
+
+        /* Get reference to the BottomNavigationView widget from layout.*/
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+
+
+        //floating add item button
         addFab = findViewById(R.id.add_fab);
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override

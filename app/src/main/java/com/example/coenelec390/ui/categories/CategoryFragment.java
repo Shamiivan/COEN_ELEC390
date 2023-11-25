@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +32,7 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
     private RecyclerView recyclerView;
     private CategoryAdapter categoryAdapter;
     private DatabaseManager databaseManager;
+    private CategoryViewModel viewModel;
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
@@ -60,8 +62,8 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-        // Initialize the databaseManager object
-        databaseManager = new DatabaseManager();
+        //initialize the viewmodel,
+        viewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,23 +76,11 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
         categoryAdapter = new CategoryAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(categoryAdapter);
 
-        //
-        //Fetch the main categories from Firebase
-        databaseManager.fetchMainCategories(new DatabaseManager.OnMainCategoriesLoadedListener() {
-            @Override
-            public void onMainCategoriesLoaded(List<String> mainCategories) {
-                // Update the adapter with the retrieved main categories
-                categoryAdapter.setMainCategories(mainCategories);
-            }
-
-            @Override
-            public void onMainCategoriesError(String errorMessage) {
-                // Handle the error
-                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                Utils.print(errorMessage);
-            }
+        // Observe changes in categories from the ViewModel and update ui
+        viewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
+            // UPDATE UI with new list of categories
+            categoryAdapter.setMainCategories(categories);
         });
-
         return view;
     }
 

@@ -10,22 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
+import com.example.coenelec390.model.Category;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private List<String> mainCategories;
-    private OnItemClickListener listener;
+    private List<Category> mainCategories;
+    private final OnItemClickListener listener;
 
-    public CategoryAdapter(List<String> mainCategories, OnItemClickListener listener) {
+    public CategoryAdapter(List<Category> mainCategories, OnItemClickListener listener) {
         this.mainCategories = mainCategories;
         this.listener = listener;
     }
-    public void setMainCategories(List<String> mainCategories) {
-        this.mainCategories = mainCategories;
-        notifyDataSetChanged();
-    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,34 +33,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String category = mainCategories.get(position);
+        Category category = mainCategories.get(position);
         holder.bind(category, listener);
     }
 
     @Override
     public int getItemCount() {
-        return mainCategories.size();
+        return mainCategories == null ? 0 : mainCategories.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView categoryName;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            categoryName = itemView.findViewById(R.id.categoryTextView);
-        }
-
-        public void bind(String category, OnItemClickListener listener) {
-            categoryName.setText(category);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(category);
-                    Utils.print(category);
-                }
-
-            });
-        }
+    public void setMainCategories(List<Category> mainCategories) {
+        this.mainCategories = mainCategories;
+        notifyDataSetChanged();
     }
 
     public interface OnItemClickListener {
@@ -73,5 +55,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView categoryName;
+        //todo : include child count
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            categoryName = itemView.findViewById(R.id.categoryTextView);
+        }
+
+        public void bind(Category category, OnItemClickListener listener) {
+            String name = category.getName();
+            long childCount = category.getChildCount();
+
+            categoryName.setText(name);
+            itemView.setOnClickListener(v -> {
+                listener.onItemClick(name);
+                Utils.print(name);
+            });
+        }
+    }
 
 }
