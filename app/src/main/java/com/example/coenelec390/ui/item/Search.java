@@ -33,17 +33,11 @@ public class Search extends Fragment {
         searchView = root.findViewById(R.id.searchBar);
         listView = root.findViewById(R.id.searchlist);
 
-        arrayList = new ArrayList<>();//Dummy array
+        arrayList = new ArrayList<>();//Dummy array TODO: Remove after
         Component com1 = new Component("tag1", "Active", "MOSFET", "Part Number1", 0.5, 5, "Location1", null);
         Component com2 = new Component("tag2", "Passive", "Resistor", "Part Number2", 0.1, 10, "Location2", null);
         arrayList.add(com1);
         arrayList.add(com2);
-        /*arrayList.add("CRCW06031K00FKTA");
-        arrayList.add("CRCW060349R9FKTA");
-        arrayList.add("ERA-6AED333V");
-        arrayList.add("06035C104K4Z4A");
-        arrayList.add("C0603X220J5GACAUTO");
-        arrayList.add("IHLP4040EDER220M5A");*/
 
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);
@@ -62,30 +56,30 @@ public class Search extends Fragment {
         });
 
         Button viewActive = binding.viewActive;
+        ArrayList<Component> actives = new ArrayList<>();
+        for (Component com : arrayList) {
+            if (com.getMainCategory() == "Active") {
+                actives.add(com);
+            }
+        }
         viewActive.setOnClickListener(new View.OnClickListener() {
-            ArrayList<Component> actives = new ArrayList<>();
             @Override
             public void onClick(View view) {
-                for (Component com : arrayList) {
-                    if (com.getMainCategory() == "Active") {
-                        actives.add(com);
-                    }
-                }
                 adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, actives);
                 listView.setAdapter(adapter);
             }
         });
 
         Button viewPassive = binding.viewPassive;
+        ArrayList<Component> passives = new ArrayList<>();
+        for (Component com : arrayList) {
+            if (com.getMainCategory() == "Passive") {
+                passives.add(com);
+            }
+        }
         viewPassive.setOnClickListener(new View.OnClickListener() {
-            ArrayList<Component> passives = new ArrayList<>();
             @Override
             public void onClick(View view) {
-                for (Component com : arrayList) {
-                    if (com.getMainCategory() == "Passive") {
-                        passives.add(com);
-                    }
-                }
                 adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, passives);
                 listView.setAdapter(adapter);
             }
