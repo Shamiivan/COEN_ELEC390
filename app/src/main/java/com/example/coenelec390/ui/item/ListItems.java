@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
-import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.model.Component;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -46,7 +46,7 @@ public class ListItems extends androidx.fragment.app.DialogFragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Component>().setQuery(componentsRef, com.example.coenelec390.db_manager.Component.class).build();
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Component>().setQuery(componentsRef, Component.class).build();
         FirebaseRecyclerAdapter o ;
         FirebaseRecyclerAdapter<Component, ItemsViewHolder> adapter = new FirebaseRecyclerAdapter<Component, ItemsViewHolder>(options) {
             @Override

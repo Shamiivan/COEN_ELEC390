@@ -14,7 +14,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.model.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

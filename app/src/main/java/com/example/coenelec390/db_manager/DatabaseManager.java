@@ -6,48 +6,23 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.example.coenelec390.model.Component;
 import com.example.coenelec390.ui.item.AddItem;
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.ui.item.AddItemActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 //assign2 libraries
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.example.coenelec390.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 
 
 public class DatabaseManager {
@@ -61,13 +36,6 @@ public class DatabaseManager {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    /**
-     * Adds a component to the database.
-     * @param type The type of component (active/passive).
-     * @param category The category of the component (resistors, transistors, etc.).
-     * @param model The model of the component.
-     * @param component The component data.
-     */
 
     public void addComponent(Component component) {
         try {

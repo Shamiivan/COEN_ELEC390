@@ -1,4 +1,4 @@
-package com.example.coenelec390.db_manager;
+package com.example.coenelec390.model;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.ui.item.AddItemActivity;
 import com.example.coenelec390.ui.item.ComponentDetailFragment;

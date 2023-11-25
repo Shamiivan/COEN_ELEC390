@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.databinding.ComponentListBinding;
-import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.model.Component;
 import com.example.coenelec390.ui.categories.SubCategoryAdapter;
 
 import java.io.Serializable;

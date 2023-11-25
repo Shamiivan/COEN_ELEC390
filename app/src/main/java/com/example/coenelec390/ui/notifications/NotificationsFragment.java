@@ -16,11 +16,8 @@ import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.bluetooth.BLE_MANAGER;
 import com.example.coenelec390.databinding.FragmentBluetoothBinding;
-import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.model.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class NotificationsFragment extends Fragment implements BLE_MANAGER.FragmentOpener {
 

@@ -35,7 +35,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.db_manager.Component;
+import com.example.coenelec390.model.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.ui.item.AddItem;
 import com.example.coenelec390.ui.item.ComponentDetailFragment;
