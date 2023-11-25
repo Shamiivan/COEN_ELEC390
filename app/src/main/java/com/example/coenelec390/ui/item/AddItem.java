@@ -27,8 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddItem extends androidx.fragment.app.DialogFragment {
-    int yMvmnt = 1600;
-    int btnClickCount = 0;
     private Spinner cat;
     private Spinner subCat;
     ArrayAdapter<CharSequence> adapter;
@@ -73,7 +71,7 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
         partName = rootview.findViewById(R.id.etID);
         location = rootview.findViewById(R.id.etLocation);
         stock =  rootview.findViewById(R.id.etStock);
-        //description= rootview.findViewById(R.id.extraDesc);
+        description= rootview.findViewById(R.id.extraDesc);
         UnitPrice= rootview.findViewById(R.id.etUnitPrice);
 
 
@@ -87,28 +85,6 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         subCat.setAdapter(adapter);
 
-        Button addTxt = rootview.findViewById(R.id.btnAddDesc);
-        addTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnClickCount = btnClickCount + 1;
-                addTxt.animate().y(yMvmnt);
-                LinearLayout layout = rootview.findViewById(R.id.extraDesc);
-                EditText desc = new EditText(getContext());
-                layout.addView(desc);
-
-                if (btnClickCount == 2){
-                    addTxt.animate().y(yMvmnt + 150);
-                } else if (btnClickCount == 3) {
-                    addTxt.animate().y(yMvmnt + 300);
-                } else if (btnClickCount == 4) {
-                    addTxt.setOnClickListener(null);
-                    addTxt.setVisibility(View.GONE);
-                }
-
-            }
-        });
-
         Button save = rootview.findViewById(R.id.btnAddProduct);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +93,7 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
                 Name1 = partName.getText().toString();
                 Name2 = location.getText().toString();
                 Name3 = stock.getText().toString();
-                //Name4 = description.getText().toString();
+                Name4 = description.getText().toString();
                 Name5 = UnitPrice.getText().toString();
                 Name6 = cat.getSelectedItem().toString();
                 Name7 = subCat.getSelectedItem().toString();

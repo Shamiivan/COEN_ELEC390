@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.coenelec390.ui.notifications.NotificationsFragment"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_bluetooth" />
 
     <fragment
         android:id="@+id/navigation_categories"
@@ -35,7 +35,6 @@
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.coenelec390.ui.item.Search"
-        android:label="Search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
 </navigation>
