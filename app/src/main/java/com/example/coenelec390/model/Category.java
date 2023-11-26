@@ -1,5 +1,7 @@
 package com.example.coenelec390.model;
 
+import com.example.coenelec390.Utils;
+
 public class Category {
     private String name;
 
@@ -32,5 +34,9 @@ public class Category {
 
     public void setChildCount(int childCount) {
         this.childCount = childCount;
+    }
+    public void display(){
+        Utils.print(name);
+        Utils.print(String.valueOf(childCount));
     }
 }

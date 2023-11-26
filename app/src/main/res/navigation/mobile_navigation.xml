@@ -29,6 +29,7 @@
             app:destination="@id/subCategoryFragment" />
     </fragment>
 
+
     <fragment
         android:id="@+id/subCategoryFragment"
         android:name="com.example.coenelec390.ui.categories.SubCategoryFragment"/>

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
+import com.example.coenelec390.model.Category;
 import com.example.coenelec390.model.Component;
 
 import java.util.List;
@@ -17,17 +18,15 @@ import java.util.List;
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.ViewHolder> {
     private String MainCategory;
     private SubCategoryAdapter.OnItemClickListener listener;
-    private List<String> subCategories;
-    private Context context;
+    private List<Category> subCategories;
 
     private List<Component> components;
-    public SubCategoryAdapter(List<String> subCategories, Context context, OnItemClickListener listener) {
+    public SubCategoryAdapter(List<Category> subCategories, OnItemClickListener listener) {
         this.subCategories = subCategories;
         this.listener = listener;
     }
-    public SubCategoryAdapter(List<String> subCategories, Context context) {
+    public SubCategoryAdapter(List<Category> subCategories) {
         this.subCategories = subCategories;
-        this.context = context;
     }
 
     @NonNull
@@ -39,8 +38,11 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String subCategory = subCategories.get(position);
-        holder.subCategoryTextView.setText(subCategory);
+        Category subCategory = subCategories.get(position);
+        String name = subCategory.getName();
+        //bind text
+        //todo : set the part number count
+//        holder.subCategoryTextView.setText(name);
         holder.bind(subCategory, listener);
     }
 
@@ -49,6 +51,10 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         return subCategories.size();
     }
 
+    public void setSubCategories(List<Category> subCategories) {
+        this.subCategories = subCategories;
+        notifyDataSetChanged();
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView subCategoryTextView;
 
@@ -56,12 +62,13 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
             super(itemView);
             subCategoryTextView = itemView.findViewById(R.id.textView);
         }
-        public void bind(String subCategory, SubCategoryAdapter.OnItemClickListener listener) {
-            subCategoryTextView.setText(subCategory);
+        public void bind(Category subCategory, SubCategoryAdapter.OnItemClickListener listener) {
+            String name = subCategory.getName();
+            subCategoryTextView.setText(name);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(subCategory);
+                    listener.onItemClick(name);
                 }
 
             });

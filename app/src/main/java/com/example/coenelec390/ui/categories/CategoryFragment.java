@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,29 +90,16 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
     public void onItemClick(String category) {
         Toast.makeText(getContext(), "Clicked categoryMAIN: " + category, Toast.LENGTH_SHORT).show();
         categoryAdapter.clearData();
-        fetchSubCategories(category);
 
-    }
+        // set the view Model
+        viewModel.fetchSubCategories(category);
+        Bundle bundle = new Bundle();
+        bundle.putString("categoryName", category);
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.action_navigation_categories_to_subCategoryFragment, bundle);
 
-    private void fetchSubCategories(String category) {
-        // Fetch the subcategories for the selected category from Firebase
-        databaseManager.fetchSubCategories(category, new DatabaseManager.OnSubCategoriesLoadedListener() {
-            @Override
-            public void onSubCategoriesLoaded(List<String> subCategories) {
-                SubCategoryFragment subCategoryFragment = SubCategoryFragment.newInstance(subCategories, category);
-                // Replace the fragment using a transaction
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment_activity_main, subCategoryFragment);
-                transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
-                transaction.commit();
-            }
+//        fetchSubCategories(category);
 
-            @Override
-            public void onSubCategoriesError(String errorMessage) {
-                // Handle possible errors.
-                Toast.makeText(getContext(), "Error fetching subcategories: " + errorMessage, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

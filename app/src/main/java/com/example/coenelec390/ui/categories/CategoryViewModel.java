@@ -10,7 +10,6 @@ import java.util.List;
 
 public class CategoryViewModel extends ViewModel {
     // MutableLiveData to hold a string data
-
     private MutableLiveData<List<Category>> categories;
     private MutableLiveData<String> categoriesError;
     private MutableLiveData<List<Category>> subCategories;
@@ -27,7 +26,6 @@ public class CategoryViewModel extends ViewModel {
     }
 
     public void fetchMainCategories(){
-
         databaseManager.fetchMainCategories(new DatabaseManager.OnMainCategoriesLoadedListener() {
             @Override
             public void onMainCategoriesLoaded(List<Category> mainCategories) {
@@ -42,7 +40,22 @@ public class CategoryViewModel extends ViewModel {
     }
 
 
-    public void fetchSubCategories(){}
+    public void fetchSubCategories(String category){
+        databaseManager.fetchSubCategories(category, new DatabaseManager.OnSubCategoriesLoadedListener() {
+            @Override
+            public void onSubCategoriesLoaded(List<Category> _subCategories) {
+                for (Category category : _subCategories) {
+                    category.display();
+                }
+                subCategories.setValue(_subCategories);
+            }
+
+            @Override
+            public void onSubCategoriesError(String errorMessage) {
+            subCategoriesError.setValue(errorMessage);
+            }
+        });
+    }
     // returns a read only version
     public LiveData<List<Category>> getCategories() {
         return categories;
@@ -50,6 +63,14 @@ public class CategoryViewModel extends ViewModel {
 
     public LiveData<String> getCategoriesError(){
         return categoriesError;
+    }
+
+    public MutableLiveData<List<Category>> getSubCategories() {
+        return subCategories;
+    }
+
+    public MutableLiveData<String> getSubCategoriesError() {
+        return subCategoriesError;
     }
 }
 

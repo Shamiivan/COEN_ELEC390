@@ -187,7 +187,7 @@ public class DatabaseManager {
     * Subcategories
     * */
     public interface OnSubCategoriesLoadedListener {
-        void onSubCategoriesLoaded(List<String> subCategories);
+        void onSubCategoriesLoaded(List<Category> subCategories);
         void onSubCategoriesError(String errorMessage);
     }
 
@@ -196,9 +196,11 @@ public class DatabaseManager {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<String> subCategories = new ArrayList<>();
+                List<Category> subCategories = new ArrayList<>();
                 for (DataSnapshot subCategorySnap : snapshot.getChildren()) {
-                    String subCategory = subCategorySnap.getKey();
+                    String name = subCategorySnap.getKey();
+                    long childCount = subCategorySnap.getChildrenCount(); // Get the number of child elements
+                    Category subCategory = new Category(name, childCount);
                     subCategories.add(subCategory);
                 }
                 listener.onSubCategoriesLoaded(subCategories);
