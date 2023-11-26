@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.bluetooth.BLE_MANAGER;
-import com.example.coenelec390.databinding.FragmentNotificationsBinding;
+import com.example.coenelec390.databinding.FragmentBluetoothBinding;
 import com.example.coenelec390.db_manager.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
 
@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class NotificationsFragment extends Fragment implements BLE_MANAGER.FragmentOpener {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentBluetoothBinding binding;
     public BLE_MANAGER bleManager;
     @Override
     public void openFragment(Fragment fragment) {
@@ -38,7 +38,7 @@ public class NotificationsFragment extends Fragment implements BLE_MANAGER.Fragm
         NotificationsViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentBluetoothBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         FragmentManager fragmentManager = getChildFragmentManager(); // Use your actual way to obtain the FragmentManager

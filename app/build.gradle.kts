@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.coenelec390"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.coenelec390"
@@ -68,6 +68,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
     implementation("com.android.car.ui:car-ui-lib:2.5.1")
     implementation("com.google.firebase:firebase-auth:22.3.0")
+
+    implementation("androidx.compose.material:material:1.5.4")
 
 
     testImplementation("junit:junit:4.13.2")

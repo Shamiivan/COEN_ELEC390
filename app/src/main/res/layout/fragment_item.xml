@@ -8,39 +8,37 @@
 
     <Button
         android:id="@+id/viewCat"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
         android:text="View by category"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewList"
-        app:layout_constraintVertical_bias="0.05" />
-
-    <Button
-        android:id="@+id/additem"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="5dp"
-        android:text="add item"
-        app:layout_constraintBottom_toTopOf="@+id/viewList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
         android:id="@+id/viewList"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
         android:text="View by list"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toStartOf="@+id/viewCat"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
