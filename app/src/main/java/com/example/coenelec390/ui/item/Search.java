@@ -57,33 +57,11 @@ public class Search extends Fragment {
 
         Button viewActive = binding.viewActive;
         ArrayList<Component> actives = new ArrayList<>();
-        for (Component com : arrayList) {
-            if (com.getMainCategory() == "Active") {
-                actives.add(com);
-            }
-        }
-        viewActive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, actives);
-                listView.setAdapter(adapter);
-            }
-        });
+        filterCategory(viewActive, actives, "Active");
 
         Button viewPassive = binding.viewPassive;
         ArrayList<Component> passives = new ArrayList<>();
-        for (Component com : arrayList) {
-            if (com.getMainCategory() == "Passive") {
-                passives.add(com);
-            }
-        }
-        viewPassive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, passives);
-                listView.setAdapter(adapter);
-            }
-        });
+        filterCategory(viewPassive, passives, "Passive");
 
         Button viewList = binding.viewList;
         viewList.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +73,22 @@ public class Search extends Fragment {
         });
 
         return root;
+    }
+
+    private void filterCategory(Button viewCat, ArrayList<Component> catList, String category) {
+        for (Component com : arrayList) {
+            if (com.getMainCategory() == category) {
+                catList.add(com);
+            }
+        }
+
+        viewCat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, catList);
+                listView.setAdapter(adapter);
+            }
+        });
     }
 
     @Override
