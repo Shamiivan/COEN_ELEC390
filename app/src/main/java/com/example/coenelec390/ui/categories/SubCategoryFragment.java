@@ -78,13 +78,13 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Clear the data in the adapter
-        if (subCategoryAdapter != null) {
-            subCategoryAdapter.clearData();
-        }
-        // Set the RecyclerView and Adapter to null to release resources
-        recyclerView = null;
-        subCategoryAdapter = null;
+//        // Clear the data in the adapter
+//        if (subCategoryAdapter != null) {
+//            subCategoryAdapter.clearData();
+//        }
+//        // Set the RecyclerView and Adapter to null to release resources
+//        recyclerView = null;
+//        subCategoryAdapter = null;
     }
 
     @Override

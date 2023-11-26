@@ -105,7 +105,7 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        categoryAdapter.clearData(); // Clear the data when the view is destroyed
+//        categoryAdapter.clearData(); // Clear the data when the view is destroyed
     }
 
 
