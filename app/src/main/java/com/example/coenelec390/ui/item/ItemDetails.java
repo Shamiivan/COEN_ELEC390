@@ -49,8 +49,8 @@ public class ItemDetails extends Fragment {
                 cat.setEnabled(true);
                 subCat.setEnabled(true);
 
-                Button addTxtField = root.findViewById(R.id.btnAddDesc);
-                addTxtField.setVisibility(View.VISIBLE);
+                EditText description = root.findViewById(R.id.extraDesc);
+                description.setEnabled(true);
 
                 Button saveEdits = root.findViewById(R.id.saveEdits);
                 saveEdits.setVisibility(View.VISIBLE);

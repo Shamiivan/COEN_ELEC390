@@ -12,11 +12,11 @@
 
     <fragment
         android:id="@+id/navigation_items"
-        android:name="com.example.coenelec390.ui.item.ItemFragment"
+        android:name="com.example.coenelec390.ui.item.Search"
         tools:layout="@layout/fragment_component_detail" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_bluetooth"
         android:name="com.example.coenelec390.ui.notifications.NotificationsFragment"
         tools:layout="@layout/fragment_bluetooth" />
 
@@ -33,8 +33,8 @@
         android:id="@+id/subCategoryFragment"
         android:name="com.example.coenelec390.ui.categories.SubCategoryFragment"/>
     <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.example.coenelec390.ui.item.Search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+        android:id="@+id/itemDetails"
+        android:name="com.example.coenelec390.ui.item.ItemDetails"
+        tools:layout="@layout/item_details" />
 
 </navigation>

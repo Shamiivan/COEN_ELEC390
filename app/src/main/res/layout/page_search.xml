@@ -68,7 +68,6 @@
             app:layout_constraintVertical_bias="0.023" />
     </LinearLayout>
 
-
     <ListView
         android:id="@+id/searchlist"
         android:layout_width="match_parent"

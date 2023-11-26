@@ -9,16 +9,16 @@
     <item
         android:id="@+id/navigation_items"
         android:icon="@drawable/ic_items_black_24dp"
-        android:title="@string/title_items" />
+        android:title="Items" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_bluetooth"
         android:icon="@android:drawable/stat_sys_data_bluetooth"
         android:title="@string/title_bluetooth" />
 
     <item
-        android:id="@+id/navigation_search"
-        android:icon="?android:attr/actionModeWebSearchDrawable"
-        android:title="Search" />
+        android:id="@+id/itemDetails"
+        android:icon="@drawable/car_ui_icon_overflow_menu"
+        android:title="Details" />
 
 </menu>
