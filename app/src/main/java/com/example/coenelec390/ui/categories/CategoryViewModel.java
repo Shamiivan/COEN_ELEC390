@@ -13,11 +13,15 @@ public class CategoryViewModel extends ViewModel {
 
     private MutableLiveData<List<Category>> categories;
     private MutableLiveData<String> categoriesError;
+    private MutableLiveData<List<Category>> subCategories;
+    private MutableLiveData<String> subCategoriesError;
     private final DatabaseManager databaseManager;
 
     public CategoryViewModel() {
         categories = new MutableLiveData<>();
         categoriesError = new MutableLiveData<>();
+        subCategories = new MutableLiveData<>();
+        subCategoriesError = new MutableLiveData<>();
         databaseManager = new DatabaseManager();
         fetchMainCategories();
     }
@@ -36,6 +40,9 @@ public class CategoryViewModel extends ViewModel {
             }
         });
     }
+
+
+    public void fetchSubCategories(){}
     // returns a read only version
     public LiveData<List<Category>> getCategories() {
         return categories;
