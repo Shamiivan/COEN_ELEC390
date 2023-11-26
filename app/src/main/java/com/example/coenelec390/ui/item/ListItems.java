@@ -31,7 +31,7 @@ public class ListItems extends androidx.fragment.app.DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootview = inflater.inflate(R.layout.component_list, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_component_list, container, false);
 
         recyclerView = rootview.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

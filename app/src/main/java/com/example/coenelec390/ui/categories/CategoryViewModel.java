@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.model.Category;
+import com.example.coenelec390.model.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryViewModel extends ViewModel {
@@ -14,6 +16,8 @@ public class CategoryViewModel extends ViewModel {
     private MutableLiveData<String> categoriesError;
     private MutableLiveData<List<Category>> subCategories;
     private MutableLiveData<String> subCategoriesError;
+    private  MutableLiveData<List<String>> componentNames;
+    private MutableLiveData<List<Component>>components;
     private final DatabaseManager databaseManager;
 
     public CategoryViewModel() {
@@ -21,6 +25,8 @@ public class CategoryViewModel extends ViewModel {
         categoriesError = new MutableLiveData<>();
         subCategories = new MutableLiveData<>();
         subCategoriesError = new MutableLiveData<>();
+        componentNames = new MutableLiveData<>();
+        components = new MutableLiveData<>();
         databaseManager = new DatabaseManager();
         fetchMainCategories();
     }
@@ -56,8 +62,26 @@ public class CategoryViewModel extends ViewModel {
             }
         });
     }
-    // returns a read only version
-    public LiveData<List<Category>> getCategories() {
+
+    public void fetchComponents(String mainCategory, String subCategory){
+        List<String> _componentsName = new ArrayList<>();
+        databaseManager.fetchComponents(mainCategory, subCategory, new DatabaseManager.OnComponentsLoadedListener() {
+            @Override
+            public void onComponentsLoaded(List<Component> _components) {
+                for (Component component: _components) {
+                   _componentsName.add(component.getPartNumber());
+                }
+                componentNames.setValue(_componentsName);
+                components.setValue(_components);
+            }
+
+            @Override
+            public void onComponentError(String errorMessage) {
+
+            }
+        });
+    }
+   public LiveData<List<Category>> getCategories() {
         return categories;
     }
 
@@ -71,6 +95,14 @@ public class CategoryViewModel extends ViewModel {
 
     public MutableLiveData<String> getSubCategoriesError() {
         return subCategoriesError;
+    }
+
+    public MutableLiveData<List<String>> getComponentNames() {
+        return componentNames;
+    }
+
+    public MutableLiveData<List<Component>> getComponents() {
+        return components;
     }
 }
 

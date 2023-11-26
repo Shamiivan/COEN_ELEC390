@@ -243,12 +243,12 @@ public class DatabaseManager {
      *
      * */
 
-    public interface OnComponentLoadedListener{
-        void onComponentLoaded(List<Component> components);
+    public interface OnComponentsLoadedListener{
+        void onComponentsLoaded(List<Component> components);
         void onComponentError(String errorMessage);
     }
 
-    public void fetchComponents(String mainCategory,String subCategory, OnComponentLoadedListener listener) {
+    public void fetchComponents(String mainCategory,String subCategory, OnComponentsLoadedListener listener) {
         DatabaseReference reference = mDatabase.child("components").child(mainCategory).child(subCategory);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -258,7 +258,7 @@ public class DatabaseManager {
                     Component component = subCategorySnap.getValue(Component.class);
                     components.add(component);
                 }
-                listener.onComponentLoaded(components);
+                listener.onComponentsLoaded(components);
             }
 
             @Override

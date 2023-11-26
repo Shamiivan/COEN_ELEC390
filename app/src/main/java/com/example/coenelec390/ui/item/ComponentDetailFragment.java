@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.databinding.ComponentListBinding;
+import com.example.coenelec390.databinding.FragmentComponentListBinding;
 import com.example.coenelec390.model.Component;
 import com.example.coenelec390.ui.categories.SubCategoryAdapter;
 
@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ComponentDetailFragment extends Fragment implements ComponentAdapter.OnItemClickListener  {
-    private ComponentListBinding binding;
+    private FragmentComponentListBinding binding;
     private List<Component> components;
     private SubCategoryAdapter adapter;
     private RecyclerView recyclerView;
@@ -50,7 +50,7 @@ public class ComponentDetailFragment extends Fragment implements ComponentAdapte
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        binding = ComponentListBinding.inflate(inflater, container, false);
+        binding = FragmentComponentListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         // Set up the RecyclerView

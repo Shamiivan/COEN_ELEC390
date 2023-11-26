@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
 
     }
 
+
     @Override
     public void onBackPressed() {
         ComponentDetailFragment fragment = (ComponentDetailFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
