@@ -1,11 +1,7 @@
 package com.example.coenelec390.db_manager;
-
 import static android.app.PendingIntent.getActivity;
-
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.ui.item.AddItemActivity;
 import com.google.android.gms.tasks.Continuation;
@@ -16,14 +12,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 //assign2 libraries
-
-
 public class DatabaseManager {
 
     private DatabaseReference mDatabase;

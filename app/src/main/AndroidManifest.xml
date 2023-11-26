@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
     <!-- To remove later -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-
-    <!-- Permissions for Bluetooth -->
-    <uses-permission android:name="android.permission.BLUETOOTH"
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Permissions for Bluetooth -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
         android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
         android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
-
-    <!-- Permission for accessing fine location (optional) -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" /> <!-- Permission for accessing fine location (optional) -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -28,20 +24,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.COENELEC390"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".Users.AccessRequestsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_access_requests"
+            android:theme="@style/Theme.COENELEC390" />
+        <activity
+            android:name=".Users.ManagerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Users.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Users.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Users.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.item.ListItemsActivity"
             android:exported="true"
             android:label="@string/title_activity_item"
             android:theme="@style/Theme.COENELEC390" />
-        <activity android:name=".ui.item.AddItemActivity"
+        <activity
+            android:name=".ui.item.AddItemActivity"
             android:exported="true"
             android:label="AddItemActivity"
             android:theme="@style/Theme.COENELEC390" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,20 +63,18 @@
             </intent-filter>
         </activity>
 
-
-        <receiver android:name=".bluetooth.BLE_BroadcastReceiver"
+        <receiver
+            android:name=".bluetooth.BLE_BroadcastReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.example.coenelec390.bluetooth.NEW_CHARACTERISTIC" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".bluetooth.IntentService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
-
-
     </application>
 
 </manifest>

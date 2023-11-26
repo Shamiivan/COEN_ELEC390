@@ -2,12 +2,10 @@ package com.example.coenelec390.db_manager;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.ui.item.AddItemActivity;
 import com.example.coenelec390.ui.item.ComponentDetailFragment;
-
 import java.util.Map;
 
 public class Component {
     private Map<String, Object> characteristics;
-
     private String tag;
     private String location;
     private String MainCategory;
@@ -16,11 +14,9 @@ public class Component {
     private double unitPrice;
     private int quantity;
     private double totalPrice;
-
     public Component() {
         // Default constructor required for Firebase
     }
-
     public Component(String tag, String mainCategory, String subCategory, String partNumber, double unitPrice, int quantity,String location, Map<String, Object> characteristics) {
         this.characteristics = characteristics;
         this.location = location;
@@ -33,7 +29,6 @@ public class Component {
         this.tag = tag;
         //TO DO make sure all of these are lower case.
     }
-
 
     public Map<String, Object> getCharacteristics() {
         return characteristics;
