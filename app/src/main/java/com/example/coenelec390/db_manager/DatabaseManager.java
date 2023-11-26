@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.coenelec390.model.Category;
 import com.example.coenelec390.model.Component;
+import com.example.coenelec390.model.SubCategory;
 import com.example.coenelec390.ui.item.AddItem;
 import com.example.coenelec390.Utils;
 import com.google.android.gms.tasks.Continuation;
@@ -187,7 +188,7 @@ public class DatabaseManager {
     * Subcategories
     * */
     public interface OnSubCategoriesLoadedListener {
-        void onSubCategoriesLoaded(List<Category> subCategories);
+        void onSubCategoriesLoaded(List<SubCategory> subCategories);
         void onSubCategoriesError(String errorMessage);
     }
 
@@ -196,11 +197,11 @@ public class DatabaseManager {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Category> subCategories = new ArrayList<>();
+                List<SubCategory> subCategories = new ArrayList<>();
                 for (DataSnapshot subCategorySnap : snapshot.getChildren()) {
                     String name = subCategorySnap.getKey();
                     long childCount = subCategorySnap.getChildrenCount(); // Get the number of child elements
-                    Category subCategory = new Category(name, childCount);
+                    SubCategory subCategory = new SubCategory(name,mainCategory, childCount);
                     subCategories.add(subCategory);
                 }
                 listener.onSubCategoriesLoaded(subCategories);

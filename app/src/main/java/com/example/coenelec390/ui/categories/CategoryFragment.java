@@ -87,7 +87,7 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
     }
 
     @Override
-    public void onItemClick(String category, String subCate) {
+    public void onItemClick(String category) {
         Toast.makeText(getContext(), "Clicked categoryMAIN: " + category, Toast.LENGTH_SHORT).show();
         categoryAdapter.clearData();
 
@@ -95,7 +95,6 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
         viewModel.fetchSubCategories(category);
         Bundle bundle = new Bundle();
         bundle.putString("categoryName", category);
-        bundle.putString("subCategory")
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.action_navigation_categories_to_subCategoryFragment, bundle);
 

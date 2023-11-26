@@ -67,6 +67,7 @@ dependencies {
     implementation("com.firebaseui:firebase-ui-database:8.0.2")
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
     implementation("com.android.car.ui:car-ui-lib:2.5.1")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
 
     testImplementation("junit:junit:4.13.2")

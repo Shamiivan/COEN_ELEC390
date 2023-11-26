@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.model.Category;
 import com.example.coenelec390.model.Component;
+import com.example.coenelec390.model.SubCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class CategoryViewModel extends ViewModel {
     // MutableLiveData to hold a string data
     private MutableLiveData<List<Category>> categories;
     private MutableLiveData<String> categoriesError;
-    private MutableLiveData<List<Category>> subCategories;
+    private MutableLiveData<List<SubCategory>> subCategories;
     private MutableLiveData<String> subCategoriesError;
     private  MutableLiveData<List<String>> componentNames;
     private MutableLiveData<List<Component>>components;
@@ -49,9 +50,9 @@ public class CategoryViewModel extends ViewModel {
     public void fetchSubCategories(String category){
         databaseManager.fetchSubCategories(category, new DatabaseManager.OnSubCategoriesLoadedListener() {
             @Override
-            public void onSubCategoriesLoaded(List<Category> _subCategories) {
-                for (Category category : _subCategories) {
-                    category.display();
+            public void onSubCategoriesLoaded(List<SubCategory> _subCategories) {
+                for (SubCategory subCategory : _subCategories) {
+                    subCategory.display();
                 }
                 subCategories.setValue(_subCategories);
             }
@@ -89,7 +90,7 @@ public class CategoryViewModel extends ViewModel {
         return categoriesError;
     }
 
-    public MutableLiveData<List<Category>> getSubCategories() {
+    public MutableLiveData<List<SubCategory>> getSubCategories() {
         return subCategories;
     }
 

@@ -26,21 +26,25 @@ import com.example.coenelec390.ui.item.ComponentDetailFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.OnItemClickListener {
+public class ComponentNameFragment extends Fragment implements ComponetNameAdapter.OnItemClickListener {
     private RecyclerView recyclerView;
     private SubCategoryAdapter subCategoryAdapter;
     private List<String> subCategories;
     private String categoryName;
+    private String subCategoryName;
     private CategoryViewModel viewModel;
-    public SubCategoryFragment() {
+    private ComponetNameAdapter componentNameAdapter;
+    public ComponentNameFragment() {
         // Required empty public constructor
     }
 
-    public static SubCategoryFragment newInstance(String categoryName) {
-        SubCategoryFragment fragment = new SubCategoryFragment();
+    public static ComponentNameFragment newInstance(String categoryName, String subCategory) {
+        ComponentNameFragment fragment = new ComponentNameFragment();
         Bundle args = new Bundle();
-        args.putString("categoryName", categoryName);
+        args.putString("subCategory", subCategory);
+        args.putString("category", categoryName);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -48,33 +52,32 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            categoryName = getArguments().getString("categoryName");
+            categoryName = getArguments().getString("category");
+            subCategoryName = getArguments().getString("subCategory");
         }
         //get the view model to handle the data
-        Utils.print("Calling from " + categoryName);
+        Utils.print("Calling from " + categoryName + " " + subCategoryName);
         viewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
-        viewModel.fetchSubCategories(categoryName);
+        viewModel.fetchComponents(categoryName, subCategoryName);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_subcategory_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_component_name_list, container, false);
 
-        recyclerView = view.findViewById(R.id.list);
-        subCategoryAdapter = new SubCategoryAdapter(new ArrayList<>(), this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(subCategoryAdapter);
-        viewModel.getSubCategories().observe(getViewLifecycleOwner(), new Observer<List<SubCategory>>() {
+        viewModel.getComponentNames().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
-            public void onChanged(List<SubCategory> _subCategories) {
-                subCategoryAdapter.setSubCategories(_subCategories);
-                for (SubCategory subCategory : _subCategories) {
-                    subCategory.display();
-                }
+            public void onChanged(List<String> names) {
+                componentNameAdapter.setComponentNames(names);
             }
         });
+        recyclerView = view.findViewById(R.id.list);
+        componentNameAdapter = new ComponetNameAdapter(new ArrayList<>(), this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(componentNameAdapter);
+
         return view;
     }
     @Override
@@ -90,20 +93,8 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
     }
 
     @Override
-    public void onItemClick(SubCategory subCategory) {
-        Toast.makeText(getContext(), "Clicked categorySUB: " + subCategory.getName(), Toast.LENGTH_SHORT).show();
-        Utils.print(subCategory + " " + categoryName);
-        String category = subCategory.getParentName();
-        String subCategoryName = subCategory.getName();
-        viewModel.fetchComponents(category,subCategoryName);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("subCategory", subCategory.getName());
-        bundle.putString("category", subCategory.getParentName());
-        Utils.print("CATEGORY ----> " +  subCategory.getParentName());
-
-        NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(R.id.action_subCategoryFragment_to_componetNameFragment, bundle);
+    public void onItemClick(String componentName) {
+        Toast.makeText(getContext(), "Clicked categorySUB: " + componentName, Toast.LENGTH_SHORT).show();
 //        fetchComponents(categoryName, subCategory);
     }
 
