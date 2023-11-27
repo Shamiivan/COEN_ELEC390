@@ -365,6 +365,43 @@ public class DatabaseManager {
             }
         });
     }
+
+
+    public interface OnAllComponentsLoadedListener {
+        void onComponentsLoaded(List<Component> component);
+
+        void onError(String errorMessage);
+    }
+
+    public void fetchAllComponents(OnAllComponentsLoadedListener listener){
+        DatabaseReference ref = mDatabase.child("components");
+        List<Component> components = new ArrayList<>();
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot subCategorySnapshot : categorySnapshot.getChildren()) {
+                        for (DataSnapshot componentSnapshot : subCategorySnapshot.getChildren()) {
+                            Component component = componentSnapshot.getValue(Component.class);
+                            component.setMainCategory(categorySnapshot.getKey());
+                            component.setSubCategory(subCategorySnapshot.getKey());
+                            component.setPartNumber(componentSnapshot.getKey());
+                            components.add(component);
+                        }
+                    }
+                }
+                listener.onComponentsLoaded(components);
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onError(error.getMessage());
+            }
+        });
+    }
     public void fetchModelDetails(String type, String category, String model, ValueEventListener listener) {
         DatabaseReference ref = mDatabase.child("components").child(type).child(category).child(model);
         ref.addListenerForSingleValueEvent(listener);

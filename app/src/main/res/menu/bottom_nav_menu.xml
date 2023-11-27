@@ -6,10 +6,10 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard" />
 
-    <item
-        android:id="@+id/navigation_items"
-        android:icon="@drawable/ic_items_black_24dp"
-        android:title="@string/title_items" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_items"-->
+<!--        android:icon="@drawable/ic_items_black_24dp"-->
+<!--        android:title="@string/title_items" />-->
 
     <item
         android:id="@+id/navigation_notifications"
@@ -17,11 +17,11 @@
         android:title="@string/title_bluetooth" />
 
     <item
-        android:id="@+id/navigation_search"
-        android:icon="?android:attr/actionModeWebSearchDrawable"
-        android:title="Search" />
-    <item
         android:id="@+id/navigation_categories"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="Categories" />
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search" />
 </menu>

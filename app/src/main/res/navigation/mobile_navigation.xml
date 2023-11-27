@@ -38,13 +38,14 @@
             app:destination="@id/componetNameFragment" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.example.coenelec390.ui.item.Search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
-    <fragment
         android:id="@+id/componetNameFragment"
         android:name="com.example.coenelec390.ui.categories.ComponentNameFragment"
         android:label="fragment_component_name_list"
         tools:layout="@layout/fragment_component_name_list" />
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.coenelec390.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 
 </navigation>
