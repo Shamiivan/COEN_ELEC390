@@ -4,6 +4,10 @@
     <!-- To remove later -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"/>
 
     <!-- Permissions for Bluetooth -->
     <uses-permission android:name="android.permission.BLUETOOTH"
