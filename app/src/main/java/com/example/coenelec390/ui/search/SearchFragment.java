@@ -29,8 +29,8 @@ import java.util.List;
 public class SearchFragment extends Fragment  implements SearchAdapter.OnItemClickListener{
     SearchView searchView;
 
-    ArrayList<Component> arrayList;
-    ArrayList<String> componentNames;
+    List<Component> arrayList;
+    List<String> componentNames;
 //    ArrayAdapter<Component> adapter;
     private PageSearchBinding binding;
     SearchAdapter adapter;
@@ -88,9 +88,12 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
         viewModel.getComponentNames().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> names) {
+                componentNames = names;
                 adapter.setComponentNames(names);
             }
         });
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -99,7 +102,7 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                viewModel.searchComponents(newText);
+                filter(newText);
                 return false;
             }
         });
@@ -124,6 +127,29 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
 
         return root;
     }
+    void filter(String text){
+    Utils.print(text);
+    adapter.setComponentNames(componentNames);
+        if (componentNames == null) {
+            return;
+        }
+        List<String> temp = new ArrayList();
+        for(String d: componentNames){
+            if(d.toLowerCase().contains(text.toLowerCase())){
+                temp.add(d);
+
+            }
+        }
+
+        Utils.print("Update list ");
+        for (String name : temp
+             ) {
+                Utils.print(name);
+        }
+        // Update RecyclerView
+        adapter.updateList(temp);
+    }
+
 
     @Override
     public void onDestroyView() {

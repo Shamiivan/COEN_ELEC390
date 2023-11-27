@@ -45,8 +45,13 @@ public class SearchAdapter  extends RecyclerView.Adapter<SearchAdapter.ViewHolde
     public void setComponentNames(List<String> componentNames){
         this.componentNames = componentNames;
     }
+    public void updateList(List<String> list){
+        componentNames = list;
+        notifyDataSetChanged();
+    }
 
-public interface OnItemClickListener {
+
+    public interface OnItemClickListener {
     void onItemClick(String componentName);
 }
 
