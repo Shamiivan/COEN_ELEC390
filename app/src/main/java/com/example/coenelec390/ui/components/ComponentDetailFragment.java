@@ -78,7 +78,7 @@ public class ComponentDetailFragment extends Fragment {
         unitPriceTextView = view.findViewById(R.id.textViewUnitPrice);
         quantityTextView = view.findViewById(R.id.textViewQuantity);
         totalPriceTextView = view.findViewById(R.id.textViewTotalPrice);
-        editButton = view.findViewById(R.id.editbutton);
+        editButton = view.findViewById(R.id.editButton);
 
         // Set view content
         tagTextView.setText(component.getTag());
@@ -93,7 +93,7 @@ public class ComponentDetailFragment extends Fragment {
 //        TextView characteristicsTextView = view.findViewById(R.id.textViewCharacteristics);
 //        characteristicsTextView.setText(component.getCharacteristics());
 
-        Button editButton = view.findViewById(R.id.editbutton);
+        Button editButton = view.findViewById(R.id.editButton);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

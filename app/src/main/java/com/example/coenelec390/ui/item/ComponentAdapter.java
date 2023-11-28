@@ -42,7 +42,7 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.Comp
         Component component = components.get(position);
         holder.bind(component);
 
-        holder.binding.editbutton.setOnClickListener(new View.OnClickListener() {
+        holder.binding.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener!=null)

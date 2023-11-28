@@ -57,7 +57,7 @@ public class ComponentDetailFragment extends Fragment implements ComponentAdapte
         recyclerView = binding.list;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new ComponentAdapter(components, this)); // You need to create this adapter
-        editButton = root.findViewById(R.id.editbutton);
+        editButton = root.findViewById(R.id.editButton);
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
