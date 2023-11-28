@@ -21,7 +21,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="550dp"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle">
 
         <LinearLayout
@@ -45,25 +45,11 @@
                     android:id="@+id/textViewTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:padding="16dp"
-                    android:text="Tag:" />
-            </androidx.cardview.widget.CardView>
-
-            <!-- Location CardView -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
-
-                <TextView
-                    android:id="@+id/textViewLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Location:" />
+                    android:text="Tag:"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </androidx.cardview.widget.CardView>
 
             <!-- Main Category CardView -->
@@ -75,12 +61,14 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/textViewMainCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:padding="16dp"
-                    android:text="Main Category:" />
+                    android:text="Main Category:"
+                    android:textColor="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <!-- Sub Category CardView -->
@@ -92,12 +80,14 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/textViewSubCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:padding="16dp"
-                    android:text="Sub Category:" />
+                    android:text="Sub Category:"
+                    android:textColor="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <!-- Part Number CardView -->
@@ -109,12 +99,33 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/textViewPartNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:padding="16dp"
-                    android:text="Part Number:" />
+                    android:text="Part Number:"
+                    android:textColor="@color/black" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Location CardView -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <EditText
+                    android:id="@+id/textViewLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:padding="16dp"
+                    android:text="Location:"
+                    android:textColor="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <!-- Unit Price CardView -->
@@ -126,12 +137,14 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/textViewUnitPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:padding="16dp"
-                    android:text="Unit Price:" />
+                    android:text="Unit Price:"
+                    android:textColor="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <!-- Quantity CardView -->
@@ -143,12 +156,14 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/textViewQuantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:padding="16dp"
-                    android:text="Quantity:" />
+                    android:text="Quantity:"
+                    android:textColor="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <!-- Total Price CardView -->
@@ -165,7 +180,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:text="Total Price:" />
+                    android:text="Total Price:"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </androidx.cardview.widget.CardView>
 
             <!-- Characteristics CardView -->
@@ -177,12 +194,14 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/textViewCharacteristics"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:padding="16dp"
-                    android:text="Characteristics:" />
+                    android:text="Characteristics:"
+                    android:textColor="@color/black" />
             </androidx.cardview.widget.CardView>
 
             <!-- Edit Button - Positioned at the bottom of the screen -->
@@ -193,6 +212,18 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="Edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Save"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

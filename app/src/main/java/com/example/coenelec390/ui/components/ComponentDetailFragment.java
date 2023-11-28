@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -24,14 +25,16 @@ public class ComponentDetailFragment extends Fragment {
     // UI ELEMENTS
     // Declare view references as member variables
     private TextView tagTextView;
-    private TextView locationTextView;
-    private TextView mainCategoryTextView;
-    private TextView subCategoryTextView;
-    private TextView partNumberTextView;
-    private TextView unitPriceTextView;
-    private TextView quantityTextView;
+    private EditText locationTextView;
+    private EditText mainCategoryTextView;
+    private EditText subCategoryTextView;
+    private EditText partNumberTextView;
+    private EditText unitPriceTextView;
+    private EditText quantityTextView;
     private TextView totalPriceTextView;
+    private EditText characteristicsTextView;
     private Button editButton;
+    private Button saveButton;
 
     public ComponentDetailFragment() {
         // Required empty public constructor
@@ -79,28 +82,53 @@ public class ComponentDetailFragment extends Fragment {
         quantityTextView = view.findViewById(R.id.textViewQuantity);
         totalPriceTextView = view.findViewById(R.id.textViewTotalPrice);
         editButton = view.findViewById(R.id.editButton);
+        saveButton = view.findViewById(R.id.saveButton);
+        characteristicsTextView = view.findViewById(R.id.textViewCharacteristics);
+
 
         // Set view content
         tagTextView.setText(component.getTag());
         locationTextView.setText("Location : " + component.getLocation());
         mainCategoryTextView.setText("Main category : " + component.getMainCategory());
-        subCategoryTextView.setText("Subcategory"+ component.getSubCategory());
+        subCategoryTextView.setText("Subcategory: "+ component.getSubCategory());
         partNumberTextView.setText("Name : " + component.getPartNumber());
         unitPriceTextView.setText("Unit Price : " +  String.valueOf(component.getUnitPrice()));
         quantityTextView.setText(String.valueOf("Quantity : " + component.getQuantity()));
         totalPriceTextView.setText(String.valueOf("Total Price : " + component.getTotalPrice()));
+        characteristicsTextView.setText(component.getCharacteristics());
 
-//        TextView characteristicsTextView = view.findViewById(R.id.textViewCharacteristics);
-//        characteristicsTextView.setText(component.getCharacteristics());
-
-        Button editButton = view.findViewById(R.id.editButton);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle edit button click
+                locationTextView.setEnabled(true);
+                mainCategoryTextView.setEnabled(true);
+                subCategoryTextView.setEnabled(true);
+                partNumberTextView.setEnabled(true);
+                unitPriceTextView.setEnabled(true);
+                quantityTextView.setEnabled(true);
+                characteristicsTextView.setEnabled(true);
+
+                saveButton.setVisibility(View.VISIBLE);
+
+                editButton.setVisibility(View.GONE);
             }
         });
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locationTextView.setEnabled(false);
+                mainCategoryTextView.setEnabled(false);
+                subCategoryTextView.setEnabled(false);
+                partNumberTextView.setEnabled(false);
+                unitPriceTextView.setEnabled(false);
+                quantityTextView.setEnabled(false);
+                characteristicsTextView.setEnabled(false);
+                editButton.setVisibility(View.VISIBLE);
+
+                saveButton.setVisibility(View.GONE);
+            }
+        });
         return view;
     }
     @Override
