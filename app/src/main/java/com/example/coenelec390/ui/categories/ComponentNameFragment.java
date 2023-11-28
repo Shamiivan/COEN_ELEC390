@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -18,18 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.model.Category;
 import com.example.coenelec390.model.Component;
-import com.example.coenelec390.db_manager.DatabaseManager;
-import com.example.coenelec390.model.SubCategory;
-import com.example.coenelec390.ui.components.ComponentDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComponentNameFragment extends Fragment implements ComponetNameAdapter.OnItemClickListener {
-    private RecyclerView recyclerView;
-    private SubCategoryAdapter subCategoryAdapter;
     private List<String> subCategories;
     private List<Component> components;
     private String categoryName;
@@ -68,6 +61,15 @@ public class ComponentNameFragment extends Fragment implements ComponetNameAdapt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_component_name_list, container, false);
+
+            // Set the dynamic title
+                if (getActivity() != null) {
+                    ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+                    if (actionBar != null) {
+                        String path = categoryName + "/"  + subCategoryName;
+                        actionBar.setTitle(path);  // Replace with your dynamic title
+                    }
+                }
         viewModel.getComponents().observe(getViewLifecycleOwner(), new Observer<List<Component>>() {
             @Override
             public void onChanged(List<Component> _components) {
@@ -81,7 +83,7 @@ public class ComponentNameFragment extends Fragment implements ComponetNameAdapt
                 componentNameAdapter.setComponentNames(names);
             }
         });
-        recyclerView = view.findViewById(R.id.list);
+        RecyclerView recyclerView = view.findViewById(R.id.list);
         componentNameAdapter = new ComponetNameAdapter(new ArrayList<>(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(componentNameAdapter);

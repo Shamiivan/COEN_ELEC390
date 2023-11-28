@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -71,6 +73,14 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subcategory_list, container, false);
 
+        // Set the dynamic title
+        if (getActivity() != null) {
+            ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (actionBar != null) {
+                String path = "components/" + categoryName;
+                actionBar.setTitle(path);  // Replace with your dynamic title
+            }
+        }
         recyclerView = view.findViewById(R.id.list);
         subCategoryAdapter = new SubCategoryAdapter(new ArrayList<>(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
