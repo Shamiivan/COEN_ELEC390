@@ -3,9 +3,10 @@ import com.example.coenelec390.Utils;
 import com.example.coenelec390.ui.item.AddItemActivity;
 import com.example.coenelec390.ui.item.ComponentDetailFragment;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Component {
+public class Component implements Serializable {
     private Map<String, Object> characteristics;
 
     private String tag;

@@ -41,11 +41,19 @@
         android:id="@+id/componetNameFragment"
         android:name="com.example.coenelec390.ui.categories.ComponentNameFragment"
         android:label="fragment_component_name_list"
-        tools:layout="@layout/fragment_component_name_list" />
+        tools:layout="@layout/fragment_component_name_list" >
+        <action
+            android:id="@+id/action_componetNameFragment_to_componentDetailFragment"
+            app:destination="@id/componentDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.coenelec390.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/componentDetailFragment"
+        android:name="com.example.coenelec390.ui.components.ComponentDetailFragment"
+        android:label="ComponentDetailFragment" />
 
 </navigation>

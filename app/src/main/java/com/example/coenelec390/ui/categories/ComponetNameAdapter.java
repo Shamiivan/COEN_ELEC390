@@ -72,7 +72,7 @@ public class ComponetNameAdapter extends RecyclerView.Adapter<ComponetNameAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(componentName);
+                    listener.onItemClick(position);
                 }
 
             });
@@ -87,7 +87,7 @@ public class ComponetNameAdapter extends RecyclerView.Adapter<ComponetNameAdapte
 
 
     public interface OnItemClickListener {
-        void onItemClick(String componentName);
+        void onItemClick(Integer position);
     }
 
 }

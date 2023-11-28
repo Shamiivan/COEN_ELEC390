@@ -100,7 +100,6 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
         Bundle bundle = new Bundle();
         bundle.putString("subCategory", subCategory.getName());
         bundle.putString("category", subCategory.getParentName());
-        Utils.print("CATEGORY ----> " +  subCategory.getParentName());
 
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.action_subCategoryFragment_to_componetNameFragment, bundle);

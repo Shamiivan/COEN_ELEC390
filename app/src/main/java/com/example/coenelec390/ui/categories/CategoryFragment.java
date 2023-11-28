@@ -98,7 +98,6 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.action_navigation_categories_to_subCategoryFragment, bundle);
 
-//        fetchSubCategories(category);
 
     }
 

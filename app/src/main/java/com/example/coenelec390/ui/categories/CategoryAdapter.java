@@ -71,7 +71,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             categoryName.setText(name);
             itemView.setOnClickListener(v -> {
                 listener.onItemClick(name);
-                Utils.print(name);
             });
         }
     }

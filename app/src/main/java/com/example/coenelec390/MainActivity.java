@@ -38,16 +38,38 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
         FirebaseApp.initializeApp(this);
 
 
-        /* Get reference to the BottomNavigationView widget from layout.*/
+
+        // Remove the old setup with NavController as it's now handled above
+        // NavigationUI.setupWithNavController(binding.navView, navController);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        // Existing AppBarConfiguration setup
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_dashboard, R.id.navigation_items, R.id.navigation_notifications, R.id.navigation_search)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+
+        navView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.navigation_dashboard) {
+                navController.navigate(R.id.navigation_dashboard);
+            } else if (itemId == R.id.navigation_items) {
+                navController.navigate(R.id.navigation_items);
+            } else if (itemId == R.id.navigation_notifications) {
+                navController.navigate(R.id.navigation_notifications);
+            } else if (itemId == R.id.navigation_search) {
+                navController.navigate(R.id.navigation_search);
+            } else if (itemId == R.id.navigation_categories) {
+                navController.popBackStack(R.id.navigation_categories, false);
+                navController.navigate(R.id.navigation_categories);
+            }
+            // Add else-if for other items if needed
+
+            return true;
+        });
+
 
 
 
