@@ -51,9 +51,6 @@ public class CategoryViewModel extends ViewModel {
         databaseManager.fetchSubCategories(category, new DatabaseManager.OnSubCategoriesLoadedListener() {
             @Override
             public void onSubCategoriesLoaded(List<SubCategory> _subCategories) {
-                for (SubCategory subCategory : _subCategories) {
-                    subCategory.display();
-                }
                 subCategories.setValue(_subCategories);
             }
 

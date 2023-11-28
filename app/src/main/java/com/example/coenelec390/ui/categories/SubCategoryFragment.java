@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -51,9 +52,17 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
             categoryName = getArguments().getString("categoryName");
         }
         //get the view model to handle the data
-        Utils.print("Calling from " + categoryName);
         viewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
         viewModel.fetchSubCategories(categoryName);
+        // Handle the back button event
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+
+                Utils.print("Back button pressed");
+            }
+        });
     }
 
 
@@ -70,9 +79,6 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
             @Override
             public void onChanged(List<SubCategory> _subCategories) {
                 subCategoryAdapter.setSubCategories(_subCategories);
-                for (SubCategory subCategory : _subCategories) {
-                    subCategory.display();
-                }
             }
         });
         return view;
@@ -106,28 +112,4 @@ public class SubCategoryFragment extends Fragment implements SubCategoryAdapter.
 //        fetchComponents(categoryName, subCategory);
     }
 
-//    public void fetchComponents(String mainCategory, String subCategory){
-//        databaseManager.fetchComponents(mainCategory, subCategory, new DatabaseManager.OnComponentLoadedListener() {
-//            @Override
-//            public void onComponentLoaded(List<Component> components) {
-//                for (Component component: components) {
-//                    component.setMainCategory(mainCategory);
-//                    component.setSubCategory(subCategory);
-//                    component.display();
-//                }
-//                // Start the ComponentDetailFragment
-//                ComponentDetailFragment componentDetailFragment = ComponentDetailFragment.newInstance(components);
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.nav_host_fragment_activity_main, componentDetailFragment);
-//                transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
-//                transaction.commit();
-//            }
-//
-//            @Override
-//            public void onComponentError(String errorMessage) {
-//                Toast.makeText(getContext(), "Error fetching subcategories: " + errorMessage, Toast.LENGTH_SHORT).show();
-//                Utils.print(errorMessage);
-//            }
-//        });
-//    }
 }

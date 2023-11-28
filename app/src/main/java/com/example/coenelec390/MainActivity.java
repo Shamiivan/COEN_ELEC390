@@ -2,6 +2,7 @@ package com.example.coenelec390;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.coenelec390.ui.item.AddItem;
 import com.example.coenelec390.ui.item.AddItemActivity;
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Utils.print("Activity created");
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null){
             Utils.print("Not null");
@@ -84,15 +84,24 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
         });
 
     }
-
-
     @Override
     public void onBackPressed() {
-        ComponentDetailFragment fragment = (ComponentDetailFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
-        if (fragment != null && fragment.isVisible()) {
-            fragment.handleBackPress();
-        } else {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        Toast.makeText(this, "Back button pressed", Toast.LENGTH_SHORT).show();
             super.onBackPressed();
-        }
+//        Utils.print("Back button pressed");
+//        // Check if the current destination is not the start destination
+//        if (navController.getCurrentDestination().getId() != navController.getGraph().getStartDestination()) {
+//            Utils.print(navController.getCurrentDestination().getDisplayName());
+//            // Navigate up in the navigation hierarchy
+//            navController.navigateUp();
+//        } else {
+//            // Optional: Add another check here if you are at the 'Categories' fragment and want special handling
+//            // e.g., if at 'Categories', show a dialog or exit the app
+//
+//            // Otherwise, call the super method which typically exits the app
+//            super.onBackPressed();
+//        }
     }
+
 }
