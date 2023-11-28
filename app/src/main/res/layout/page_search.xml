@@ -18,7 +18,7 @@
         android:orientation="horizontal">
         <SearchView
             android:id="@+id/searchBar"
-            android:layout_width="350dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

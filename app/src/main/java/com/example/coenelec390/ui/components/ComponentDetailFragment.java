@@ -95,7 +95,7 @@ public class ComponentDetailFragment extends Fragment {
         unitPriceTextView.setText("Unit Price : " +  String.valueOf(component.getUnitPrice()));
         quantityTextView.setText(String.valueOf("Quantity : " + component.getQuantity()));
         totalPriceTextView.setText(String.valueOf("Total Price : " + component.getTotalPrice()));
-        characteristicsTextView.setText(component.getCharacteristics());
+        //characteristicsTextView.setText(component.getCharacteristics());
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
