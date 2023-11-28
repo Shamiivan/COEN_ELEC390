@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,6 +17,7 @@ import com.example.coenelec390.R;
 import com.example.coenelec390.databinding.ItemDetailsBinding;
 public class ItemDetails extends Fragment {
     private ItemDetailsBinding binding;
+    ArrayAdapter<CharSequence> adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -24,9 +26,15 @@ public class ItemDetails extends Fragment {
 
         Spinner cat = root.findViewById(R.id.category);
         cat.setEnabled(false);
+        adapter = ArrayAdapter.createFromResource(getContext(), R.array.Category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        cat.setAdapter(adapter);
 
         Spinner subCat = root.findViewById(R.id.subcategory);
         subCat.setEnabled(false);
+        adapter = ArrayAdapter.createFromResource(getContext(), R.array.Subcategory, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        subCat.setAdapter(adapter);
 
         Button update = binding.updateItem;
         update.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +57,8 @@ public class ItemDetails extends Fragment {
                 cat.setEnabled(true);
                 subCat.setEnabled(true);
 
-                Button addTxtField = root.findViewById(R.id.btnAddDesc);
-                addTxtField.setVisibility(View.VISIBLE);
+                EditText description = root.findViewById(R.id.extraDesc);
+                description.setEnabled(true);
 
                 Button saveEdits = root.findViewById(R.id.saveEdits);
                 saveEdits.setVisibility(View.VISIBLE);
