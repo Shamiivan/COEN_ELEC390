@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Header: Bluetooth Connection -->
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bluetooth Connection"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp" />
+
+
+                <!-- Button Container -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- ON Button -->
+                    <Button
+                        android:id="@+id/btnOn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ON"
+                        android:layout_marginEnd="40dp"
+                        android:background="@drawable/button_rounded_corners" />
+
+
+                    <!-- OFF Button -->
+                    <Button
+                        android:id="@+id/btnOff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OFF"
+
+                        android:background="@drawable/button_rounded_corners" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Header: Bluetooth Scan -->
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bluetooth Scan"
+                    android:textSize="24sp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Scan Button Container -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Start Scan Button -->
+                    <Button
+                        android:id="@+id/scan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start"
+                        android:layout_marginEnd="40dp"
+                        android:background="@drawable/button_rounded_corners" />
+
+                    <!-- Stop Scan Button -->
+                    <Button
+                        android:id="@+id/stopScan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stop"
+                        android:background="@drawable/button_rounded_corners" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- Header: Connection -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connection"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Connection Button Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- Connect to Peripheral Button -->
+            <Button
+                android:id="@+id/connect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To Peripheral"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/button_rounded_corners" />
+
+            <!-- Connect to Database Button -->
+            <Button
+                android:id="@+id/updateDB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To Database"
+                android:background="@drawable/button_rounded_corners" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

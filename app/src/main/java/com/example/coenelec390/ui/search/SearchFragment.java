@@ -69,7 +69,7 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
         View root = binding.getRoot();
 
         searchView = root.findViewById(R.id.searchBar);
-        RecyclerView recyclerView = binding.searchlist;
+        RecyclerView recyclerView = (RecyclerView) binding.searchlist;
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new SearchAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
@@ -106,25 +106,6 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
                 return false;
             }
         });
-
-        Button viewCat = binding.viewCat;
-        viewCat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO
-            }
-        });
-
-        Button viewList = binding.viewList;
-        viewList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO
-            }
-        });
-
-
-
         return root;
     }
     void filter(String text){
@@ -139,12 +120,6 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
                 temp.add(d);
 
             }
-        }
-
-        Utils.print("Update list ");
-        for (String name : temp
-             ) {
-                Utils.print(name);
         }
         // Update RecyclerView
         adapter.updateList(temp);

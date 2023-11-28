@@ -17,8 +17,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.model.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
+import com.example.coenelec390.model.Component;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -71,7 +71,7 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
         location = rootview.findViewById(R.id.etLocation);
         stock =  rootview.findViewById(R.id.etStock);
         description= rootview.findViewById(R.id.extraDesc);
-        UnitPrice= rootview.findViewById(R.id.etUnitPrice);
+        //UnitPrice= rootview.findViewById(R.id.etUnitPrice);
 
 
         cat = rootview.findViewById(R.id.category);

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".ui.item.ItemDetails">
+    tools:context=".ui.item.AddItem">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:enabled="false"
             android:hint="Part Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:enabled="false"
             android:hint="Location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.6"
@@ -54,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:enabled="false"
             android:hint="Stock"
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +121,6 @@
                 android:id="@+id/etUnitPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:enabled="false"
                 android:hint="Unit Price"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +162,7 @@
             android:id="@+id/extraDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
+            android:hint="Add extra info here"
             android:textAlignment="viewStart"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
@@ -176,37 +172,17 @@
             app:layout_constraintVertical_bias="0.072" />
 
         <Button
-            android:id="@+id/saveEdits"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:id="@+id/btnAddProduct"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
             android:gravity="center"
-            android:text="Save"
-            android:visibility="gone"
+            android:text="ADD"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.955"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subcategory"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:dividerPadding="1dp"
-            android:gravity="left"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/updateItem"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/car_ui_icon_edit"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.955"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/subcategory"
-                app:layout_constraintVertical_bias="0.5" />
-        </LinearLayout>
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
