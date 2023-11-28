@@ -1,139 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal">
-
+        android:orientation="vertical"
+        android:gravity="center">
         <LinearLayout
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="top|center"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Header: Bluetooth Connection -->
+            <LinearLayout
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Bluetooth Connection"
-                android:textAlignment="center"
-                android:textColor="?attr/actionMenuTextColor"
-                android:textSize="15sp"
-                android:textStyle="bold"></TextView>
-            <Button
-                android:id="@+id/btnOn"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:textSize="10sp"
-                android:text="ON"
-                app:cornerRadius="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.399" />
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <Button
-                android:id="@+id/btnOff"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:textSize="10sp"
-                android:text="OFF"
-                app:cornerRadius="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.516"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.483" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bluetooth Connection"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp" />
+
+
+                <!-- Button Container -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- ON Button -->
+                    <Button
+                        android:id="@+id/btnOn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ON"
+                        android:layout_marginEnd="40dp"
+                        android:background="@drawable/button_rounded_corners" />
+
+
+                    <!-- OFF Button -->
+                    <Button
+                        android:id="@+id/btnOff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OFF"
+
+                        android:background="@drawable/button_rounded_corners" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Header: Bluetooth Scan -->
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bluetooth Scan"
+                    android:textSize="24sp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Scan Button Container -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Start Scan Button -->
+                    <Button
+                        android:id="@+id/scan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start"
+                        android:layout_marginEnd="40dp"
+                        android:background="@drawable/button_rounded_corners" />
+
+                    <!-- Stop Scan Button -->
+                    <Button
+                        android:id="@+id/stopScan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stop"
+                        android:background="@drawable/button_rounded_corners" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="150dp"
+        <!-- Header: Connection -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="top|center"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bluetooth Scan"
-                android:textAlignment="center"
-                android:textColor="?attr/actionMenuTextColor"
-                android:textSize="15sp"
-                android:textStyle="bold"></TextView>
-            <Button
-                android:id="@+id/scan"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:textSize="10sp"
-                android:text="Start"
-                app:cornerRadius="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.297"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.603" />
+            android:text="Connection"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp" />
 
-            <Button
-                android:id="@+id/stopScan"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:textSize="10sp"
-                android:text="Stop"
-                app:cornerRadius="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.718"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.603" />
-        </LinearLayout>
-
+        <!-- Connection Button Container -->
         <LinearLayout
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Connection"
-                android:textAlignment="center"
-                android:textColor="?attr/actionMenuTextColor"
-                android:textSize="15sp"
-                android:textStyle="bold"></TextView>
+            android:orientation="horizontal">
+
+            <!-- Connect to Peripheral Button -->
             <Button
                 android:id="@+id/connect"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="To Peripheral"
-                app:cornerRadius="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.737" />
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/button_rounded_corners" />
 
+            <!-- Connect to Database Button -->
             <Button
                 android:id="@+id/updateDB"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="To Database"
-                app:cornerRadius="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.526"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.836" />
+                android:background="@drawable/button_rounded_corners" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

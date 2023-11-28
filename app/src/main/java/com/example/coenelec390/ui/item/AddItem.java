@@ -71,7 +71,7 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
         location = rootview.findViewById(R.id.etLocation);
         stock =  rootview.findViewById(R.id.etStock);
         description= rootview.findViewById(R.id.extraDesc);
-        UnitPrice= rootview.findViewById(R.id.etUnitPrice);
+        //UnitPrice= rootview.findViewById(R.id.etUnitPrice);
 
 
         cat = rootview.findViewById(R.id.category);
