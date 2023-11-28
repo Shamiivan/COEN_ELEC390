@@ -57,11 +57,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView categoryName;
-        //todo : include child count
+        private final TextView childCountView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryName = itemView.findViewById(R.id.categoryTextView);
+            childCountView = itemView.findViewById(R.id.childcount);
         }
 
         public void bind(Category category, OnItemClickListener listener) {
@@ -69,6 +70,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             long childCount = category.getChildCount();
 
             categoryName.setText(name);
+            childCountView.setText("Number of items : " + String.valueOf(childCount));
             itemView.setOnClickListener(v -> {
                 listener.onItemClick(name);
             });

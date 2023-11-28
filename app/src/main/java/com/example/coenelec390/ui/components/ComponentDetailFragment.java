@@ -82,13 +82,13 @@ public class ComponentDetailFragment extends Fragment {
 
         // Set view content
         tagTextView.setText(component.getTag());
-        locationTextView.setText(component.getLocation());
-        mainCategoryTextView.setText(component.getMainCategory());
-        subCategoryTextView.setText(component.getSubCategory());
-        partNumberTextView.setText(component.getPartNumber());
-        unitPriceTextView.setText(String.valueOf(component.getUnitPrice()));
-        quantityTextView.setText(String.valueOf(component.getQuantity()));
-        totalPriceTextView.setText(String.valueOf("Price : " + component.getTotalPrice()));
+        locationTextView.setText("Location : " + component.getLocation());
+        mainCategoryTextView.setText("Main category : " + component.getMainCategory());
+        subCategoryTextView.setText("Subcategory"+ component.getSubCategory());
+        partNumberTextView.setText("Name : " + component.getPartNumber());
+        unitPriceTextView.setText("Unit Price : " +  String.valueOf(component.getUnitPrice()));
+        quantityTextView.setText(String.valueOf("Quantity : " + component.getQuantity()));
+        totalPriceTextView.setText(String.valueOf("Total Price : " + component.getTotalPrice()));
 
 //        TextView characteristicsTextView = view.findViewById(R.id.textViewCharacteristics);
 //        characteristicsTextView.setText(component.getCharacteristics());

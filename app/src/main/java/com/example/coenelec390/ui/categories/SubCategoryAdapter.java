@@ -58,14 +58,19 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView subCategoryTextView;
+        public TextView childCountTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             subCategoryTextView = itemView.findViewById(R.id.textView);
+            childCountTextView = itemView.findViewById(R.id.childcount);
         }
         public void bind(SubCategory subCategory, SubCategoryAdapter.OnItemClickListener listener) {
             String name = subCategory.getName();
+            String childCount = String.valueOf(subCategory.getChildCount());
             subCategoryTextView.setText(name);
+            childCountTextView.setText("Number of items : " + childCount);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

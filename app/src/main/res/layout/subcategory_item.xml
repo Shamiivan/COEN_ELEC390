@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_margin="4dp"
+    android:background="#D0F6F5F5"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="8dp">
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:gravity="center|center_horizontal|left"
+        android:padding="0dp"
+        android:text="Category Name"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <!--    // TODO : add child cound -->
 <!--    child count-->
     <TextView
         android:id="@+id/childcount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="Child Count: 6"
+        android:textSize="12sp"
+        android:textStyle="normal|bold" />
 </LinearLayout>
