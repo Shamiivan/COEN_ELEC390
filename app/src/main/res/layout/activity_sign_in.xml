@@ -1,42 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/welcomeBackTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome back!"
+        android:textSize="34sp"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="96dp"/>
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_below="@id/welcomeBackTextView"
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_below="@id/editTextEmail"
+        android:layout_marginTop="12dp"/>
 
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/buttonSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign In"/>
+        android:text="Sign In"
+        android:background="@drawable/button_background"
+        android:textColor="#FFF"
+        android:layout_below="@id/editTextPassword"
+        android:layout_marginTop="16dp"/>
 
     <Button
-        android:id="@+id/forgotPasswordButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password?"/>
-
-    <Button
-        android:id="@+id/signUpButton"
+        android:id="@+id/signUpButton_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up ?"
-        android:layout_marginTop="16dp" />
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="#6200EE"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
 
-</LinearLayout>
+</RelativeLayout>

@@ -3,106 +3,61 @@ package com.example.coenelec390.Users;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.coenelec390.R;
+import com.example.coenelec390.ui.dashboard.DashboardFragment;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText emailEditText, usernameEditText, passwordEditText;
+    private EditText emailEditText, passwordEditText;
+    private FirebaseAuth mAuth;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        mAuth = FirebaseAuth.getInstance();
         emailEditText = findViewById(R.id.editTextEmail);
-        usernameEditText = findViewById(R.id.editTextUsername);
         passwordEditText = findViewById(R.id.editTextPassword);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button signUpButton = findViewById(R.id.buttonSignUp);
 
-        findViewById(R.id.requestAccessButton).setOnClickListener(view -> {
-            String email = emailEditText.getText().toString();
-            String username = usernameEditText.getText().toString();
-            requestAccess(email, username);
-        });
-
-        findViewById(R.id.signUpButton).setOnClickListener(view -> {
-            String email = emailEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
-            checkUserStatusAndSignUp(email, password);
-        });
-    }
-
-    public void signUpUser(String email, String password) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // User account created successfully
-                    } else {
-                        // Handle unsuccessful sign-ups
-                    }
-                });
-    }
-
-    public void requestAccess(String email, String username) {
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("listOfUsers");
-        String userId = usersRef.push().getKey(); // Generate a unique ID for the user
-
-        Map<String, Object> userData = new HashMap<>();
-        userData.put("email", email);
-        userData.put("username", username);
-        userData.put("status", "pending");
-
-        usersRef.child(userId).setValue(userData)
-                .addOnSuccessListener(aVoid -> {
-                    // Notify the user that the access request has been sent
-                    Toast.makeText(SignUpActivity.this, "Access request sent.", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    // Handle the error
-                    Toast.makeText(SignUpActivity.this, "Failed to send access request.", Toast.LENGTH_SHORT).show();
-                });
-    }
-
-    public void checkUserStatusAndSignUp(String email, String password) {
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("listOfUsers");
-        Query query = usersRef.orderByChild("email").equalTo(email);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String status = snapshot.child("status").getValue(String.class);
-                        if ("accepted".equals(status)) {
-                            signUpUser(email, password);
-                        } else {
-                            // Show message: "Your access request is still pending or denied."
-                        }
-                    }
+            public void onClick(View view) {
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    createNewUser(email, password);
                 } else {
-                    // User not found in listOfUsers, handle accordingly
+                    Toast.makeText(SignUpActivity.this, "Please enter all details", Toast.LENGTH_SHORT).show();
                 }
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors
-            }
         });
+    }
+
+    private void createNewUser(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("SignUp", "createUserWithEmail:success");
+                        // Redirect to another activity after successful sign-up
+                         Intent intent = new Intent(SignUpActivity.this, DashboardFragment.class);
+                         startActivity(intent);
+                    } else {
+                        Log.w("SignUp", "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(SignUpActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

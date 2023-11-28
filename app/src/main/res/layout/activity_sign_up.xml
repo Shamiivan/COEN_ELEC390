@@ -4,40 +4,52 @@
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:text="Create an Account"
+        android:textColor="#000"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/edittext_background"
         android:hint="Email"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:padding="12dp" />
 
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"/>
+        android:hint="Username"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"/>
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"/>
 
     <Button
-        android:id="@+id/signUpButton"
+        android:id="@+id/buttonSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:layout_marginTop="10dp"/>
-
-    <Button
-        android:id="@+id/requestAccessButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Request Access"
-        android:layout_marginTop="10dp"/>
+        android:background="@drawable/button_background"
+        android:textColor="#FFF"
+        android:layout_marginTop="60dp"/>
 
 </LinearLayout>
