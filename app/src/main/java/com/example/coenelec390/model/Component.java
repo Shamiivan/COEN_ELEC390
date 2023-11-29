@@ -121,4 +121,21 @@ public class Component implements Serializable {
 
 
     }
+
+    public void setLocation(String updatedLocation) {
+        this.location = updatedLocation;
+    }
+
+    /*public void setUnitPrice(double updatedUnitPrice) {
+    this.unitPrice = updatedUnitPrice;
+
+    }*/
+
+    public void setQuantity(int updatedQuantity) {
+    this.quantity = updatedQuantity;
+    }
+
+    public void setCharacteristics(String key, String updatedCharacteristics) {
+        this.characteristics.put(key, updatedCharacteristics );
+    }
 }

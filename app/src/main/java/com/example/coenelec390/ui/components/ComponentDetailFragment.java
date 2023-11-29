@@ -9,17 +9,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
+import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.model.Component;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ComponentDetailFragment extends Fragment {
     private Component component;
+
+    DatabaseManager db = new DatabaseManager();
+
 
 
     // UI ELEMENTS
@@ -88,13 +97,13 @@ public class ComponentDetailFragment extends Fragment {
 
         // Set view content
         tagTextView.setText(component.getTag());
-        locationTextView.setText("Location : " + component.getLocation());
-        mainCategoryTextView.setText("Main category : " + component.getMainCategory());
-        subCategoryTextView.setText("Subcategory: "+ component.getSubCategory());
-        partNumberTextView.setText("Name : " + component.getPartNumber());
-        unitPriceTextView.setText("Unit Price : " +  String.valueOf(component.getUnitPrice()));
-        quantityTextView.setText(String.valueOf("Quantity : " + component.getQuantity()));
-        totalPriceTextView.setText(String.valueOf("Total Price : " + component.getTotalPrice()));
+        locationTextView.setText( component.getLocation());
+        mainCategoryTextView.setText( component.getMainCategory());
+        subCategoryTextView.setText( component.getSubCategory());
+        partNumberTextView.setText(component.getPartNumber());
+        unitPriceTextView.setText(  String.valueOf(component.getUnitPrice()));
+        quantityTextView.setText(String.valueOf( component.getQuantity()));
+        totalPriceTextView.setText(String.valueOf(component.getTotalPrice()));
         //characteristicsTextView.setText(component.getCharacteristics());
 
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +126,80 @@ public class ComponentDetailFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                String updatedLocation = locationTextView.getText().toString();
+                String updatedMainCategory = mainCategoryTextView.getText().toString();
+                String updatedSubCategory = subCategoryTextView.getText().toString();
+                String updatedPartNumber = partNumberTextView.getText().toString();
+                String updatedUnitPriceString = unitPriceTextView.getText().toString();
+                Double updatedUnitPrice = Double.parseDouble(updatedUnitPriceString);
+                String updatedQuantityString = quantityTextView.getText().toString();
+                int updatedQuantity = Integer.parseInt(updatedQuantityString);
+                //String[] updatedCharacteristics = characteristicsTextView.getText().toString().split(": ");
+                 Component updatedcomponent = new Component();
+                /*component.setLocation(updatedLocation);
+                component.setMainCategory(updatedMainCategory);
+                component.setSubCategory(updatedSubCategory);
+                component.setPartNumber(updatedPartNumber);
+                component.setUnitPrice(updatedUnitPrice);
+                component.setQuantity(updatedQuantity);
+                component.setCharacteristics("Description" ,updatedCharacteristics);*/
+
+                /*String existingPath = component.getComponentCommaSeparated();
+
+                // Update the component in the database
+                DatabaseReference componentRef = FirebaseDatabase.getInstance()
+                        .getReference().child(existingPath);  // Replace with the actual path in your database
+                componentRef.setValue(component)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getContext(), "Component updated successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Failed to update component: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });*/
+
+                //Map<String, Object> characteristics3 = new HashMap<>();
+                //characteristics3.put("Description", updatedCharacteristics[1]);
+
+                Map<String, Object> updates = new HashMap<>();
+                updates.put("location" , updatedLocation);
+                updates.put("quantity" , updatedQuantity);
+                updates.put("unitPrice" , updatedUnitPrice);
+                //updates.put();
+
+                Utils.print("update started");
+                db.updateComponentFields(updatedMainCategory, updatedSubCategory, updatedPartNumber, updates, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // Handle successful update
+                            //Log.d(TAG, "Update successful");
+                            Utils.print("Update successful BASHAR");
+                            Utils.print("type:" + updatedMainCategory + "subcategory"+updatedSubCategory + "part number" + updatedPartNumber);
+                        } else {
+                            // Handle failed update
+                            Exception e = task.getException();
+                            Utils.print("Update failed");
+
+                            if (e != null) {
+                              //  Log.e(TAG, "Update failed: " + e.getMessage());
+                                Utils.print("Update failed 2222");
+                            }
+                        }
+                    }
+                });
+
+
+                Utils.print("FINISHED update");
+
+
                 locationTextView.setEnabled(false);
                 mainCategoryTextView.setEnabled(false);
                 subCategoryTextView.setEnabled(false);
@@ -125,7 +208,6 @@ public class ComponentDetailFragment extends Fragment {
                 quantityTextView.setEnabled(false);
                 characteristicsTextView.setEnabled(false);
                 editButton.setVisibility(View.VISIBLE);
-
                 saveButton.setVisibility(View.GONE);
             }
         });
