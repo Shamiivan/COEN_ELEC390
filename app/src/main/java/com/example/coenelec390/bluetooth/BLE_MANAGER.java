@@ -518,6 +518,7 @@ public class BLE_MANAGER {
 
         public void onScanFailed(int errorCode){
             //TODO : implement error handling when scan fails
+            Utils.display(activity.getApplicationContext(), "Scan failed, please restart again");
             Utils.print("onScanFailed : scan failed");
             stopScan();
         }

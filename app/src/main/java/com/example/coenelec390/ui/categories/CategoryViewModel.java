@@ -79,7 +79,13 @@ public class CategoryViewModel extends ViewModel {
             }
         });
     }
-   public LiveData<List<Category>> getCategories() {
+
+    public void deleteComponent(Component component) {
+        databaseManager.deleteComponentByPartNumber(component.getMainCategory(), component.getSubCategory(), component.getPartNumber());
+    }
+
+
+    public LiveData<List<Category>> getCategories() {
         return categories;
     }
 

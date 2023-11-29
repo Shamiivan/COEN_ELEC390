@@ -13,10 +13,14 @@ import androidx.fragment.app.Fragment;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.model.Component;
+import com.example.coenelec390.ui.categories.CategoryViewModel;
 
 public class ComponentDetailFragment extends Fragment {
     private Component component;
@@ -35,6 +39,8 @@ public class ComponentDetailFragment extends Fragment {
     private EditText characteristicsTextView;
     private Button editButton;
     private Button saveButton;
+    private Button deleteButton;
+    private CategoryViewModel viewModel;
 
     public ComponentDetailFragment() {
         // Required empty public constructor
@@ -71,6 +77,9 @@ public class ComponentDetailFragment extends Fragment {
                 actionBar.setTitle(path);  // Replace with your dynamic title
             }
         }
+        viewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+
+
 
         // Initialize view references
         tagTextView = view.findViewById(R.id.textViewTag);
@@ -84,6 +93,8 @@ public class ComponentDetailFragment extends Fragment {
         editButton = view.findViewById(R.id.editButton);
         saveButton = view.findViewById(R.id.saveButton);
         characteristicsTextView = view.findViewById(R.id.textViewCharacteristics);
+        deleteButton = view.findViewById(R.id.delete);
+
 
 
         // Set view content
@@ -111,6 +122,7 @@ public class ComponentDetailFragment extends Fragment {
                 saveButton.setVisibility(View.VISIBLE);
 
                 editButton.setVisibility(View.GONE);
+
             }
         });
 
@@ -127,6 +139,16 @@ public class ComponentDetailFragment extends Fragment {
                 editButton.setVisibility(View.VISIBLE);
 
                 saveButton.setVisibility(View.GONE);
+            }
+        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.deleteComponent(component);
+
+                Bundle bundle = new Bundle();
+                NavController navController = NavHostFragment.findNavController(ComponentDetailFragment.this);
+                navController.navigate(R.id.action_delete_to_success_fragment, bundle);
             }
         });
         return view;
