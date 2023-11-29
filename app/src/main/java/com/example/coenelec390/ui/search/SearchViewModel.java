@@ -1,13 +1,11 @@
 package com.example.coenelec390.ui.search;
 
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.coenelec390.model.Component;
-
 import com.example.coenelec390.db_manager.DatabaseManager;
+import com.example.coenelec390.model.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +96,10 @@ public class SearchViewModel extends ViewModel {
 
     public MutableLiveData<List<Component>> getComponentsFound() {
         return componentsFound;
+    }
+
+    public void componentDetailFragment(String PartName) {
+
     }
 }
 
