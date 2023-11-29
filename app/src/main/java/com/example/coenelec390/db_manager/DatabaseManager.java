@@ -138,9 +138,6 @@ public class DatabaseManager {
 
 
 
-    public void updateComponentFields(String type, String category, String model, Map<String, Object> updates) {
-        mDatabase.child("components").child(type).child(category).child(model).updateChildren(updates);
-
     public void updateComponentFields(String type, String category, String model, Map<String, Object> updates  , OnCompleteListener<Void> listener) {
         //mDatabase.child("components").child(type).child(category).child(model).updateChildren(updates);
         //the user only inputs Map<String, Object> updates, the rest stays the same
@@ -148,9 +145,6 @@ public class DatabaseManager {
 
         componentRef.updateChildren(updates)
                 .addOnCompleteListener(listener);
-
-
-
 
     }
 

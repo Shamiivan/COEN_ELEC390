@@ -62,14 +62,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-                <EditText
-                    android:id="@+id/textViewMainCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:padding="4dp"
-                    android:text="Main Category:"
-                    android:textColor="@color/black" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -103,14 +96,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-                <EditText
-                    android:id="@+id/textViewSubCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:padding="4dp"
-                    android:text="Sub Category:"
-                    android:textColor="@color/black" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -166,14 +152,7 @@
 
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/textViewPartNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:padding="4dp"
-                    android:text="Part Number:"
-                    android:textColor="@color/black" />
+
             </androidx.cardview.widget.CardView>
 
             <!-- Location CardView -->
