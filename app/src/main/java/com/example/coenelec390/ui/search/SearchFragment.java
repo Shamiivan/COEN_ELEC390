@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +31,7 @@ import java.util.List;
 public class SearchFragment extends Fragment  implements SearchAdapter.OnItemClickListener{
     SearchView searchView;
 
-    List<Component> arrayList;
+    List<Component> components;
     List<String> componentNames;
 //    ArrayAdapter<Component> adapter;
     private PageSearchBinding binding;
@@ -81,7 +83,7 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
             public void onChanged(List<Component> componentsList) {
                 // Update the ListView with the components data
                 // For example, display the components in a ListView
-
+                components = componentsList;
             }
         });
 
@@ -133,7 +135,15 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
     }
 
     @Override
-    public void onItemClick(String componentName) {
-        Utils.display(getContext(), componentName);
+    public void onItemClick(Integer position) {
+        Component componentToLoad = components.get(position);
+        addComponentDetailFragment(componentToLoad);
+    }
+    public void addComponentDetailFragment(Component component) {
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("component", component);
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.action_search_to_componentDetailFragment, bundle);
     }
 }

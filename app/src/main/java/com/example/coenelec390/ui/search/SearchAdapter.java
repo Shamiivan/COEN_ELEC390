@@ -52,7 +52,7 @@ public class SearchAdapter  extends RecyclerView.Adapter<SearchAdapter.ViewHolde
 
 
     public interface OnItemClickListener {
-    void onItemClick(String componentName);
+    void onItemClick(Integer position);
 }
 
 
@@ -76,7 +76,7 @@ public class SearchAdapter  extends RecyclerView.Adapter<SearchAdapter.ViewHolde
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(componentName);
+                    listener.onItemClick(position);
                 }
 
             });

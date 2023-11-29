@@ -264,6 +264,12 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Characteristics CardView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/characteristicsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

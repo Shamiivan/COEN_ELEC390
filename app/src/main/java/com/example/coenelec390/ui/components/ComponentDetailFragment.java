@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
@@ -25,7 +27,9 @@ import com.example.coenelec390.ui.categories.CategoryViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ComponentDetailFragment extends Fragment {
@@ -46,6 +50,7 @@ public class ComponentDetailFragment extends Fragment {
     private EditText quantityTextView;
     private TextView totalPriceTextView;
     private EditText characteristicsTextView;
+    private RecyclerView characteristicsRecyclerView;
     private Button editButton;
     private Button saveButton;
     private Button deleteButton;
@@ -101,7 +106,11 @@ public class ComponentDetailFragment extends Fragment {
         characteristicsTextView = view.findViewById(R.id.textViewCharacteristics);
         deleteButton = view.findViewById(R.id.delete);
 
-
+        characteristicsRecyclerView = view.findViewById(R.id.characteristicsRecyclerView);
+        characteristicsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        List<Map.Entry<String, Object>> characteristicsList = new ArrayList<>(component.getCharacteristics().entrySet());
+        CharacteristicsAdapter adapter = new CharacteristicsAdapter(characteristicsList);
+        characteristicsRecyclerView.setAdapter(adapter);
 
         // Set view content
         tagTextView.setText(component.getTag());

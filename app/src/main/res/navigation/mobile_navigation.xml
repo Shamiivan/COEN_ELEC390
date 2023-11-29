@@ -51,7 +51,12 @@
         android:id="@+id/navigation_search"
         android:name="com.example.coenelec390.ui.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_componentDetailFragment"
+            app:destination="@id/componentDetailFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/componentDetailFragment"
         android:name="com.example.coenelec390.ui.components.ComponentDetailFragment"
