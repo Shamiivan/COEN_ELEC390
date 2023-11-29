@@ -140,7 +140,6 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
         addComponentDetailFragment(componentToLoad);
     }
     public void addComponentDetailFragment(Component component) {
-
         Bundle bundle = new Bundle();
         bundle.putSerializable("component", component);
         NavController navController = NavHostFragment.findNavController(this);
