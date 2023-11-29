@@ -146,10 +146,6 @@ public class DatabaseManager {
 
         componentRef.updateChildren(updates)
                 .addOnCompleteListener(listener);
-
-
-
-
     }
 
 

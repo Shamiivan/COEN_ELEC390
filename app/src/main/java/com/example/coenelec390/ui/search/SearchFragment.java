@@ -1,15 +1,12 @@
 package com.example.coenelec390.ui.search;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-
-import androidx.annotation.NonNull;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -21,7 +18,6 @@ import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.databinding.PageSearchBinding;
 import com.example.coenelec390.model.Component;
-import com.example.coenelec390.ui.categories.ComponetNameAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +25,7 @@ import java.util.List;
 public class SearchFragment extends Fragment  implements SearchAdapter.OnItemClickListener{
     SearchView searchView;
 
-    List<Component> arrayList;
+    List<Component> components;
     List<String> componentNames;
 //    ArrayAdapter<Component> adapter;
     private PageSearchBinding binding;
@@ -134,6 +130,10 @@ public class SearchFragment extends Fragment  implements SearchAdapter.OnItemCli
 
     @Override
     public void onItemClick(String componentName) {
-        Utils.display(getContext(), componentName);
+        Utils.display(getContext(), componentName+"BASHAR");
+       // viewModel.componentDetailFragment();
+
+        //db.
+
     }
 }
