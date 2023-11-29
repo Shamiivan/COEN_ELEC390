@@ -120,7 +120,9 @@ public class BLE_MANAGER {
         }
 
         Utils.print("Peripheral available, attempting to connect devices");
-        gatt = peripheral.connectGatt(context, false, gattCallback, TRANSPORT_LE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            gatt = peripheral.connectGatt(context, false, gattCallback, TRANSPORT_LE);
+        }
 
         //TODO : do something some freakin chaching
     }
