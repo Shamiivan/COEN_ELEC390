@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="top"
     android:orientation="vertical"
-    android:gravity="center"
+    android:padding="4dp"
     tools:context=".ui.item.ComponentAdapter">
-
     <!-- Title TextView -->
     <TextView
         android:id="@+id/textViewTitle"
@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:text="Item Info"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:padding="16dp"
+                    android:padding="4dp"
                     android:text="Tag:"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -60,6 +60,7 @@
                 android:layout_marginBottom="8dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -93,6 +94,7 @@
                 android:layout_marginBottom="8dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,6 +150,7 @@
                         android:textColor="@color/black" />
 
                 </LinearLayout>
+
 
             </androidx.cardview.widget.CardView>
 
@@ -254,13 +257,19 @@
                     android:id="@+id/textViewTotalPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:padding="4dp"
                     android:text="Total Price:"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </androidx.cardview.widget.CardView>
 
             <!-- Characteristics CardView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/characteristicsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -291,28 +300,54 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Edit Button - Positioned at the bottom of the screen -->
-            <Button
-                android:id="@+id/editButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="Edit"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Save"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
 
             <Button
-                android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
+                android:id="@+id/editButton"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Save"
-                android:visibility="gone"
+                android:padding="4dp"
+                android:text="Edit"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#F83758"
+        android:backgroundTint="#F73758"
+        android:padding="8dp"
+        android:text="Delete"
+        android:textColor="@color/white" />
+
 </LinearLayout>

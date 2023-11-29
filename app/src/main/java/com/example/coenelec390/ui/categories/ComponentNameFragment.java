@@ -119,12 +119,6 @@ public class ComponentNameFragment extends Fragment implements ComponetNameAdapt
         bundle.putSerializable("component", component);
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.action_componetNameFragment_to_componentDetailFragment, bundle);
-//        ComponentDetailFragment componentDetailFragment = ComponentDetailFragment.newInstance(component);
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.add(R.id.nav_host_fragment_activity_main, componentDetailFragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
     }
 
 //    public void fetchComponents(String mainCategory, String subCategory){

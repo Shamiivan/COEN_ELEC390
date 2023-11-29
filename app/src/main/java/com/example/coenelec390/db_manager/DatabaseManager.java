@@ -132,13 +132,12 @@ public class DatabaseManager {
 
 
 
-
-
-
-    public void deleteComponent(String type, String category, String model) {
-        mDatabase.child("components").child(type).child(category).child(model).removeValue();
-        //if you want to remove a model from the database
+    public void deleteComponentByPartNumber(String mainCategory, String subCategory, String partNumber) {
+        mDatabase.child("components").child(mainCategory).child(subCategory).child(partNumber).removeValue();
     }
+
+
+
     public void updateComponentFields(String type, String category, String model, Map<String, Object> updates  , OnCompleteListener<Void> listener) {
         //mDatabase.child("components").child(type).child(category).child(model).updateChildren(updates);
         //the user only inputs Map<String, Object> updates, the rest stays the same
@@ -146,6 +145,7 @@ public class DatabaseManager {
 
         componentRef.updateChildren(updates)
                 .addOnCompleteListener(listener);
+
     }
 
 

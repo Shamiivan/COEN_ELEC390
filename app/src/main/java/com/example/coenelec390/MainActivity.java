@@ -28,10 +28,6 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null){
-            Utils.print("Not null");
-        }
-
         binding = MainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

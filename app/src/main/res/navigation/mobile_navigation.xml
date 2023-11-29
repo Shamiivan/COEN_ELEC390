@@ -51,10 +51,25 @@
         android:id="@+id/navigation_search"
         android:name="com.example.coenelec390.ui.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_componentDetailFragment"
+            app:destination="@id/componentDetailFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/componentDetailFragment"
         android:name="com.example.coenelec390.ui.components.ComponentDetailFragment"
-        android:label="ComponentDetailFragment" />
+        android:label="ComponentDetailFragment" >
+        <action
+            android:id="@+id/action_delete_to_success_fragment"
+            app:destination="@id/success" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/success"
+        android:name="com.example.coenelec390.ui.utils.Success"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" />
 
 </navigation>

@@ -12,16 +12,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.model.Component;
+import com.example.coenelec390.ui.categories.CategoryViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ComponentDetailFragment extends Fragment {
@@ -42,8 +50,11 @@ public class ComponentDetailFragment extends Fragment {
     private EditText quantityTextView;
     private TextView totalPriceTextView;
     private EditText characteristicsTextView;
+    private RecyclerView characteristicsRecyclerView;
     private Button editButton;
     private Button saveButton;
+    private Button deleteButton;
+    private CategoryViewModel viewModel;
 
     public ComponentDetailFragment() {
         // Required empty public constructor
@@ -93,7 +104,13 @@ public class ComponentDetailFragment extends Fragment {
         editButton = view.findViewById(R.id.editButton);
         saveButton = view.findViewById(R.id.saveButton);
         characteristicsTextView = view.findViewById(R.id.textViewCharacteristics);
+        deleteButton = view.findViewById(R.id.delete);
 
+        characteristicsRecyclerView = view.findViewById(R.id.characteristicsRecyclerView);
+        characteristicsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        List<Map.Entry<String, Object>> characteristicsList = new ArrayList<>(component.getCharacteristics().entrySet());
+        CharacteristicsAdapter adapter = new CharacteristicsAdapter(characteristicsList);
+        characteristicsRecyclerView.setAdapter(adapter);
 
         // Set view content
         tagTextView.setText(component.getTag());
@@ -120,6 +137,7 @@ public class ComponentDetailFragment extends Fragment {
                 saveButton.setVisibility(View.VISIBLE);
 
                 editButton.setVisibility(View.GONE);
+
             }
         });
 
@@ -209,6 +227,16 @@ public class ComponentDetailFragment extends Fragment {
                 characteristicsTextView.setEnabled(false);
                 editButton.setVisibility(View.VISIBLE);
                 saveButton.setVisibility(View.GONE);
+            }
+        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.deleteComponent(component);
+
+                Bundle bundle = new Bundle();
+                NavController navController = NavHostFragment.findNavController(ComponentDetailFragment.this);
+                navController.navigate(R.id.action_delete_to_success_fragment, bundle);
             }
         });
         return view;
