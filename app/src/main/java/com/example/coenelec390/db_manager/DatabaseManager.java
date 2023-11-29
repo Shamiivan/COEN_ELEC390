@@ -1,16 +1,14 @@
 package com.example.coenelec390.db_manager;
 
-import static android.app.PendingIntent.getActivity;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.example.coenelec390.Utils;
 import com.example.coenelec390.model.Category;
 import com.example.coenelec390.model.Component;
 import com.example.coenelec390.model.SubCategory;
 import com.example.coenelec390.ui.item.AddItem;
-import com.example.coenelec390.Utils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -142,7 +140,18 @@ public class DatabaseManager {
 
     public void updateComponentFields(String type, String category, String model, Map<String, Object> updates) {
         mDatabase.child("components").child(type).child(category).child(model).updateChildren(updates);
+
+    public void updateComponentFields(String type, String category, String model, Map<String, Object> updates  , OnCompleteListener<Void> listener) {
+        //mDatabase.child("components").child(type).child(category).child(model).updateChildren(updates);
         //the user only inputs Map<String, Object> updates, the rest stays the same
+        DatabaseReference componentRef = mDatabase.child("components").child(type).child(category).child(model);
+
+        componentRef.updateChildren(updates)
+                .addOnCompleteListener(listener);
+
+
+
+
     }
 
 

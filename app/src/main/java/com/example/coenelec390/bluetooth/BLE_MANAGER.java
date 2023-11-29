@@ -35,10 +35,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.model.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
+import com.example.coenelec390.model.Component;
 import com.example.coenelec390.ui.item.AddItem;
-import com.example.coenelec390.ui.item.ComponentDetailFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -304,8 +303,9 @@ public class BLE_MANAGER {
                                                         //transaction.replace(R.id.navigation_notifications, fragment );
                                                         //transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
                                                         //transaction.commit();
-                                                        Fragment frag = ComponentDetailFragment.newInstance(existComponent);
-                                                        fragOpener.openFragment(frag);
+                                                        //Fragment frag = ComponentDetailFragment.newInstance(existComponent);
+                                                        Fragment frag2 = com.example.coenelec390.ui.components.ComponentDetailFragment.newInstance(component);
+                                                        fragOpener.openFragment(frag2);
 
                                                         Utils.print("fragmentManager != null COMPLETED"+ component.getPartNumber());
                                                     }
@@ -354,6 +354,7 @@ public class BLE_MANAGER {
                                     if (fragmentManager != null) {
                                         AddItem fragment = AddItem.newInstance(stringValue.toString().trim());
                                         fragment.show(fragmentManager, "dialogFragment");
+
                                     }
                                 }
                             } else {
