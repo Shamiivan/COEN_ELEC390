@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
@@ -71,7 +70,7 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
         location = rootview.findViewById(R.id.etLocation);
         stock =  rootview.findViewById(R.id.etStock);
         description= rootview.findViewById(R.id.extraDesc);
-        //UnitPrice= rootview.findViewById(R.id.etUnitPrice);
+        UnitPrice= rootview.findViewById(R.id.etUnitPrice);
 
 
         cat = rootview.findViewById(R.id.category);
@@ -96,9 +95,12 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
                 Name5 = UnitPrice.getText().toString();
                 Name6 = cat.getSelectedItem().toString();
                 Name7 = subCat.getSelectedItem().toString();
-                if (Name1.equals("") || Name2.equals("") || Name3.equals("") || Name4.equals("") || Name5.equals("") || Name6.equals("") || stringNFC.equals("") || Name7.equals(""))
+                if (Name1.equals("") || Name2.equals("") || Name3.equals("") || Name4.equals("") || Name5.equals("") || Name6.equals("") || stringNFC==null || Name7.equals(""))
                     Toast.makeText(getActivity(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                 else{
+
+                    //if (stringNFC==null)
+                    //    Toast.makeText(getActivity(), "string null!", Toast.LENGTH_SHORT).show();
 
                     // insert a new component in  the database
                     DatabaseManager dbManager = new DatabaseManager();
