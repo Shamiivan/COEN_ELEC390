@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:padding="4dp"
     tools:context=".ui.item.ComponentAdapter">
-
     <!-- Title TextView -->
     <TextView
         android:id="@+id/textViewTitle"
