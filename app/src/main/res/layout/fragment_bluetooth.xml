@@ -3,19 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:background="@android:color/transparent"
-    android:gravity="center"
+    android:gravity="top|left"
     android:orientation="vertical">
 
-    <!-- Header: Bluetooth Connection -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bluetooth Connection"
-        android:textSize="24sp"
 
-        android:layout_marginBottom="16dp" />
+    <!-- Header: Bluetooth Connection -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:background="#FEF2F2"
+        android:padding="4dp"
+        android:gravity="bottom|left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|left"
+            android:text="Dashboard"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
 
 
     <!-- Button Container -->
@@ -23,93 +34,84 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
+        android:orientation="horizontal"/>
 
-        <!-- ON Button -->
-        <Button
-            android:id="@+id/btnOn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ON"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/button_rounded_corners" />
-
-
-        <!-- OFF Button -->
-        <Button
-            android:id="@+id/btnOff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OFF"
-
-            android:background="@drawable/button_rounded_corners" />
-    </LinearLayout>
-
-    <!-- Header: Bluetooth Scan -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bluetooth Scan"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/categoryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@android:color/transparent"
+            android:gravity="center|center_horizontal|left"
+            android:hint="Bluetooth Status:"
+            android:padding="8dp"
+            android:textFontWeight="800"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/bleStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not Connected"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+    <!-- Header: Bluetooth Scan -->
+
 
     <!-- Scan Button Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
-
-        <!-- Start Scan Button -->
-        <Button
-            android:id="@+id/scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/button_rounded_corners" />
-
-        <!-- Stop Scan Button -->
-        <Button
-            android:id="@+id/stopScan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stop"
-            android:background="@drawable/button_rounded_corners" />
-    </LinearLayout>
-
-    <!-- Header: Connection -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connection"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Connection Button Container -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <!-- Connect to Peripheral Button -->
-        <Button
-            android:id="@+id/connect"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/scan"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="To Peripheral"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/button_rounded_corners" />
+            android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
+            android:background="#1099EE"
+            android:elevation="4dp"
+            android:padding="12dp"
+            android:text="Connect to Device"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
-        <!-- Connect to Database Button -->
-        <Button
-            android:id="@+id/updateDB"
-            android:layout_width="wrap_content"
+
+    </LinearLayout>
+
+
+    <!-- Scan Button Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="To Database"
-            android:background="@drawable/button_rounded_corners" />
+            android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
+            android:background="#FE0F0F"
+            android:elevation="4dp"
+            android:padding="12dp"
+            android:text="Sign out"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
     </LinearLayout>
 </LinearLayout>

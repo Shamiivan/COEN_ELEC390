@@ -72,6 +72,7 @@ public class BLE_MANAGER {
     static private FragmentManager fragmentManager ;
     int containerID;
     private FragmentOpener fragOpener;
+    private BluetoothDataListener bleListener;
 
 
     public BLE_MANAGER(Activity _activity , FragmentManager _fragmentManager , int _containerID) {
@@ -89,6 +90,11 @@ public class BLE_MANAGER {
         bleHandler = new Handler(Looper.getMainLooper());
 
     }
+
+    public void setBluetoothDataListener(BluetoothDataListener bluetoothDataListener) {
+        this. bleListener = bluetoothDataListener;
+    }
+
     public void setFragmentOpener(FragmentOpener fragmentOpener) {
         this.fragOpener = fragmentOpener;
     }
@@ -143,8 +149,6 @@ public class BLE_MANAGER {
 
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 Utils.print("Connected to GATT server.");
-                //Utils.display(activity.getApplicationContext(), "noice");
-                //BASHAR: figure why we cant get activity context here.
 
                 // Attempts to discover services after successful connection.
                 if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
@@ -219,7 +223,6 @@ public class BLE_MANAGER {
                         BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
                         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                         gatt.writeDescriptor(descriptor);
-
 
                     } else {Utils.print("Characteristic not found");}
                 } else {Utils.print("Service not found");}
@@ -440,7 +443,7 @@ public class BLE_MANAGER {
     public void startScan() {
         Utils.print("Scanning started");
 //        Utils.display(activity.getApplicationContext() , "Scanning started");
-
+         bleListener.onBluetoothDataReceived("Scanning Started Please wait");
         devices = new ArrayList<>();
         AsyncTask.execute(new Runnable() {
             @Override
@@ -449,33 +452,7 @@ public class BLE_MANAGER {
                     requestPermissions();
                     return;
                 }
-
-                //TODO : Implement scan with filters
-//                String[] names = new String[]{"ESP32"};
-//                List<ScanFilter> filters = null;
-//                if(names != null) {
-//                    filters = new ArrayList<>();
-//                    for (String name : names) {
-//                        ScanFilter filter = new ScanFilter.Builder()
-//                                .setDeviceName(name)
-//                                .build();
-//                        filters.add(filter);
-//                    }
-//                }
-
-                //TODO : Implement scan with specific settings
-//                ScanSettings scanSettings = new ScanSettings.Builder()
-//                        .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
-//                        .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
-//                        .setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
-//                        .setNumOfMatches(ScanSettings.MATCH_NUM_ONE_ADVERTISEMENT)
-//                        .setReportDelay(0L)
-//                        .build();
-//                scanner.startScan(filters, scanSettings, leScanCallback);
                 btScanner.startScan(leScanCallback);
-
-                // TODO : Add Match Mode
-                //TODO : Add Caching
             }
         });
     }
@@ -566,7 +543,7 @@ public class BLE_MANAGER {
                 if(name.equals("ESP32")) {
                     peripheralAvailable = true;
                     peripheral = device.getDevice();
-//                    Utils.display(activity.getApplicationContext(), "Smart Inv Found!");
+                    bleListener.onBluetoothDataReceived("Smart Inv Found in Peripherals");
                     break;
                 }
             }
