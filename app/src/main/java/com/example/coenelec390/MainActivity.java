@@ -1,13 +1,9 @@
 package com.example.coenelec390;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
-import com.example.coenelec390.ui.item.AddItem;
-import com.example.coenelec390.ui.item.AddItemActivity;
-import com.example.coenelec390.ui.item.ComponentDetailFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -16,7 +12,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.coenelec390.databinding.MainBinding;
-
+import com.example.coenelec390.ui.item.ComponentDetailFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
 
@@ -74,8 +71,13 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddItem addItem = new AddItem();
-                addItem.show(getSupportFragmentManager(), "Add Fragment");
+                //AddItem addItem = new AddItem();
+                //addItem.show(getSupportFragmentManager(), "Add Fragment");
+                Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
+                startActivity(intent);
+
+
+
             }
         });
 

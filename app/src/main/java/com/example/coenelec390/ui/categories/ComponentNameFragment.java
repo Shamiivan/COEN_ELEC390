@@ -1,5 +1,6 @@
 package com.example.coenelec390.ui.categories;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.coenelec390.ComponentDetailActivity;
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.model.Component;
@@ -115,10 +115,12 @@ public class ComponentNameFragment extends Fragment implements ComponetNameAdapt
     }
     public void addComponentDetailFragment(Component component) {
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("component", component);
-        NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(R.id.action_componetNameFragment_to_componentDetailFragment, bundle);
+        //Bundle bundle = new Bundle();
+        //bundle.putSerializable("component", component);
+        //NavController navController = NavHostFragment.findNavController(this);
+        //navController.navigate(R.id.action_componetNameFragment_to_componentDetailFragment, bundle);
+        Intent intent = ComponentDetailActivity.newIntent(requireContext(), component);
+        startActivity(intent);
     }
 
 //    public void fetchComponents(String mainCategory, String subCategory){

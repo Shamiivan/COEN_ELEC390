@@ -21,6 +21,7 @@ import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -33,7 +34,10 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.PreferenceManager;
 
+import com.example.coenelec390.AddItemActivity;
+import com.example.coenelec390.ComponentDetailActivity;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.db_manager.DatabaseManager;
 import com.example.coenelec390.model.Component;
@@ -44,6 +48,7 @@ import com.google.android.gms.tasks.Task;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -311,8 +316,36 @@ public class BLE_MANAGER {
                                                         //transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
                                                         //transaction.commit();
                                                         //Fragment frag = ComponentDetailFragment.newInstance(existComponent);
-                                                        Fragment frag2 = com.example.coenelec390.ui.components.ComponentDetailFragment.newInstance(component);
-                                                        fragOpener.openFragment(frag2);
+                                                        //Fragment frag2 = com.example.coenelec390.ui.components.ComponentDetailFragment.newInstance(component);
+                                                        //fragOpener.openFragment(frag2);
+
+
+                                                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                                                        long lastOpeningTimestampCompDetail = preferences.getLong("last_opening_timestampComp", 0);
+                                                        // Get the current timestamp
+                                                        long currentTimestamp = Calendar.getInstance().getTimeInMillis();
+                                                        // Check if the specified duration has passed since the last opening
+                                                        long durationInMillis =  2 * 1000; // Example: 2 seconds
+                                                        if (currentTimestamp - lastOpeningTimestampCompDetail >= durationInMillis) {
+
+                                                            SharedPreferences.Editor editor = preferences.edit();
+                                                            editor.putLong("last_opening_timestampComp", currentTimestamp);
+                                                            editor.apply();
+
+                                                            Intent intent = ComponentDetailActivity.newIntent(context, component);
+                                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                            context.startActivity(intent);
+                                                        } else {}
+
+
+
+
+
+
+                                                        //Intent intent = new Intent(context, AddItemActivity.class);
+                                                        //intent.putExtra("EXTRA_KEY", stringValue.toString().trim());
+                                                        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                        //context.startActivity(intent);
 
                                                         Utils.print("fragmentManager != null COMPLETED"+ component.getPartNumber());
                                                     }
@@ -358,11 +391,35 @@ public class BLE_MANAGER {
 
                                 } else {
                                     Utils.print("Type DOESN'T exist!");
-                                    if (fragmentManager != null) {
-                                        AddItem fragment = AddItem.newInstance(stringValue.toString().trim());
-                                        fragment.show(fragmentManager, "dialogFragment");
+                                   // if (fragmentManager != null) {
+                                   //     AddItem fragment = AddItem.newInstance(stringValue.toString().trim());
+                                   //     fragment.show(fragmentManager, "dialogFragment");
 
-                                    }
+                                    //}
+                                    //Intent intent = new Intent(context , AddItemActivity.class);
+                                    //context.startActivity(intent);
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                                    long lastOpeningTimestamp = preferences.getLong("last_opening_timestamp", 0);
+                                    // Get the current timestamp
+                                    long currentTimestamp = Calendar.getInstance().getTimeInMillis();
+                                    // Check if the specified duration has passed since the last opening
+                                    long durationInMillis =  2 * 1000; // Example: 2 seconds
+
+                                    if (currentTimestamp - lastOpeningTimestamp >= durationInMillis) {
+                                        // If enough time has passed, start the AddItemActivity
+
+                                        // Update the last opening timestamp
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putLong("last_opening_timestamp", currentTimestamp);
+                                        editor.apply();
+
+                                        Intent intent = new Intent(context, AddItemActivity.class);
+                                        intent.putExtra("EXTRA_KEY", stringValue.toString().trim());
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        context.startActivity(intent);
+                                    } else {}
+
+
                                 }
                             } else {
 
