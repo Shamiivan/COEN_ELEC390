@@ -156,7 +156,7 @@ public class AddItemActivity extends AppCompatActivity {
                                             Utils.print("db should be updated");
                                             Toast.makeText(getApplicationContext(), "SUCCESSFULLY ADDED.", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            intent.putExtra("fragmentToOpen", R.id.navigation_dashboard);
+                                            intent.putExtra("fragmentToOpen", R.id.navigation_notifications);
                                             startActivity(intent);
 
 
