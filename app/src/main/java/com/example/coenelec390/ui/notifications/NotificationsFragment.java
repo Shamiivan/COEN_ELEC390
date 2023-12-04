@@ -2,6 +2,7 @@ package com.example.coenelec390.ui.notifications;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,8 @@ import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
 import com.example.coenelec390.bluetooth.BLE_MANAGER;
 import com.example.coenelec390.databinding.FragmentBluetoothBinding;
-import com.example.coenelec390.model.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
+import com.example.coenelec390.model.Component;
 
 public class NotificationsFragment extends Fragment implements BLE_MANAGER.FragmentOpener {
 
@@ -41,6 +42,33 @@ public class NotificationsFragment extends Fragment implements BLE_MANAGER.Fragm
         FragmentManager fragmentManager = getChildFragmentManager(); // Use your actual way to obtain the FragmentManager
         bleManager = new BLE_MANAGER(getActivity() , fragmentManager, R.id.nav_host_fragment_activity_main);
         bleManager.setFragmentOpener(this);
+
+        Button btnScan = root.findViewById(R.id.scan);
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!bleManager.hasBluetooth())  bleManager.enableBluetooth();
+                bleManager.startScan();
+                // Use a Handler to delay the stopScan and subsequent actions
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        bleManager.stopScan();
+                        bleManager.showDevices();
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            bleManager.connectPeripheral();
+                        }
+                    }
+                }, 5000);
+
+
+
+            }
+        });
+
+
+
 
         Button btnOn = root.findViewById(R.id.btnOn);
         btnOn.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +99,8 @@ public class NotificationsFragment extends Fragment implements BLE_MANAGER.Fragm
             }
 
         });
-        Button btnScan = root.findViewById(R.id.scan);
-        btnScan.setOnClickListener(new View.OnClickListener() {
+        Button btnScanOrg = root.findViewById(R.id.updateDB);
+        btnScanOrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!bleManager.hasBluetooth())  bleManager.enableBluetooth();
@@ -87,6 +115,7 @@ public class NotificationsFragment extends Fragment implements BLE_MANAGER.Fragm
             public void onClick(View view) {
                 bleManager.stopScan();
                 bleManager.showDevices();
+
             }
         });
 
@@ -96,6 +125,7 @@ public class NotificationsFragment extends Fragment implements BLE_MANAGER.Fragm
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     bleManager.connectPeripheral();
+
                 }
             }
         });

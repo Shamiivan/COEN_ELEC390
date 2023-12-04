@@ -119,12 +119,16 @@ public class BLE_MANAGER {
         }
 
         Utils.print("Peripheral available, attempting to connect devices");
-        gatt = peripheral.connectGatt(context, false, gattCallback, TRANSPORT_LE);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            gatt = peripheral.connectGatt(context, false, gattCallback, TRANSPORT_LE);
+//        }
 
         //TODO : do something some freakin chaching
     }
 
     ;
+
     private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
@@ -134,6 +138,9 @@ public class BLE_MANAGER {
 
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 Utils.print("Connected to GATT server.");
+                //Utils.display(activity.getApplicationContext(), "noice");
+                //BASHAR: figure why we cant get activity context here.
+
                 // Attempts to discover services after successful connection.
                 if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions();
@@ -197,7 +204,7 @@ public class BLE_MANAGER {
                 if (service != null) {
                     //get the characteristic
                     BluetoothGattCharacteristic characteristic = service.getCharacteristic(characteristicUUID);
-
+                    Utils.print("Service works");
                     if (characteristic != null) {
                         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                             requestPermissions();
@@ -211,13 +218,13 @@ public class BLE_MANAGER {
 
                     } else {Utils.print("Characteristic not found");}
                 } else {Utils.print("Service not found");}
-//            List<BluetoothGattService> services = gatt.getServices();
-//            for (BluetoothGattService service : services) {
-//                Utils.print("Service found: " + service.getUuid().toString());
-//                for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
-//                    Utils.print("-- Characteristic found: " + characteristic.getUuid().toString());
-//                }
-//            }
+            List<BluetoothGattService> services = gatt.getServices();
+            for (BluetoothGattService _service : services) {
+                Utils.print("Service found: " + service.getUuid().toString());
+                for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
+                    Utils.print("-- Characteristic found: " + characteristic.getUuid().toString());
+                }
+            }
             } else {
                 Utils.print("Service discovery failed with status: " + status);
             }
@@ -229,7 +236,7 @@ public class BLE_MANAGER {
                 // The data is contained in the characteristic's value
                 byte[] data = characteristic.getValue();
                 int value = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN).getInt();
-//                Utils.print("Value from esp32 : " + String.valueOf(value));
+                Utils.print("Value from esp32 : " + String.valueOf(value));
             } else {
                 Utils.print("Failed to read characteristic");
             }
@@ -375,6 +382,8 @@ public class BLE_MANAGER {
 
     public void startScan() {
         Utils.print("Scanning started");
+//        Utils.display(activity.getApplicationContext() , "Scanning started");
+
         devices = new ArrayList<>();
         AsyncTask.execute(new Runnable() {
             @Override
@@ -435,7 +444,7 @@ public class BLE_MANAGER {
                     return;
                 }
                 if (!gatt.readCharacteristic(characteristic)) {
-//                    Utils.print(String.format("ERROR: readCharacteristic failed for characteristic: %s", characteristic.getUuid()));
+                    Utils.print(String.format("ERROR: readCharacteristic failed for characteristic: %s", characteristic.getUuid()));
                     completedCommand();
                 } else {
                     Utils.print(String.format("Reading characteristic <%s>", characteristic.getUuid()));
@@ -500,7 +509,8 @@ public class BLE_MANAGER {
                 if(name.equals("ESP32")) {
                     peripheralAvailable = true;
                     peripheral = device.getDevice();
-//                    break;
+//                    Utils.display(activity.getApplicationContext(), "Smart Inv Found!");
+                    break;
                 }
             }
         } else Utils.print("No devices found");

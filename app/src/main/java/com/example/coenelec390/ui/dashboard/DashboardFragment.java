@@ -15,8 +15,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.coenelec390.R;
 import com.example.coenelec390.Users.SignInActivity;
 import com.example.coenelec390.databinding.FragmentDashboardBinding;
+import com.example.coenelec390.ui.categories.CategoryViewModel;
 
 public class DashboardFragment extends Fragment {
+    private CategoryViewModel viewModel;
 
     private FragmentDashboardBinding binding;
 

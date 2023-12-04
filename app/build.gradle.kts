@@ -80,6 +80,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
 
+
     //Allows to display image of product based off of URL
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")

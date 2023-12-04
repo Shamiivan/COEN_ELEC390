@@ -1,6 +1,5 @@
 package com.example.coenelec390.ui.item;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +74,7 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
         partName = rootview.findViewById(R.id.etID);
         location = rootview.findViewById(R.id.etLocation);
         stock =  rootview.findViewById(R.id.etStock);
-        description= rootview.findViewById(R.id.extraDesc);
+      //  description= rootview.findViewById(R.id.extraDesc);
         UnitPrice= rootview.findViewById(R.id.etUnitPrice);
 
 
@@ -97,11 +96,11 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
                 Name1 = partName.getText().toString();
                 Name2 = location.getText().toString();
                 Name3 = stock.getText().toString();
-                Name4 = description.getText().toString();
+//                Name4 = description.getText().toString();
                 Name5 = UnitPrice.getText().toString();
                 Name6 = cat.getSelectedItem().toString();
                 Name7 = subCat.getSelectedItem().toString();
-                if (Name1.equals("") || Name2.equals("") || Name3.equals("") || Name4.equals("") || Name5.equals("") || Name6.equals("") || stringNFC==null || Name7.equals(""))
+               if (Name1.equals("") || Name2.equals("") || Name3.equals("")/* || Name4.equals("") */|| Name5.equals("") || Name6.equals("") || stringNFC==null || Name7.equals(""))
                     Toast.makeText(getActivity(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                 else{
 
@@ -111,7 +110,7 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
                     // insert a new component in  the database
                     DatabaseManager dbManager = new DatabaseManager();
                     Map<String, String> characteristics5 = new HashMap<>();
-                    characteristics5.put("description", Name4);
+                  //  characteristics5.put("description", Name4);
                     double price = 10;
                     //Component capacitor1 = new Component(stringNFC,Name1, Name2 , Name3,price,Integer.parseInt(Name5), ,characteristics5,  );
 // Passive Components
@@ -123,11 +122,11 @@ public class AddItem extends androidx.fragment.app.DialogFragment {
                     characteristics2.put("Package", "0603");
                     Component component2 = new Component(stringNFC,"Passive", "Resistors", "CRCW060349R9FKTA", 100, 11, "49.9 ohms", characteristics2);
                     Map<String, Object> characteristics3 = new HashMap<>();
-                    characteristics3.put("Description", Name4);
+                    characteristics3.put("Description", "res");
                     //characteristics3.put("Tolerance", "0.50%");
                     //characteristics3.put("Rating", "0.125 W");
                     //characteristics3.put("Package", "0805");
-                    Component component3 = new Component(stringNFC, Name6, Name7, Name1, Integer.parseInt(Name5), Integer.parseInt(Name3), Name2, characteristics3);
+                    Component component3 = new Component(stringNFC, Name6, Name7, Name1,  Double.parseDouble(Name5) , Integer.parseInt(Name3) , Name2, characteristics3);
 
 
                     //dbManager.addComponent(Name2, Name3, Name4, capacitor1);
