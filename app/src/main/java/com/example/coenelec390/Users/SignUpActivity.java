@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.coenelec390.R;
-import com.example.coenelec390.ui.dashboard.DashboardFragment;
+import com.example.coenelec390.ui.notifications.NotificationsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -51,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d("SignUp", "createUserWithEmail:success");
                         // Redirect to another activity after successful sign-up
-                         Intent intent = new Intent(SignUpActivity.this, DashboardFragment.class);
+                         Intent intent = new Intent(SignUpActivity.this, NotificationsFragment.class);
                          startActivity(intent);
                     } else {
                         Log.w("SignUp", "createUserWithEmail:failure", task.getException());

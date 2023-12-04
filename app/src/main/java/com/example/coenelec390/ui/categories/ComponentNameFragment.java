@@ -123,28 +123,4 @@ public class ComponentNameFragment extends Fragment implements ComponetNameAdapt
         startActivity(intent);
     }
 
-//    public void fetchComponents(String mainCategory, String subCategory){
-//        databaseManager.fetchComponents(mainCategory, subCategory, new DatabaseManager.OnComponentLoadedListener() {
-//            @Override
-//            public void onComponentLoaded(List<Component> components) {
-//                for (Component component: components) {
-//                    component.setMainCategory(mainCategory);
-//                    component.setSubCategory(subCategory);
-//                    component.display();
-//                }
-//                // Start the ComponentDetailFragment
-//                ComponentDetailFragment componentDetailFragment = ComponentDetailFragment.newInstance(components);
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.nav_host_fragment_activity_main, componentDetailFragment);
-//                transaction.addToBackStack(null); // Optional: Add to back stack for fragment navigation
-//                transaction.commit();
-//            }
-//
-//            @Override
-//            public void onComponentError(String errorMessage) {
-//                Toast.makeText(getContext(), "Error fetching subcategories: " + errorMessage, Toast.LENGTH_SHORT).show();
-//                Utils.print(errorMessage);
-//            }
-//        });
-//    }
 }

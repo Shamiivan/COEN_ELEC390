@@ -66,6 +66,14 @@ public class CategoryFragment extends Fragment implements  CategoryAdapter.OnIte
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        // Set the dynamic title
+        if (getActivity() != null) {
+            ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle("Components");  // Replace with your dynamic title
+            }
+        }
         //initialize the viewmodel,
         viewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
     }

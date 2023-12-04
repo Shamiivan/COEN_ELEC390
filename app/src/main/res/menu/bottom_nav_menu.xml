@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_bluetooth" />
     <item
         android:id="@+id/navigation_search"
         android:icon="?android:attr/actionModeFindDrawable"
@@ -13,8 +13,5 @@
         android:id="@+id/navigation_categories"
         android:icon="@drawable/ic_items_black_24dp"
         android:title="Categories" />
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@android:drawable/stat_sys_data_bluetooth"
-        android:title="@string/title_bluetooth" />
+
 </menu>

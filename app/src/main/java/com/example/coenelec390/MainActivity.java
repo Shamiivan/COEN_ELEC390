@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         // Existing AppBarConfiguration setup
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_dashboard, R.id.navigation_items, R.id.navigation_notifications, R.id.navigation_search)
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_items, R.id.navigation_notifications, R.id.navigation_search)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -58,9 +57,7 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
         navView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
-            if (itemId == R.id.navigation_dashboard) {
-                navController.navigate(R.id.navigation_dashboard);
-            } else if (itemId == R.id.navigation_items) {
+           if (itemId == R.id.navigation_items) {
                 navController.navigate(R.id.navigation_items);
             } else if (itemId == R.id.navigation_notifications) {
                 navController.navigate(R.id.navigation_notifications);

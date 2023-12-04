@@ -57,17 +57,24 @@ public class ComponetNameAdapter extends RecyclerView.Adapter<ComponetNameAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
-        public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public final TextView nameView;
+        public final TextView categoryView;
+        public final TextView subCategoryView;
+        public final TextView quantityView;
+
+
+
 
         public ViewHolder(FragmentComponentNameBinding binding) {
             super(binding.getRoot());
             mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            nameView = binding.content;
+            categoryView = binding.category;
+            subCategoryView = binding.subcategory;
+            quantityView = binding.quantity;
         }
 
         public void bind( String componentName,Integer position,ComponetNameAdapter.OnItemClickListener listener) {
-            mContentView.setText(componentName);
             mIdView.setText(position.toString());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,12 +84,6 @@ public class ComponetNameAdapter extends RecyclerView.Adapter<ComponetNameAdapte
 
             });
         }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
-
     }
 
 
