@@ -24,6 +24,7 @@ public class NotificationsFragment extends Fragment implements BLE_MANAGER.Fragm
 
     private FragmentBluetoothBinding binding;
     public BLE_MANAGER bleManager;
+    //
     @Override
     public void openFragment(Fragment fragment) {
         getFragmentManager().beginTransaction()
