@@ -10,12 +10,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import com.example.coenelec390.R;
 import com.example.coenelec390.Utils;
-import com.example.coenelec390.model.Component;
 import com.example.coenelec390.db_manager.DatabaseManager;
+import com.example.coenelec390.model.Component;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -155,9 +154,12 @@ public class AddItemActivity  extends androidx.fragment.app.DialogFragment {
                                             dbManager.addComponent(component3);
                                             Utils.print("db should be updated");
                                             Toast.makeText(getActivity(), "SUCCESSFULLY ADDED.", Toast.LENGTH_SHORT).show();
+                                            // Example: Open the destination activity with the dashboard fragment
 
 
-                                            }
+
+
+                                        }
                                     } else {
                                         // Handle any potential errors here
                                         Toast.makeText(getActivity(), "Error occurred.", Toast.LENGTH_SHORT).show();

@@ -151,10 +151,13 @@ public class AddItemActivity extends AppCompatActivity {
                                         } else {
                                             //editText7.setText(stringNFC);
                                             // Type doesn't exist in the database, show a message
-                                            Toast.makeText(getApplicationContext(), "Type doesn't exist.", Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(getApplicationContext(), "Type doesn't exist.", Toast.LENGTH_SHORT).show();
                                             dbManager.addComponent(component3);
                                             Utils.print("db should be updated");
                                             Toast.makeText(getApplicationContext(), "SUCCESSFULLY ADDED.", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            intent.putExtra("fragmentToOpen", R.id.navigation_dashboard);
+                                            startActivity(intent);
 
 
                                         }
