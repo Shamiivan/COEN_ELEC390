@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity implements ComponentDetailFr
         if (intent != null && intent.hasExtra("fragmentToOpen")) {
             int fragmentId = intent.getIntExtra("fragmentToOpen", -1);
 
-            if (fragmentId == R.id.navigation_dashboard) {
+            if (fragmentId == R.id.navigation_notifications) {
                 // Navigate to the dashboard fragment
                 NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.navigation_dashboard);
+                navController.navigate(R.id.navigation_notifications);
             }
             // Add more conditions for other fragments as needed
         }

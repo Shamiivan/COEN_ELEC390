@@ -53,14 +53,8 @@
             android:hint="Bluetooth Status:"
             android:padding="8dp"
             android:textFontWeight="800"
-            android:textSize="12sp" />
+            android:textSize="0sp" />
 
-        <TextView
-            android:id="@+id/bleStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Not Connected"
-            android:textSize="16sp" />
 
 
     </LinearLayout>

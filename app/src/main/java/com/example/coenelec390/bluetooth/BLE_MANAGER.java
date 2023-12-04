@@ -72,7 +72,7 @@ public class BLE_MANAGER {
     static private FragmentManager fragmentManager ;
     int containerID;
     private FragmentOpener fragOpener;
-    private BluetoothDataListener bleListener;
+
 
 
     public BLE_MANAGER(Activity _activity , FragmentManager _fragmentManager , int _containerID) {
@@ -91,9 +91,6 @@ public class BLE_MANAGER {
 
     }
 
-    public void setBluetoothDataListener(BluetoothDataListener bluetoothDataListener) {
-        this. bleListener = bluetoothDataListener;
-    }
 
     public void setFragmentOpener(FragmentOpener fragmentOpener) {
         this.fragOpener = fragmentOpener;
@@ -443,7 +440,6 @@ public class BLE_MANAGER {
     public void startScan() {
         Utils.print("Scanning started");
 //        Utils.display(activity.getApplicationContext() , "Scanning started");
-         bleListener.onBluetoothDataReceived("Scanning Started Please wait");
         devices = new ArrayList<>();
         AsyncTask.execute(new Runnable() {
             @Override
@@ -543,7 +539,6 @@ public class BLE_MANAGER {
                 if(name.equals("ESP32")) {
                     peripheralAvailable = true;
                     peripheral = device.getDevice();
-                    bleListener.onBluetoothDataReceived("Smart Inv Found in Peripherals");
                     break;
                 }
             }
